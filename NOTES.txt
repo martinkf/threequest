@@ -1,0 +1,9 @@
+FAZER O FLUXO DE TELAS
+
+FAZER O PLANEJAMENTO DAS CLASSES
+
+CRIAR ASSETS DOS BOTÕES
+são 3 linhas e 1 coluna
+normal, on hover, clicking
+
+OTIMIZAR ASSETS DO FUNDO
