@@ -1,4 +1,3 @@
-﻿  Diver.cpp
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\diver.cpp(22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  Jogo.cpp
   base.vcxproj -> C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.exe
   base.vcxproj -> C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.pdb (Full PDB)

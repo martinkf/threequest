@@ -13,6 +13,7 @@ public:
 	void desenhar();
 
 	void destruir();
+	bool estaVivo();
 
 private:
 	int x;
@@ -20,5 +21,6 @@ private:
 	int speed;
 	Sprite sprite;
 	Direction facingDirection;
+	bool isAlive;
 };
 

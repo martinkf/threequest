@@ -10,7 +10,10 @@ IMPLEMENTAR INIMIGOS, COLISÕES, VIDAS, GAME OVER ETC
 
 	IMPLEMENTAR MERGULHADORES
 		to do: colisão com ele (obtê-los)
-		to do: pensar numa array de mergulhadores + spawner? que servirá para inimigos também?
+		to do: out of bounds destroi eles, assim como colisão com eles
+		ONGOING: otimizar numa array de mergulhadores + spawner? que servirá para inimigos também?
+
+IMPLEMENTAR MELHOR FRAME COUNTER PARA TIMED EVENTS
 
 IMPLEMENTAR OXIGENIO
 
@@ -19,3 +22,5 @@ IMPLEMENTAR THREEQUEST obter TIROS dos inimigos mortos
 CRIAR TELA DE GAME OVER
 CRIAR TELA DE INSTRUÇÕES
 CRIAR TELA DE CRÉDITOS
+
+MEU DEUS OS ÁUDIOS TODOS

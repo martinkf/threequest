@@ -3,7 +3,7 @@
 #include "FrameCounter.h"
 #include "Player.h"
 #include "MyEnums.h"
-#include "Diver.h"
+#include "DiverArray.h"
 
 class Jogo
 {
@@ -25,6 +25,6 @@ private:
 	Sprite gameBackground;
 	Sprite gameWaterSurface;
 	Player player;
-	Diver divertest;
+	DiverArray divers;
 };
 

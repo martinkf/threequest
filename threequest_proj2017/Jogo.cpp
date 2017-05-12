@@ -71,8 +71,9 @@ void Jogo::inicializarTelaJogo()
 	// TELA JOGO: INICIALIZA O PLAYER
 	player.inicializar();
 
-	// TESTE
-	divertest.inicializar();
+	// TELA JOGO: INICIALIZA A DIVER ARRAY
+	divers.inicializar();
+	divers.spawnNewRandomDiver();
 }
 
 void Jogo::executarTelaJogo()
@@ -89,7 +90,10 @@ void Jogo::executarTelaJogo()
 	// DESENHA A WATER SURFACE
 	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 125);
 
-	// test
-	divertest.atualizar();
-	divertest.desenhar();
+	// DESENHA A DIVER ARRAY
+	divers.atualizar();
+	divers.desenhar();
+
+	// TEST: NOVO DIVER
+	if (fcnt.getFrameNumber() % 60 == 0) divers.spawnNewRandomDiver();
 }

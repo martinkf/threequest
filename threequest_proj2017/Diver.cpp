@@ -40,7 +40,10 @@ void Diver::inicializar()
 	y = 150 + spawnHeight;
 
 	// definindo speed
-	speed = rand() % 2 + 1;
+	speed = rand() % 3 + 1;
+
+	// dizendo que está vivo
+	isAlive = true;
 }
 
 void Diver::atualizar()
@@ -79,4 +82,13 @@ void Diver::desenhar()
 void Diver::destruir()
 {
 	// to do
+	//isAlive = false;
+
+	// o problema aqui é que ele NASCE out of bounds, daí já se destrói. tem que programar pra que o out of bounds
+	// dele seja na realidade out of screen
+}
+
+bool Diver::estaVivo()
+{
+	return isAlive;
 }

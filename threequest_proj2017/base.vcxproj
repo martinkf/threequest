@@ -100,6 +100,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Diver.cpp" />
+    <ClCompile Include="DiverArray.cpp" />
     <ClCompile Include="FrameCounter.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="main.cpp" />
@@ -109,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Diver.h" />
+    <ClInclude Include="DiverArray.h" />
     <ClInclude Include="FrameCounter.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="MyEnums.h" />
