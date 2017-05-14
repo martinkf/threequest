@@ -1,4 +1,3 @@
-﻿  DiverArray.cpp
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\diverarray.cpp(78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+﻿  Player.cpp
   base.vcxproj -> C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.exe
   base.vcxproj -> C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.pdb (Full PDB)

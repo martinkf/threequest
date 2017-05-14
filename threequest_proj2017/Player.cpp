@@ -25,6 +25,7 @@ void Player::inicializar()
 	speed = 6;
 	shotType = shotBlue;
 	shotArray = ShotArray();
+	oxygenLeft = 1800;
 }
 
 void Player::atualizar()
@@ -88,9 +89,27 @@ void Player::atualizar()
 	if (isOnSurface)
 	{
 		// coisas a se fazer quando na superficie aqui
-		// TO DO
-		// TO DO
-		// TO DO
+		if (oxygenLeft <= 1800) 
+		{
+			if (oxygenLeft + 4 > 1800) 
+			{
+				oxygenLeft = 1800;
+			} 
+			else
+			{
+				oxygenLeft += 4;
+			}
+		}		
+	}
+	else
+	{
+		oxygenLeft--;
+	}
+
+	// verificações referentes a oxigênio disponível
+	if (oxygenLeft == 0)
+	{
+		// MATAR O PLAYER POR FALTA DE OXIGÊNIO
 	}
 
 	// verificações referentes a atirar
@@ -153,4 +172,9 @@ Direction Player::getDirection()
 Sprite Player::getSprite()
 {
 	return sprite;
+}
+
+int Player::getOxygenLeft()
+{
+	return oxygenLeft;
 }

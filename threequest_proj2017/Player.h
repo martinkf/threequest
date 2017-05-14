@@ -20,6 +20,7 @@ public:
 	int getY();
 	Direction getDirection();
 	Sprite getSprite();
+	int getOxygenLeft();
 
 private:
 	int x;
@@ -30,5 +31,6 @@ private:
 	bool isOnSurface;
 	ShotType shotType;
 	ShotArray shotArray;
+	int oxygenLeft;
 };
 

@@ -23,14 +23,6 @@ void Jogo::inicializar()
 	inicializarTelaJogo();
 }
 
-void Jogo::finalizar()
-{
-	//	O resto da finalização vem aqui (provavelmente, em ordem inversa a inicialização)!
-
-	// LIB UNICÓRNIO NECESSARY
-	uniFinalizar();
-}
-
 void Jogo::executar()
 {
 	while(!gTeclado.soltou[TECLA_ESC] && !gEventos.sair)
@@ -50,6 +42,14 @@ void Jogo::executar()
 		// LIB UNICÓRNIO NECESSARY
 		uniTerminarFrame();
 	}
+}
+
+void Jogo::finalizar()
+{
+	//	O resto da finalização vem aqui (provavelmente, em ordem inversa a inicialização)!
+
+	// LIB UNICÓRNIO NECESSARY
+	uniFinalizar();
 }
 
 void Jogo::inicializarTelaJogo()
@@ -72,8 +72,10 @@ void Jogo::inicializarTelaJogo()
 	player.inicializar();
 
 	// TELA JOGO: INICIALIZA A DIVER ARRAY
-	divers.inicializar();
-	divers.spawnNewRandomDiver();
+	divers.inicializar();	
+
+	// TELA JOGO: INICIALIZA A JOGO INTERFACE
+	interfac.inicializar();
 }
 
 void Jogo::executarTelaJogo()
@@ -82,13 +84,10 @@ void Jogo::executarTelaJogo()
 	gameBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
 	int rateOfAnimation = 5;
 	if (fcnt.getFrameNumber() % rateOfAnimation == 0) gameBackground.avancarAnimacao();
-
-	// DESENHA O PLAYER
-	player.atualizar();
-	player.desenhar();
-
-	// DESENHA A WATER SURFACE
-	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 125);
+	
+	// DESENHA A JOGO INTERFACE
+	interfac.atualizar(player);
+	interfac.desenhar();	
 
 	// DESENHA A DIVER ARRAY
 	divers.atualizar();
@@ -96,6 +95,13 @@ void Jogo::executarTelaJogo()
 
 	// TEST: DIVER SPAWNER
 	if (fcnt.getFrameNumber() % 180 == 0) divers.spawnNewRandomDiver();
+
+	// DESENHA O PLAYER
+	player.atualizar();
+	player.desenhar();
+
+	// DESENHA A WATER SURFACE
+	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 125);
 
 	// TESTANDO COLISÃO DE PLAYER COM DIVER
 	divers.testaColisaoComPlayer(player);

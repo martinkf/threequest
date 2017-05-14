@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "MyEnums.h"
 #include "DiverArray.h"
+#include "JogoInterface.h"
 
 class Jogo
 {
@@ -24,6 +25,7 @@ private:
 	FrameCounter fcnt;
 	Sprite gameBackground;
 	Sprite gameWaterSurface;
+	JogoInterface interfac;
 	Player player;
 	DiverArray divers;
 };

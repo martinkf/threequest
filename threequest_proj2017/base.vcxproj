@@ -103,6 +103,7 @@
     <ClCompile Include="DiverArray.cpp" />
     <ClCompile Include="FrameCounter.cpp" />
     <ClCompile Include="Jogo.cpp" />
+    <ClCompile Include="JogoInterface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ShotArray.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="DiverArray.h" />
     <ClInclude Include="FrameCounter.h" />
     <ClInclude Include="Jogo.h" />
+    <ClInclude Include="JogoInterface.h" />
     <ClInclude Include="MyEnums.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ShotArray.h" />
