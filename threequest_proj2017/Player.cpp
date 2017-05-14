@@ -149,3 +149,8 @@ Direction Player::getDirection()
 {
 	return facingDirection;
 }
+
+Sprite Player::getSprite()
+{
+	return sprite;
+}

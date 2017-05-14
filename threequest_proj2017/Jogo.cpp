@@ -94,6 +94,9 @@ void Jogo::executarTelaJogo()
 	divers.atualizar();
 	divers.desenhar();
 
-	// TEST: NOVO DIVER
-	if (fcnt.getFrameNumber() % 60 == 0) divers.spawnNewRandomDiver();
+	// TEST: DIVER SPAWNER
+	if (fcnt.getFrameNumber() % 180 == 0) divers.spawnNewRandomDiver();
+
+	// TESTANDO COLISÃO DE PLAYER COM DIVER
+	divers.testaColisaoComPlayer(player);
 }

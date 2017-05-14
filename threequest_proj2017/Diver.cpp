@@ -25,12 +25,12 @@ void Diver::inicializar()
 	int leftOrRight = rand() % 2;
 	if (leftOrRight == 0)
 	{
-		x = -20;
+		x = -10;
 		facingDirection = facingRight;
 	}
 	else
 	{
-		x = 820;
+		x = 810;
 		facingDirection = facingLeft;
 		sprite.setInverterX(true);
 	}
@@ -40,7 +40,7 @@ void Diver::inicializar()
 	y = 150 + spawnHeight;
 
 	// definindo speed
-	speed = rand() % 3 + 1;
+	speed = (rand() % 2) + 1;
 
 	// dizendo que está vivo
 	isAlive = true;
@@ -62,7 +62,7 @@ void Diver::atualizar()
 	}
 
 	// verifica out-of-bounds
-	if (x > (sprite.getLargura() / 2) || x < (gJanela.getLargura() - sprite.getLargura() / 2))
+	if (x > 830 || x < -30)
 	{
 		destruir();
 	}
@@ -80,15 +80,26 @@ void Diver::desenhar()
 }
 
 void Diver::destruir()
-{
-	// to do
-	//isAlive = false;
-
-	// o problema aqui é que ele NASCE out of bounds, daí já se destrói. tem que programar pra que o out of bounds
-	// dele seja na realidade out of screen
+{	
+	isAlive = false;
 }
 
 bool Diver::estaVivo()
 {
 	return isAlive;
+}
+
+Sprite Diver::getSprite()
+{
+	return sprite;
+}
+
+int Diver::getX()
+{
+	return x;
+}
+
+int Diver::getY()
+{
+	return y;
 }

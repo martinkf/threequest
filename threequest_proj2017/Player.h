@@ -19,6 +19,7 @@ public:
 	int getX();
 	int getY();
 	Direction getDirection();
+	Sprite getSprite();
 
 private:
 	int x;

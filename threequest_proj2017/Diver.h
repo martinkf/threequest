@@ -15,6 +15,10 @@ public:
 	void destruir();
 	bool estaVivo();
 
+	Sprite getSprite();
+	int getX();
+	int getY();
+
 private:
 	int x;
 	int y;
