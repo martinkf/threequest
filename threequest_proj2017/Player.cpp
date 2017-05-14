@@ -26,6 +26,7 @@ void Player::inicializar()
 	shotType = shotBlue;
 	shotArray = ShotArray();
 	oxygenLeft = 1800;
+	numberDivers = 0;		 
 }
 
 void Player::atualizar()
@@ -99,7 +100,11 @@ void Player::atualizar()
 			{
 				oxygenLeft += 4;
 			}
-		}		
+		}
+		if (numberDivers > 0)
+		{
+			numberDivers--;
+		}
 	}
 	else
 	{
@@ -154,6 +159,23 @@ void Player::atirar()
 	shotArray.adicionaTiroNaLista(tiro);
 }
 
+bool Player::tryAddOneDiver()
+{
+	if (numberDivers < 6) 
+	{		
+		return true;
+	}
+	else 
+	{
+		return false;
+	}	
+}
+
+void Player::addOneDiver()
+{
+	numberDivers++;
+}
+
 int Player::getX()
 {
 	return x;
@@ -177,4 +199,9 @@ Sprite Player::getSprite()
 int Player::getOxygenLeft()
 {
 	return oxygenLeft;
+}
+
+int Player::getNumberDivers()
+{
+	return numberDivers;
 }

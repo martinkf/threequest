@@ -103,6 +103,30 @@ void Jogo::executarTelaJogo()
 	// DESENHA A WATER SURFACE
 	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 125);
 
-	// TESTANDO COLISÃO DE PLAYER COM DIVER
-	divers.testaColisaoComPlayer(player);
+	// TESTANDO COLISÃO DE PLAYER COM DIVERS
+	for (int i = 0; i < divers.retornaNumeroTotalDivers(); i++)
+	{
+		if (uniTestarColisao(
+			divers.retornaDiverAtIndex(i).getSprite(),
+			divers.retornaDiverAtIndex(i).getX(),
+			divers.retornaDiverAtIndex(i).getY(),
+			0,
+			player.getSprite(),
+			player.getX(),
+			player.getY(),
+			0
+		))
+		{
+			// COLIDIU UM DIVER COM O PLAYER!
+			// vê se cabe um diver no submarino
+			if (player.tryAddOneDiver())
+			{
+				// adiciona o diver
+				player.addOneDiver();
+
+				// destrói o diver do mundo
+				divers.removeDiverAtIndex(i);
+			}
+		}
+	}	
 }

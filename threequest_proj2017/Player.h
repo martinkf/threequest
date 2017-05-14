@@ -15,12 +15,15 @@ public:
 	void desenhar();	
 
 	void atirar();
+	bool tryAddOneDiver();
+	void addOneDiver();
 
 	int getX();
 	int getY();
 	Direction getDirection();
 	Sprite getSprite();
 	int getOxygenLeft();
+	int getNumberDivers();
 
 private:
 	int x;
@@ -32,5 +35,6 @@ private:
 	ShotType shotType;
 	ShotArray shotArray;
 	int oxygenLeft;
+	int numberDivers;
 };
 

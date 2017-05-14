@@ -12,15 +12,13 @@ public:
 	void inicializar();
 	void atualizar();
 	void desenhar();
-
-	//int retornaNumeroTotalDivers();
-	//Tiro retornaDiverAtIndex(int index_);
-	//void adicionaDiverNaLista(Diver diver_);
-	void removeDiverAtIndex(int index_);
-	//void adicionaDiverNesteIndex(Diver diver_, int index_);
+	
 	void spawnNewRandomDiver();
-	void testaColisaoComPlayer(Player player_);
-
+	
+	int retornaNumeroTotalDivers();
+	Diver retornaDiverAtIndex(int index_);
+	void removeDiverAtIndex(int index_);
+	
 private:
 	int numeroTotalUtilizado;
 	Diver array[5];

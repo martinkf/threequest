@@ -13,6 +13,7 @@ public:
 
 private:
 	int oxygenLeft;
+	int numberDivers;
 	Texto text;
 };
 
