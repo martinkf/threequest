@@ -22,10 +22,12 @@ void Player::inicializar()
 	isOnSurface = false;
 	facingDirection = facingRight;
 	sprite.setInverterX(true);
-	speed = 6;
-	shotType = shotBlue;
-	shotArray = ShotArray();
-	oxygenLeft = 1800;
+	speed = 4;
+	shotType = shotRegular;
+	shotArray = TiroArray();
+	shotArray.inicializar();
+	maxOxygen = 2300;
+	oxygenLeft = maxOxygen;
 	numberDivers = 0;		 
 }
 
@@ -33,6 +35,26 @@ void Player::atualizar()
 {
 	// avança a animação do sprite do player
 	sprite.avancarAnimacao();
+
+	// verificações referentes a velocidade do submarino do player
+	switch (numberDivers)
+	{
+	case 0:
+	case 1:
+		speed = 4;
+		break;
+	case 2:
+	case 3:
+		speed = 3;
+		break;
+	case 4:
+	case 5:
+		speed = 2;
+		break;
+	case 6:
+		speed = 1;
+		break;
+	}
 
 	// verificações referentes a movimentação
 	if (gTeclado.segurando[TECLA_CIMA] && y > 120)
@@ -90,15 +112,15 @@ void Player::atualizar()
 	if (isOnSurface)
 	{
 		// coisas a se fazer quando na superficie aqui
-		if (oxygenLeft <= 1800) 
+		if (oxygenLeft <= maxOxygen) 
 		{
-			if (oxygenLeft + 4 > 1800) 
+			if (oxygenLeft + 9 > maxOxygen)
 			{
-				oxygenLeft = 1800;
+				oxygenLeft = maxOxygen;
 			} 
 			else
 			{
-				oxygenLeft += 4;
+				oxygenLeft += 9;
 			}
 		}
 		if (numberDivers > 0)

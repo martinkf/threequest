@@ -2,7 +2,7 @@
 #include "libUnicornio.h"
 #include "MyEnums.h"
 #include "Tiro.h"
-#include "ShotArray.h"
+#include "TiroArray.h"
 
 class Player
 {
@@ -33,7 +33,8 @@ private:
 	Direction facingDirection;
 	bool isOnSurface;
 	ShotType shotType;
-	ShotArray shotArray;
+	TiroArray shotArray;
+	int maxOxygen;
 	int oxygenLeft;
 	int numberDivers;
 };

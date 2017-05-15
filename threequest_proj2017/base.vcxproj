@@ -106,7 +106,8 @@
     <ClCompile Include="JogoInterface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="ShotArray.cpp" />
+    <ClCompile Include="TelaJogo.cpp" />
+    <ClCompile Include="TiroArray.cpp" />
     <ClCompile Include="Tiro.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +118,8 @@
     <ClInclude Include="JogoInterface.h" />
     <ClInclude Include="MyEnums.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="ShotArray.h" />
+    <ClInclude Include="TelaJogo.h" />
+    <ClInclude Include="TiroArray.h" />
     <ClInclude Include="Tiro.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

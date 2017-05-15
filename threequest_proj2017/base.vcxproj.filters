@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Jogo.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Diver.cpp">
+      <Filter>Classes: Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Classes: Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Tiro.cpp">
+      <Filter>Classes: Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="DiverArray.cpp">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameCounter.cpp">
+      <Filter>Classes: Helper files</Filter>
+    </ClCompile>
+    <ClCompile Include="JogoInterface.cpp">
+      <Filter>Classes: GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TiroArray.cpp">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClCompile>
+    <ClCompile Include="TelaJogo.cpp">
+      <Filter>Classes: Telas</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Jogo.h" />
+    <ClInclude Include="Diver.h">
+      <Filter>Classes: Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Classes: Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Tiro.h">
+      <Filter>Classes: Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="DiverArray.h">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameCounter.h">
+      <Filter>Classes: Helper files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyEnums.h">
+      <Filter>Classes: Helper files</Filter>
+    </ClInclude>
+    <ClInclude Include="JogoInterface.h">
+      <Filter>Classes: GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TiroArray.h">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClInclude>
+    <ClInclude Include="TelaJogo.h">
+      <Filter>Classes: Telas</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Classes: Element Arrays">
+      <UniqueIdentifier>{834a8adb-b790-4597-8c77-da7cdff9bba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes: Elements">
+      <UniqueIdentifier>{dc6d3e30-02e0-4964-9ed0-0edcf312469c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes: Helper files">
+      <UniqueIdentifier>{0ad5b76c-a826-4b96-9bf9-e32af89f5bf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes: GUI">
+      <UniqueIdentifier>{81d10076-4081-46ee-b082-29b76de57991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes: Telas">
+      <UniqueIdentifier>{02fb82b4-ffff-4b99-859a-c3e2dd0ab825}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
