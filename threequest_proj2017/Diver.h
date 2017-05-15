@@ -1,6 +1,7 @@
 #pragma once
 #include "libUnicornio.h"
 #include "MyEnums.h"
+#include <ctime>
 
 class Diver
 {

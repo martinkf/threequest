@@ -1,5 +1,4 @@
 #include "Diver.h"
-#include <ctime>
 
 Diver::Diver()
 {
@@ -17,9 +16,6 @@ void Diver::inicializar()
 		gRecursos.carregarSpriteSheet("diver", "imagens/spr_diver.png", 1, 4);
 	}
 	sprite.setSpriteSheet("diver");
-
-	// configurando o random
-	srand(time(0));
 
 	// definindo spawn na esquerda ou direita
 	int leftOrRight = rand() % 2;

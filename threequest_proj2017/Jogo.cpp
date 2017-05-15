@@ -13,6 +13,9 @@ void Jogo::inicializar()
 	// LIB UNICÓRNIO NECESSARY
 	uniInicializar(800, 600, false);	
 	
+	// INICIALIZA O PSEUDORANDOMIZADOR
+	srand(time(0));
+
 	// INICIALIZA O FRAMECOUNTER
 	fcnt.inicializar();
 
@@ -84,18 +87,15 @@ void Jogo::executarTelaJogo()
 	gameBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
 	int rateOfAnimation = 5;
 	if (fcnt.getFrameNumber() % rateOfAnimation == 0) gameBackground.avancarAnimacao();
-	
+
 	// DESENHA A JOGO INTERFACE
 	interfac.atualizar(player);
-	interfac.desenhar();	
+	interfac.desenhar();
 
 	// DESENHA A DIVER ARRAY
 	divers.atualizar();
 	divers.desenhar();
-
-	// TEST: DIVER SPAWNER
-	if (fcnt.getFrameNumber() % 180 == 0) divers.spawnNewRandomDiver();
-
+	
 	// DESENHA O PLAYER
 	player.atualizar();
 	player.desenhar();
@@ -103,7 +103,16 @@ void Jogo::executarTelaJogo()
 	// DESENHA A WATER SURFACE
 	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 125);
 
-	// TESTANDO COLISÃO DE PLAYER COM DIVERS
+	// SPAWNER: DIVER 
+	if (fcnt.getFrameNumber() % 180 == 0) // a cada 3 segundos
+	{
+		if (rand() % 6 == 0) // uma chance em seis
+		{
+			divers.spawnNewRandomDiver();
+		}
+	}
+
+	// COLISION: PLAYER X DIVER
 	for (int i = 0; i < divers.retornaNumeroTotalDivers(); i++)
 	{
 		if (uniTestarColisao(

@@ -5,6 +5,7 @@
 #include "MyEnums.h"
 #include "DiverArray.h"
 #include "JogoInterface.h"
+#include <ctime>
 
 class Jogo
 {
