@@ -1,7 +1,8 @@
 #pragma once
 #include "libUnicornio.h"
-
-enum Direction { facingLeft, facingRight };
+#include "MyEnums.h"
+#include "Tiro.h"
+#include "TiroArray.h"
 
 class Player
 {
@@ -13,12 +14,28 @@ public:
 	void atualizar();
 	void desenhar();	
 
+	void atirar();
+	bool tryAddOneDiver();
+	void addOneDiver();
+
+	int getX();
+	int getY();
+	Direction getDirection();
+	Sprite getSprite();
+	int getOxygenLeft();
+	int getNumberDivers();
+
 private:
-	float x;
-	float y;
+	int x;
+	int y;
 	int speed;
 	Sprite sprite;
 	Direction facingDirection;
 	bool isOnSurface;
+	ShotType shotType;
+	TiroArray shotArray;
+	int maxOxygen;
+	int oxygenLeft;
+	int numberDivers;
 };
 

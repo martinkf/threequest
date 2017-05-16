@@ -10,6 +10,30 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Diver.cpp" />
+    <ClCompile Include="DiverArray.cpp" />
+    <ClCompile Include="FrameCounter.cpp" />
+    <ClCompile Include="Jogo.cpp" />
+    <ClCompile Include="JogoInterface.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TelaJogo.cpp" />
+    <ClCompile Include="Tiro.cpp" />
+    <ClCompile Include="TiroArray.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Diver.h" />
+    <ClInclude Include="DiverArray.h" />
+    <ClInclude Include="FrameCounter.h" />
+    <ClInclude Include="Jogo.h" />
+    <ClInclude Include="JogoInterface.h" />
+    <ClInclude Include="MyEnums.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="TelaJogo.h" />
+    <ClInclude Include="Tiro.h" />
+    <ClInclude Include="TiroArray.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{67AC409B-9BDA-4D9D-86C1-D2B9885557CF}</ProjectGuid>
     <RootNamespace>base</RootNamespace>
@@ -98,17 +122,6 @@
       <AdditionalDependencies>libUnicornio.lib;SDL2main.lib;SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="FrameCounter.cpp" />
-    <ClCompile Include="Jogo.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="FrameCounter.h" />
-    <ClInclude Include="Jogo.h" />
-    <ClInclude Include="Player.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

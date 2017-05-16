@@ -17,7 +17,7 @@ void FrameCounter::inicializar()
 
 void FrameCounter::tick()
 {
-	if (counter + 1 > 60)
+	if (counter + 1 > 180)
 	{
 		counter = 1;
 	}

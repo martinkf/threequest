@@ -1,10 +1,6 @@
 #pragma once
 #include "libUnicornio.h"
-#include "Player.h"
-#include "FrameCounter.h"
-
-enum StatusJogo { sTelaJogo };
-
+#include "TelaJogo.h"
 
 class Jogo
 {
@@ -12,18 +8,12 @@ public:
 	Jogo();
 	~Jogo();
 
-	void inicializar();
-	void finalizar();
+	void inicializar();	
 	void executar();
+	void finalizar();
 
-private:	
-	void telaJogo();
-
+private:
 	StatusJogo status;
-
-	FrameCounter fcnt;
-	Sprite gameBackground;
-	Sprite gameWaterSurface;
-	Player player;
+	TelaJogo telaJogo;
 };
 

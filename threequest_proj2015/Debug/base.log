@@ -1,8 +1,2 @@
 ﻿  Player.cpp
-c:\users\martinkf\desktop\libunicornio-master\projetos\threequest_proj\player.cpp(22): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\martinkf\desktop\libunicornio-master\projetos\threequest_proj\player.cpp(39): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\martinkf\desktop\libunicornio-master\projetos\threequest_proj\player.cpp(44): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\martinkf\desktop\libunicornio-master\projetos\threequest_proj\player.cpp(50): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\martinkf\desktop\libunicornio-master\projetos\threequest_proj\player.cpp(55): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\martinkf\desktop\libunicornio-master\projetos\threequest_proj\player.cpp(98): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  base.vcxproj -> C:\Users\MARTINKF\Desktop\libUnicornio-master\projetos\threequest_proj\bin\base-debug.exe
+  base.vcxproj -> C:\Users\MARTINKF\Desktop\libUnicornio-master1.1.1\libUnicornio-master\projetos\base_VS2015 - Copia\bin\base-debug.exe
