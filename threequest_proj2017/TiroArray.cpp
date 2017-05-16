@@ -13,13 +13,39 @@ void TiroArray::inicializar()
 	numeroTotalUtilizado = 0;
 }
 
-int TiroArray::retornaNumeroTotalTiros()
+void TiroArray::atualizar()
+{
+	for (int i = 0; i < numeroTotalUtilizado; i++)
+	{
+		Tiro test;
+		test = array[i];
+		if (test.estaVivo())
+		{
+			test.atualizar();
+			array[i] = test;
+		}
+		else
+		{
+			removeTiroAtIndex(i);
+		}
+	}
+}
+
+void TiroArray::desenhar()
+{
+	for (int i = 0; i < numeroTotalUtilizado; i++)
+	{
+		array[i].desenhar();
+	}
+}
+
+int TiroArray::getNumeroTotalUtilizado()
 {
 	return numeroTotalUtilizado;
 }
 
-Tiro TiroArray::retornaTiroAtIndex(int index_)
-{	
+Tiro TiroArray::getTiroAtIndex(int index_)
+{
 	return array[index_];
 }
 
@@ -36,9 +62,4 @@ void TiroArray::removeTiroAtIndex(int index_)
 		array[i] = array[i + 1];
 	}
 	numeroTotalUtilizado--;
-}
-
-void TiroArray::adicionaTiroNesteIndex(Tiro tiro_, int index_)
-{
-	array[index_] = tiro_;
 }

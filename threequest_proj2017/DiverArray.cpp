@@ -39,12 +39,17 @@ void DiverArray::desenhar()
 	}
 }
 
+bool DiverArray::isSpawnerTurnedOn()
+{
+	return isTurnedOn;
+}
+
 int DiverArray::retornaNumeroTotalDivers()
 {
 	return numeroTotalUtilizado;
 }
 
-Diver DiverArray::retornaDiverAtIndex(int index_)
+Diver DiverArray::getDiverAtIndex(int index_)
 {
 	return array[index_];
 }
@@ -64,4 +69,14 @@ void DiverArray::spawnNewRandomDiver()
 	local.inicializar();
 	array[numeroTotalUtilizado] = local;
 	numeroTotalUtilizado++;
+}
+
+void DiverArray::turnOffSpawner()
+{
+	isTurnedOn = false;
+}
+
+void DiverArray::turnOnSpawner()
+{
+	isTurnedOn = true;
 }

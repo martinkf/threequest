@@ -9,12 +9,15 @@ public:
 	~TiroArray();
 
 	void inicializar();
+	void atualizar();
+	void desenhar();
 
-	int retornaNumeroTotalTiros();
-	Tiro retornaTiroAtIndex(int index_);
+	int getNumeroTotalUtilizado();
+	Tiro getTiroAtIndex(int index_);
+
 	void adicionaTiroNaLista(Tiro tiro_);
 	void removeTiroAtIndex(int index_);
-	void adicionaTiroNesteIndex(Tiro tiro_, int index_);
+
 private:
 	int numeroTotalUtilizado;
 	Tiro array[200];

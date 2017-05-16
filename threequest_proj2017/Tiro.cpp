@@ -116,3 +116,18 @@ bool Tiro::estaVivo()
 {
 	return isAlive;
 }
+
+Sprite Tiro::getSprite()
+{
+	return sprite;
+}
+
+int Tiro::getX()
+{
+	return x;
+}
+
+int Tiro::getY()
+{
+	return y;
+}

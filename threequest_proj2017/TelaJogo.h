@@ -15,6 +15,8 @@ public:
 
 	void inicializar();
 	void executar();
+	void desenhar();
+	void verificar();
 
 private:
 	FrameCounter fcnt;

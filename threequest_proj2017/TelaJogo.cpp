@@ -42,6 +42,12 @@ void TelaJogo::inicializar()
 
 void TelaJogo::executar()
 {
+	desenhar();
+	verificar();
+}
+
+void TelaJogo::desenhar()
+{
 	// ATUALIZA O FRAMECOUNTER
 	fcnt.tick();
 
@@ -51,7 +57,6 @@ void TelaJogo::executar()
 	if (fcnt.getFrameNumber() % rateOfAnimation == 0) gameBackground.avancarAnimacao();
 
 	// DESENHA A JOGO INTERFACE
-	interfac.atualizar(player);
 	interfac.desenhar();
 
 	// DESENHA A DIVER ARRAY
@@ -64,13 +69,30 @@ void TelaJogo::executar()
 
 	// DESENHA A WATER SURFACE
 	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 125);
+}
+
+void TelaJogo::verificar()
+{
+	// SE O PLAYER ESTÁ NA SUPERFÍCIE
+	if (player.isPlayerOnSurface())
+	{
+		divers.turnOffSpawner();
+	}
+	else
+	{
+		divers.turnOnSpawner();
+		interfac.reduceOxygen();
+	}
 
 	// SPAWNER: DIVERS
-	if (fcnt.getFrameNumber() % 180 == 0) // a cada 3 segundos
+	if (fcnt.getFrameNumber() % 180 == 0) // 180 -> a cada 3 segundos
 	{
-		if (rand() % 6 == 0) // uma chance em seis
+		if (rand() % 1 == 0) // 6 -> uma chance em seis
 		{
-			divers.spawnNewRandomDiver();
+			if (divers.isSpawnerTurnedOn()) // se o spawner está ligado
+			{
+				divers.spawnNewRandomDiver();
+			}
 		}
 	}
 
@@ -78,9 +100,9 @@ void TelaJogo::executar()
 	for (int i = 0; i < divers.retornaNumeroTotalDivers(); i++)
 	{
 		if (uniTestarColisao(
-			divers.retornaDiverAtIndex(i).getSprite(),
-			divers.retornaDiverAtIndex(i).getX(),
-			divers.retornaDiverAtIndex(i).getY(),
+			divers.getDiverAtIndex(i).getSprite(),
+			divers.getDiverAtIndex(i).getX(),
+			divers.getDiverAtIndex(i).getY(),
 			0,
 			player.getSprite(),
 			player.getX(),
@@ -89,13 +111,37 @@ void TelaJogo::executar()
 		))
 		{
 			// COLIDIU UM DIVER COM O PLAYER!
-			// vê se cabe um diver no submarino
-			if (player.tryAddOneDiver())
-			{
-				// adiciona o diver
-				player.addOneDiver();
+			// adiciona um diver ao score
+			interfac.pegouUmDiver();
 
-				// destrói o diver do mundo
+			// destrói o diver
+			divers.removeDiverAtIndex(i);
+		}
+	}
+
+	// COLISION: TIRO X DIVERS
+	for (int i = 0; i < divers.retornaNumeroTotalDivers(); i++)
+	{
+		for (int j = 0; j < player.getTiroArray().getNumeroTotalUtilizado(); j++)
+		{
+			if (uniTestarColisao(
+				divers.getDiverAtIndex(i).getSprite(),
+				divers.getDiverAtIndex(i).getX(),
+				divers.getDiverAtIndex(i).getY(),
+				0,
+				player.getTiroArray().getTiroAtIndex(j).getSprite(),				
+				player.getTiroArray().getTiroAtIndex(j).getX(),
+				player.getTiroArray().getTiroAtIndex(j).getY(),
+				0
+			))
+			{
+				// COLIDIU UM TIRO COM UM DIVER!
+				// destrói o tiro
+				TiroArray test = player.getTiroArray();
+				test.removeTiroAtIndex(j);
+				player.setTiroArray(test);
+
+				// destrói o diver
 				divers.removeDiverAtIndex(i);
 			}
 		}

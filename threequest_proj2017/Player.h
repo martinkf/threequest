@@ -15,15 +15,14 @@ public:
 	void desenhar();	
 
 	void atirar();
-	bool tryAddOneDiver();
-	void addOneDiver();
 
 	int getX();
 	int getY();
 	Direction getDirection();
 	Sprite getSprite();
-	int getOxygenLeft();
-	int getNumberDivers();
+	TiroArray getTiroArray();
+	void setTiroArray(TiroArray _input);
+	bool isPlayerOnSurface();
 
 private:
 	int x;
@@ -33,9 +32,6 @@ private:
 	Direction facingDirection;
 	bool isOnSurface;
 	ShotType shotType;
-	TiroArray shotArray;
-	int maxOxygen;
-	int oxygenLeft;
-	int numberDivers;
+	TiroArray tiroArray;
 };
 

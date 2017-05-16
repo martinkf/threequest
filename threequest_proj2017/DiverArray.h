@@ -14,13 +14,17 @@ public:
 	void desenhar();
 	
 	void spawnNewRandomDiver();
-	
+	void turnOffSpawner();
+	void turnOnSpawner();
+
+	bool isSpawnerTurnedOn();
 	int retornaNumeroTotalDivers();
-	Diver retornaDiverAtIndex(int index_);
+	Diver getDiverAtIndex(int index_);
 	void removeDiverAtIndex(int index_);
 	
 private:
 	int numeroTotalUtilizado;
-	Diver array[5];
+	Diver array[10];
+	bool isTurnedOn;
 };
 

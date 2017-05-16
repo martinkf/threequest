@@ -1,14 +1,13 @@
-﻿  Player.cpp
-  Generating Code...
-  Compiling...
-  main.cpp
-  TelaJogo.cpp
+﻿  TelaJogo.cpp
 c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(89): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  JogoInterface.cpp
-  Jogo.cpp
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(111): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(133): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Player.cpp
   Generating Code...
   Skipping... (no relevant changes detected)
+  main.cpp
+  JogoInterface.cpp
+  Jogo.cpp
   DiverArray.cpp
   base.vcxproj -> C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.exe
   base.vcxproj -> C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.pdb (Full PDB)

@@ -8,12 +8,16 @@ public:
 	~JogoInterface();
 
 	void inicializar();
-	void atualizar(Player player_);
 	void desenhar();
+
+	void reduceOxygen();
+	void pegouUmDiver();
+
+	int getOxygenLeft();
 
 private:
 	int oxygenLeft;
-	int numberDivers;
+	int qttyDivers;
 	Texto text;
 };
 

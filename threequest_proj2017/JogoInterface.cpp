@@ -10,15 +10,13 @@ JogoInterface::~JogoInterface()
 
 void JogoInterface::inicializar()
 {	
+	oxygenLeft = 6000;
+	
+	qttyDivers = 0;
+
 	gRecursos.carregarFonte("MONOFONT", "fontes/MONOFONT.TTF", 32);
 	text.setFonte("MONOFONT");
 	text.setAncora(0, 0.5);
-}
-
-void JogoInterface::atualizar(Player player_)
-{	
-	oxygenLeft = player_.getOxygenLeft();
-	numberDivers = player_.getNumberDivers();
 }
 
 void JogoInterface::desenhar()
@@ -26,8 +24,19 @@ void JogoInterface::desenhar()
 	// desenha o oxigênio
 	text.setString("Oxigênio: " + to_string(oxygenLeft));	
 	text.desenhar(300, 550);
+}
 
-	// desenha os divers
-	text.setString("Divers: " + to_string(numberDivers));
-	text.desenhar(520, 550);
+void JogoInterface::reduceOxygen()
+{
+	oxygenLeft--;
+}
+
+void JogoInterface::pegouUmDiver()
+{
+	qttyDivers++;
+}
+
+int JogoInterface::getOxygenLeft()
+{
+	return oxygenLeft;
 }

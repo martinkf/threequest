@@ -22,13 +22,10 @@ void Player::inicializar()
 	isOnSurface = false;
 	facingDirection = facingRight;
 	sprite.setInverterX(true);
-	speed = 4;
+	speed = 3;
 	shotType = shotRegular;
-	shotArray = TiroArray();
-	shotArray.inicializar();
-	maxOxygen = 2300;
-	oxygenLeft = maxOxygen;
-	numberDivers = 0;		 
+	tiroArray = TiroArray();
+	tiroArray.inicializar();
 }
 
 void Player::atualizar()
@@ -36,25 +33,8 @@ void Player::atualizar()
 	// avança a animação do sprite do player
 	sprite.avancarAnimacao();
 
-	// verificações referentes a velocidade do submarino do player
-	switch (numberDivers)
-	{
-	case 0:
-	case 1:
-		speed = 4;
-		break;
-	case 2:
-	case 3:
-		speed = 3;
-		break;
-	case 4:
-	case 5:
-		speed = 2;
-		break;
-	case 6:
-		speed = 1;
-		break;
-	}
+	// atualiza os tiros
+	tiroArray.atualizar();
 
 	// verificações referentes a movimentação
 	if (gTeclado.segurando[TECLA_CIMA] && y > 120)
@@ -107,58 +87,12 @@ void Player::atualizar()
 	else 
 	{
 		isOnSurface = false;
-	}
-
-	if (isOnSurface)
-	{
-		// coisas a se fazer quando na superficie aqui
-		if (oxygenLeft <= maxOxygen) 
-		{
-			if (oxygenLeft + 9 > maxOxygen)
-			{
-				oxygenLeft = maxOxygen;
-			} 
-			else
-			{
-				oxygenLeft += 9;
-			}
-		}
-		if (numberDivers > 0)
-		{
-			numberDivers--;
-		}
-	}
-	else
-	{
-		oxygenLeft--;
-	}
-
-	// verificações referentes a oxigênio disponível
-	if (oxygenLeft == 0)
-	{
-		// MATAR O PLAYER POR FALTA DE OXIGÊNIO
-	}
+	}	
 
 	// verificações referentes a atirar
 	if (gTeclado.pressionou[TECLA_ESPACO] && !isOnSurface)
 	{
 		atirar();
-	}
-	
-	// atualiza os tiros
-	for (int i = 0; i < shotArray.retornaNumeroTotalTiros(); i++)
-	{
-		Tiro test;
-		test = shotArray.retornaTiroAtIndex(i);
-		if (test.estaVivo())
-		{
-			test.atualizar();
-			shotArray.adicionaTiroNesteIndex(test, i);
-		}
-		else 
-		{
-			shotArray.removeTiroAtIndex(i);
-		}		
 	}
 }
 
@@ -168,34 +102,14 @@ void Player::desenhar()
 	sprite.desenhar(x, y);
 
 	// desenha os tiros
-	for (int i = 0; i < shotArray.retornaNumeroTotalTiros(); i++)
-	{
-		shotArray.retornaTiroAtIndex(i).desenhar();
-	}
+	tiroArray.desenhar();
 }
 
 void Player::atirar()
 {
 	Tiro tiro = Tiro();
 	tiro.inicializar(shotType, x, y, facingDirection);
-	shotArray.adicionaTiroNaLista(tiro);
-}
-
-bool Player::tryAddOneDiver()
-{
-	if (numberDivers < 6) 
-	{		
-		return true;
-	}
-	else 
-	{
-		return false;
-	}	
-}
-
-void Player::addOneDiver()
-{
-	numberDivers++;
+	tiroArray.adicionaTiroNaLista(tiro);
 }
 
 int Player::getX()
@@ -218,12 +132,17 @@ Sprite Player::getSprite()
 	return sprite;
 }
 
-int Player::getOxygenLeft()
+TiroArray Player::getTiroArray()
 {
-	return oxygenLeft;
+	return tiroArray;
 }
 
-int Player::getNumberDivers()
+void Player::setTiroArray(TiroArray _input)
 {
-	return numberDivers;
+	tiroArray = _input;
+}
+
+bool Player::isPlayerOnSurface()
+{
+	return isOnSurface;
 }
