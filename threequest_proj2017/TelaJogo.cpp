@@ -36,6 +36,9 @@ void TelaJogo::inicializar()
 	// INICIALIZA O TIRO ARRAY
 	tiros.inicializar();
 
+	// INICIALIZA A AIR BUBBLE ARRAY
+	airBubbles.inicializar();
+
 	// INICIALIZA A DIVER ARRAY
 	divers.inicializar();
 
@@ -73,6 +76,10 @@ void TelaJogo::desenhar()
 	tiros.atualizar();
 	tiros.desenhar();
 
+	// DESENHA A AIR BUBBLE ARRAY
+	airBubbles.atualizar();
+	airBubbles.desenhar();
+
 	// DESENHA A ENEMY FISHES ARRAY
 	enemyFishes.atualizar();
 	enemyFishes.desenhar();
@@ -90,11 +97,19 @@ void TelaJogo::verificar()
 	// SE O PLAYER ESTÁ NA SUPERFÍCIE
 	if (player.isPlayerOnSurface())
 	{
+		// desliga os spawners
 		divers.turnOffSpawner();
+		enemyFishes.turnOffSpawner();
+		airBubbles.turnOffSpawner();
 	}
 	else
 	{
+		// liga os spawners
 		divers.turnOnSpawner();
+		enemyFishes.turnOnSpawner();
+		airBubbles.turnOnSpawner();
+
+		// come o oxigênio, matando-lhe lentamente
 		interfac.reduceOxygen();
 	}
 
@@ -122,10 +137,22 @@ void TelaJogo::verificar()
 		}
 	}
 
+	// SPAWNER: AIR BUBBLE
+	if (fcnt.getFrameNumber() % 240 == 0) // 240 -> a cada 4 segundos
+	{
+		if (rand() % 6 == 0) // 6 -> uma chance em seis
+		{
+			if (airBubbles.isSpawnerTurnedOn()) // se o spawner está ligado
+			{				
+				airBubbles.spawnNewRandomAirBubble();
+			}
+		}
+	}
+
 	// SPAWNER: ENEMY FISH
 	if (fcnt.getFrameNumber() % 120 == 0) // 120 -> a cada 2 segundos
 	{
-		if (rand() % 3 == 0) // 3 -> uma chance em três
+		if (rand() % 2 == 0) // 2 -> uma chance em três
 		{
 			if (enemyFishes.isSpawnerTurnedOn()) // se o spawner está ligado
 			{				
@@ -216,5 +243,30 @@ void TelaJogo::verificar()
 	}
 
 	// COLLISION: PLAYER X ENEMY FISH
+	// TO DO
+
+	// COLLISION: PLAYER X AIR BUBBLE
+	for (int i = 0; i < airBubbles.getNumeroTotalUtilizado(); i++)
+	{
+		if (uniTestarColisao(			
+			airBubbles.getAirBubbleAtIndex(i).getSprite(),
+			airBubbles.getAirBubbleAtIndex(i).getX(),
+			airBubbles.getAirBubbleAtIndex(i).getY(),
+			0,
+			player.getSprite(),
+			player.getX(),
+			player.getY(),
+			0
+		))
+		{
+			// COLIDIU UMA AIR BUBBLE COM O PLAYER!
+
+			// acrescenta um pouco de oxigênio de volta ao jogo
+			interfac.pegouUmaAirBubble();
+
+			// destrói a air bubble
+			airBubbles.removeAirBubbleAtIndex(i);
+		}
+	}
 	// TO DO
 }

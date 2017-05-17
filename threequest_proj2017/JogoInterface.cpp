@@ -10,7 +10,8 @@ JogoInterface::~JogoInterface()
 
 void JogoInterface::inicializar()
 {	
-	oxygenLeft = 6000;
+	maxOxygen = 6000;
+	oxygenLeft = maxOxygen;
 	
 	qttyDivers = 0;
 	qttyEnemyFish = 0;
@@ -30,6 +31,18 @@ void JogoInterface::desenhar()
 void JogoInterface::reduceOxygen()
 {
 	oxygenLeft--;
+}
+
+void JogoInterface::pegouUmaAirBubble()
+{
+	if (oxygenLeft + 500 > maxOxygen)
+	{
+		oxygenLeft = maxOxygen;
+	}
+	else
+	{
+		oxygenLeft += 500;
+	}
 }
 
 void JogoInterface::pegouUmDiver()

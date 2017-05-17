@@ -11,6 +11,7 @@ public:
 	void desenhar();
 
 	void reduceOxygen();
+	void pegouUmaAirBubble();
 
 	void pegouUmDiver();
 	void matouUmEnemyFish();
@@ -18,6 +19,7 @@ public:
 	int getOxygenLeft();
 
 private:
+	int maxOxygen;
 	int oxygenLeft;
 
 	int qttyDivers;

@@ -6,6 +6,7 @@
 #include "DiverArray.h"
 #include "TiroArray.h"
 #include "EnemyArray.h"
+#include "AirBubbleArray.h"
 #include "JogoInterface.h"
 #include <ctime>
 
@@ -29,6 +30,7 @@ private:
 	JogoInterface interfac;
 
 	Player player;
+	AirBubbleArray airBubbles;
 	TiroArray tiros;
 	DiverArray divers;
 	EnemyArray enemyFishes;

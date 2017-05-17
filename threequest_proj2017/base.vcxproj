@@ -99,6 +99,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AirBubble.cpp" />
+    <ClCompile Include="AirBubbleArray.cpp" />
     <ClCompile Include="Diver.cpp" />
     <ClCompile Include="DiverArray.cpp" />
     <ClCompile Include="EnemyArray.cpp" />
@@ -113,6 +115,8 @@
     <ClCompile Include="Tiro.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AirBubble.h" />
+    <ClInclude Include="AirBubbleArray.h" />
     <ClInclude Include="Diver.h" />
     <ClInclude Include="DiverArray.h" />
     <ClInclude Include="EnemyArray.h" />

@@ -25,7 +25,7 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 			}
 			sprite.setSpriteSheet("shotRegular");
 
-			shotSpeed = 3;
+			shotSpeed = 5;
 			xOffset = 44;
 			yOffset = 0;
 			break;		
@@ -36,7 +36,7 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 			}
 			sprite.setSpriteSheet("shotRed");
 
-			shotSpeed = 4;
+			shotSpeed = 6;
 			xOffset = 44;
 			yOffset = 0;
 			break;
@@ -47,7 +47,7 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 			}
 			sprite.setSpriteSheet("shotGreen");
 
-			shotSpeed = 2;
+			shotSpeed = 4;
 			xOffset = 44;
 			yOffset = 0;
 			break;
@@ -58,7 +58,7 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 			}
 			sprite.setSpriteSheet("shotBlue");
 
-			shotSpeed = 1;
+			shotSpeed = 3;
 			xOffset = 44;
 			yOffset = 0;
 			break;

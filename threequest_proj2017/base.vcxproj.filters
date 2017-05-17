@@ -33,6 +33,12 @@
     <ClCompile Include="EnemyArray.cpp">
       <Filter>Classes: Element Arrays</Filter>
     </ClCompile>
+    <ClCompile Include="AirBubble.cpp">
+      <Filter>Classes: Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="AirBubbleArray.cpp">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jogo.h" />
@@ -67,6 +73,12 @@
       <Filter>Classes: Elements</Filter>
     </ClInclude>
     <ClInclude Include="EnemyArray.h">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClInclude>
+    <ClInclude Include="AirBubble.h">
+      <Filter>Classes: Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="AirBubbleArray.h">
       <Filter>Classes: Element Arrays</Filter>
     </ClInclude>
   </ItemGroup>
