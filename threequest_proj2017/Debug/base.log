@@ -1,11 +1,62 @@
-﻿  TelaJogo.cpp
+﻿  main.cpp
+  TiroArray.cpp
+  Tiro.cpp
+  TelaJogo.cpp
 c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(260): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(286): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(313): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(343): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(267): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(293): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(320): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(347): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(377): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(404): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(434): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(465): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Player.cpp
   JogoInterface.cpp
+  Jogo.cpp
+  FrameCounter.cpp
+  EnemySubArray.cpp
+  EnemySub.cpp
+  EnemyFishArray.cpp
+  EnemyFish.cpp
+  DiverArray.cpp
+  Diver.cpp
   Generating Code...
+  LINK : C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.exe not found or not built by the last incremental link; performing full link
+AirBubble.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+libUnicornio_d.lib(Audio.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Audio.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(GerenciadorDeMusica.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(GerenciadorDeMusica.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(MixadorDeAudios.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(MixadorDeAudios.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Musica.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Musica.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Som.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Som.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(uniTestarColisao.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(uniTestarColisao.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(uniTestarColisaoSprite.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(uniTestarColisaoSprite.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(PainelDeDebug.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(PainelDeDebug.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(GerenciadorDeEventos.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(GerenciadorDeEventos.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(EventosInputTexto.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(EventosInputTexto.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(EventosJoysticks.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(EventosJoysticks.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(EventosMouse.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(EventosMouse.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(EventosTeclado.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(EventosTeclado.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(EventosToques.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(EventosToques.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Joystick.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Joystick.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Global.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Global.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(jsoncpp.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(jsoncpp.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Quad.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Quad.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(GerenciadorDeRecursos.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(GerenciadorDeRecursos.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Cor.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Cor.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Fading.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Fading.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Fonte.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Fonte.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(GerenciadorDeGraficos.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(GerenciadorDeGraficos.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Janela.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Janela.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Sprite.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Sprite.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(SpriteSheet.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(SpriteSheet.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Texto.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Texto.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Textura.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Textura.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(TexturaBase.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(TexturaBase.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(GerenciadorDeStrings.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(GerenciadorDeStrings.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(GrupoDeStrings.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(GrupoDeStrings.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(GerenciadorDeTempo.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(GerenciadorDeTempo.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(uniFuncoesPrincipais.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(uniFuncoesPrincipais.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
+libUnicornio_d.lib(Vetor2D.obj) : warning LNK4099: PDB 'libUnicornio-Windows.pdb' was not found with 'libUnicornio_d.lib(Vetor2D.obj)' or at 'C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\libUnicornio-Windows.pdb'; linking object as if no debug info
   base.vcxproj -> C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.exe
   base.vcxproj -> C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.pdb (Full PDB)

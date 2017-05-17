@@ -32,7 +32,8 @@ private:
 
 	Player player;
 	AirBubbleArray airBubbles;
-	TiroArray tiros;
+	TiroArray tirosEnemy;
+	TiroArray tirosPlayer;
 	DiverArray divers;
 	EnemyFishArray enemyFishes;
 	EnemySubArray enemySubs;
