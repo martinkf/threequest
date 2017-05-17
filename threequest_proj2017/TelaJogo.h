@@ -4,6 +4,8 @@
 #include "Player.h"
 #include "MyEnums.h"
 #include "DiverArray.h"
+#include "TiroArray.h"
+#include "EnemyArray.h"
 #include "JogoInterface.h"
 #include <ctime>
 
@@ -28,5 +30,6 @@ private:
 
 	Player player;
 	TiroArray tiros;
-	DiverArray divers;	
+	DiverArray divers;
+	EnemyArray enemyFishes;
 };

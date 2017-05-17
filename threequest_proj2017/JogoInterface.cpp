@@ -13,6 +13,7 @@ void JogoInterface::inicializar()
 	oxygenLeft = 6000;
 	
 	qttyDivers = 0;
+	qttyEnemyFish = 0;
 
 	gRecursos.carregarFonte("MONOFONT", "fontes/MONOFONT.TTF", 32);
 	text.setFonte("MONOFONT");
@@ -34,6 +35,11 @@ void JogoInterface::reduceOxygen()
 void JogoInterface::pegouUmDiver()
 {
 	qttyDivers++;
+}
+
+void JogoInterface::matouUmEnemyFish()
+{
+	qttyEnemyFish++;
 }
 
 int JogoInterface::getOxygenLeft()

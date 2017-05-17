@@ -39,6 +39,9 @@ void TelaJogo::inicializar()
 	// INICIALIZA A DIVER ARRAY
 	divers.inicializar();
 
+	// INICIALIZA A ENEMY FISH ARRAY
+	enemyFishes.inicializar();
+
 	// INICIALIZA A JOGO INTERFACE
 	interfac.inicializar();
 }
@@ -69,6 +72,10 @@ void TelaJogo::desenhar()
 	// DESENHA A TIRO ARRAY
 	tiros.atualizar();
 	tiros.desenhar();
+
+	// DESENHA A ENEMY FISHES ARRAY
+	enemyFishes.atualizar();
+	enemyFishes.desenhar();
 
 	// DESENHA O PLAYER
 	player.atualizar();
@@ -115,6 +122,18 @@ void TelaJogo::verificar()
 		}
 	}
 
+	// SPAWNER: ENEMY FISH
+	if (fcnt.getFrameNumber() % 120 == 0) // 120 -> a cada 2 segundos
+	{
+		if (rand() % 3 == 0) // 3 -> uma chance em três
+		{
+			if (enemyFishes.isSpawnerTurnedOn()) // se o spawner está ligado
+			{				
+				enemyFishes.spawnNewRandomEnemyFish();
+			}
+		}
+	}
+
 	// COLISION: PLAYER X DIVERS
 	for (int i = 0; i < divers.getNumeroTotalUtilizado(); i++)
 	{
@@ -130,6 +149,7 @@ void TelaJogo::verificar()
 		))
 		{
 			// COLIDIU UM DIVER COM O PLAYER!
+
 			// adiciona um diver ao score
 			interfac.pegouUmDiver();
 
@@ -155,14 +175,46 @@ void TelaJogo::verificar()
 			))
 			{
 				// COLIDIU UM TIRO COM UM DIVER!
+
 				// destrói o tiro
-				TiroArray test = tiros;
-				test.removeTiroAtIndex(j);
-				tiros = test;
+				tiros.removeTiroAtIndex(j);
 
 				// destrói o diver
 				divers.removeDiverAtIndex(i);
 			}
 		}
 	}
+
+	// COLISION: TIRO X ENEMY FISH
+	for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
+	{
+		for (int j = 0; j < tiros.getNumeroTotalUtilizado(); j++)
+		{
+			if (uniTestarColisao(
+				enemyFishes.getEnemyFishAtIndex(i).getSprite(),
+				enemyFishes.getEnemyFishAtIndex(i).getX(),
+				enemyFishes.getEnemyFishAtIndex(i).getY(),
+				0,
+				tiros.getTiroAtIndex(j).getSprite(),
+				tiros.getTiroAtIndex(j).getX(),
+				tiros.getTiroAtIndex(j).getY(),
+				0
+			))
+			{
+				// COLIDIU UM TIRO COM UM ENEMY FISH!
+
+				// adiciona o enemy fish ao score
+				interfac.matouUmEnemyFish();
+
+				// destrói o tiro
+				tiros.removeTiroAtIndex(j);
+
+				// destrói o enemy fish
+				enemyFishes.removeEnemyFishAtIndex(i);
+			}
+		}
+	}
+
+	// COLLISION: PLAYER X ENEMY FISH
+	// TO DO
 }

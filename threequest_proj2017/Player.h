@@ -1,8 +1,6 @@
 #pragma once
 #include "libUnicornio.h"
 #include "MyEnums.h"
-#include "Tiro.h"
-#include "TiroArray.h"
 
 class Player
 {

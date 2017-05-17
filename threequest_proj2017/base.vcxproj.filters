@@ -27,6 +27,12 @@
     <ClCompile Include="TelaJogo.cpp">
       <Filter>Classes: Telas</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyFish.cpp">
+      <Filter>Classes: Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyArray.cpp">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jogo.h" />
@@ -56,6 +62,12 @@
     </ClInclude>
     <ClInclude Include="TelaJogo.h">
       <Filter>Classes: Telas</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFish.h">
+      <Filter>Classes: Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyArray.h">
+      <Filter>Classes: Element Arrays</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -101,6 +101,8 @@
   <ItemGroup>
     <ClCompile Include="Diver.cpp" />
     <ClCompile Include="DiverArray.cpp" />
+    <ClCompile Include="EnemyArray.cpp" />
+    <ClCompile Include="EnemyFish.cpp" />
     <ClCompile Include="FrameCounter.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="JogoInterface.cpp" />
@@ -113,6 +115,8 @@
   <ItemGroup>
     <ClInclude Include="Diver.h" />
     <ClInclude Include="DiverArray.h" />
+    <ClInclude Include="EnemyArray.h" />
+    <ClInclude Include="EnemyFish.h" />
     <ClInclude Include="FrameCounter.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="JogoInterface.h" />

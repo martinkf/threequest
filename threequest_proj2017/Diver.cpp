@@ -23,12 +23,13 @@ void Diver::inicializar()
 	{
 		x = -10;
 		facingDirection = facingRight;
+		sprite.setInverterX(true);
 	}
 	else
 	{
 		x = 810;
 		facingDirection = facingLeft;
-		sprite.setInverterX(true);
+		
 	}
 
 	// definindo y do spawn
@@ -62,12 +63,6 @@ void Diver::atualizar()
 	{
 		destruir();
 	}
-
-	// verificar quase-colisão com inimigos (andar mais rápido)
-	// to do
-
-	// verificar colisão com player (se destruir + melhorar score do player)
-	// to do
 }
 
 void Diver::desenhar()
