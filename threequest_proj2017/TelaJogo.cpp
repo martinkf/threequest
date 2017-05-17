@@ -122,6 +122,41 @@ void TelaJogo::verificar()
 		interfac.reduceOxygen();
 	}
 
+	// SE ACONTECEU UM FULL THREE GRID
+	if (interfac.getThreeGridSize() == 3)
+	{
+		char temp = interfac.racionalizaThreeGrid();
+		switch (temp)
+		{
+		case 'n':
+			break;
+		case 'r':
+			player.changeShotType(shotRed);
+			player.setShotTimeRemaining();
+			break;
+		case 'g':
+			player.changeShotType(shotGreen);
+			player.setShotTimeRemaining();
+			break;
+		case 'b':
+			player.changeShotType(shotBlue);
+			player.setShotTimeRemaining();
+			break;
+		case 't':
+			break;
+		}
+	}
+
+	// SE O SHOT FOR SPECIAL, DIMINUIR ELE AOS POUCOS
+	if (player.getShotTimeRemaining() > 0) 
+	{
+		player.drainShotTimeRemaining();
+	}
+	else 
+	{
+		player.changeShotType(shotRegular);
+	}
+
 	// SE O PLAYER ATIROU
 	if (player.wantsToShoot()) 
 	{
@@ -279,8 +314,8 @@ void TelaJogo::verificar()
 			{
 				// COLIDIU UM TIRO COM UM ENEMY FISH!
 
-				// adiciona o enemy fish ao score
-				interfac.matouUmEnemyFish();
+				// adiciona o enemy fish ao score e ao three grid
+				interfac.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getShotType());
 
 				// destrói o tiro
 				tiros.removeTiroAtIndex(j);
@@ -309,8 +344,8 @@ void TelaJogo::verificar()
 			{
 				// COLIDIU UM TIRO COM UM ENEMY SUB!
 
-				// adiciona o enemy sub ao score
-				interfac.matouUmEnemySub();
+				// adiciona o enemy sub ao score e ao three grid
+				interfac.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getShotType());
 
 				// destrói o tiro
 				tiros.removeTiroAtIndex(j);

@@ -1,15 +1,11 @@
 ﻿  TelaJogo.cpp
 c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(230): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(256): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(283): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(260): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(286): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(313): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(347): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  EnemySubArray.cpp
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(343): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio\projetos\threequest_proj2017\telajogo.cpp(377): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  JogoInterface.cpp
   Generating Code...
-  Skipping... (no relevant changes detected)
-  main.cpp
-  Player.cpp
-  Jogo.cpp
   base.vcxproj -> C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.exe
   base.vcxproj -> C:\Users\marti\Desktop\libunicornio\projetos\threequest_proj2017\bin\base-debug.pdb (Full PDB)

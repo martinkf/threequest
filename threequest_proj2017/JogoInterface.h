@@ -1,5 +1,6 @@
 #pragma once
 #include "libUnicornio.h"
+#include "MyEnums.h"
 
 class JogoInterface
 {
@@ -14,11 +15,13 @@ public:
 	void pegouUmaAirBubble();
 
 	void pegouUmDiver();
-	void matouUmEnemyFish();
-	void matouUmEnemySub();
+	void matouUmEnemyFish(ShotType input_);
+	void matouUmEnemySub(ShotType input_);
 
-	//int getOxygenLeft();
-
+	void adicionaAoThreeGrid(ShotType input_);
+	char racionalizaThreeGrid();
+	int getThreeGridSize();
+	
 private:
 	int maxOxygen;
 	int oxygenLeft;
@@ -26,6 +29,9 @@ private:
 	int qttyDiver;
 	int qttyEnemyFish;
 	int qttyEnemySub;
+
+	ShotType threeGrid[3];
+	int threeGridSize;
 
 	Texto text;
 };
