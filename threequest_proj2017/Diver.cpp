@@ -32,8 +32,8 @@ void Diver::inicializar()
 	}
 
 	// definindo y do spawn
-	int spawnHeight = rand() % 320;
-	y = 150 + spawnHeight;
+	int spawnRow = rand() % 9;
+	y = 165 + (spawnRow * 40);
 
 	// definindo speed
 	speed = (rand() % 2) + 1;

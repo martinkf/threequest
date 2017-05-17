@@ -102,10 +102,11 @@ void TelaJogo::verificar()
 		// unset the flag
 		player.makeNotWantToShoot();
 	}
+
 	// SPAWNER: DIVERS
 	if (fcnt.getFrameNumber() % 180 == 0) // 180 -> a cada 3 segundos
 	{
-		if (rand() % 1 == 0) // 6 -> uma chance em seis
+		if (rand() % 6 == 0) // 6 -> uma chance em seis
 		{
 			if (divers.isSpawnerTurnedOn()) // se o spawner está ligado
 			{
