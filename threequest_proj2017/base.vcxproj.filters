@@ -30,13 +30,19 @@
     <ClCompile Include="EnemyFish.cpp">
       <Filter>Classes: Elements</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyArray.cpp">
-      <Filter>Classes: Element Arrays</Filter>
-    </ClCompile>
     <ClCompile Include="AirBubble.cpp">
       <Filter>Classes: Elements</Filter>
     </ClCompile>
     <ClCompile Include="AirBubbleArray.cpp">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySub.cpp">
+      <Filter>Classes: Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySubArray.cpp">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFishArray.cpp">
       <Filter>Classes: Element Arrays</Filter>
     </ClCompile>
   </ItemGroup>
@@ -72,13 +78,19 @@
     <ClInclude Include="EnemyFish.h">
       <Filter>Classes: Elements</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyArray.h">
-      <Filter>Classes: Element Arrays</Filter>
-    </ClInclude>
     <ClInclude Include="AirBubble.h">
       <Filter>Classes: Elements</Filter>
     </ClInclude>
     <ClInclude Include="AirBubbleArray.h">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySub.h">
+      <Filter>Classes: Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySubArray.h">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFishArray.h">
       <Filter>Classes: Element Arrays</Filter>
     </ClInclude>
   </ItemGroup>

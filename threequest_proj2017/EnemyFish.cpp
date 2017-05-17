@@ -15,7 +15,7 @@ void EnemyFish::inicializar()
 	switch (randm)
 	{
 	case 1:
-		colour = red;
+		shotType = shotRed;
 		if (!gRecursos.carregouSpriteSheet("fishRed"))
 		{
 			gRecursos.carregarSpriteSheet("fishRed", "imagens/spr_fishRed.png", 1, 4);
@@ -23,7 +23,7 @@ void EnemyFish::inicializar()
 		sprite.setSpriteSheet("fishRed");
 		break;
 	case 2:
-		colour = green;
+		shotType = shotGreen;
 		if (!gRecursos.carregouSpriteSheet("fishGreen"))
 		{
 			gRecursos.carregarSpriteSheet("fishGreen", "imagens/spr_fishGreen.png", 1, 4);
@@ -31,7 +31,7 @@ void EnemyFish::inicializar()
 		sprite.setSpriteSheet("fishGreen");
 		break;
 	case 3:
-		colour = blue;
+		shotType = shotBlue;
 		if (!gRecursos.carregouSpriteSheet("fishBlue"))
 		{
 			gRecursos.carregarSpriteSheet("fishBlue", "imagens/spr_fishBlue.png", 1, 4);
@@ -116,4 +116,9 @@ int EnemyFish::getX()
 int EnemyFish::getY()
 {
 	return y;
+}
+
+ShotType EnemyFish::getShotType()
+{
+	return shotType;
 }

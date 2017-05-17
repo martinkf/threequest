@@ -45,6 +45,9 @@ void TelaJogo::inicializar()
 	// INICIALIZA A ENEMY FISH ARRAY
 	enemyFishes.inicializar();
 
+	// INICIALIZA A ENEMY SUB ARRAY
+	enemySubs.inicializar();
+
 	// INICIALIZA A JOGO INTERFACE
 	interfac.inicializar();
 }
@@ -84,6 +87,10 @@ void TelaJogo::desenhar()
 	enemyFishes.atualizar();
 	enemyFishes.desenhar();
 
+	// DESENHA A ENEMY SUBS ARRAY
+	enemySubs.atualizar();
+	enemySubs.desenhar();
+
 	// DESENHA O PLAYER
 	player.atualizar();
 	player.desenhar();
@@ -98,16 +105,18 @@ void TelaJogo::verificar()
 	if (player.isPlayerOnSurface())
 	{
 		// desliga os spawners
-		divers.turnOffSpawner();
-		enemyFishes.turnOffSpawner();
+		divers.turnOffSpawner();		
 		airBubbles.turnOffSpawner();
+		enemyFishes.turnOffSpawner();
+		enemySubs.turnOffSpawner();
 	}
 	else
 	{
 		// liga os spawners
 		divers.turnOnSpawner();
-		enemyFishes.turnOnSpawner();
 		airBubbles.turnOnSpawner();
+		enemyFishes.turnOnSpawner();
+		enemySubs.turnOnSpawner();		
 
 		// come o oxigênio, matando-lhe lentamente
 		interfac.reduceOxygen();
@@ -118,11 +127,39 @@ void TelaJogo::verificar()
 	{
 		// cria o tiro
 		Tiro tiro = Tiro();
-		tiro.inicializar(player.getShotType(), player.getX(), player.getY(), player.getDirection());
+		tiro.inicializar(
+			player.getShotType(), 
+			player.getX(), 
+			player.getY(), 
+			player.getDirection()
+		);
 		tiros.adicionaTiroNaLista(tiro);
 
 		// unset the flag
 		player.makeNotWantToShoot();
+	}
+
+	// SE ALGUM ENEMY SUB ATIROU
+	for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
+	{
+		if (enemySubs.getEnemySubAtIndex(i).wantsToShoot()) 
+		{
+			// cria o tiro
+			Tiro tiro = Tiro();
+			tiro.inicializar(
+				enemySubs.getEnemySubAtIndex(i).getShotType(),
+				enemySubs.getEnemySubAtIndex(i).getX(),
+				enemySubs.getEnemySubAtIndex(i).getY(),
+				enemySubs.getEnemySubAtIndex(i).getDirection()
+			);			
+			tiros.adicionaTiroNaLista(tiro);
+
+			// unset the wants-to-shoot flag
+			EnemySub test = EnemySub();
+			test = enemySubs.getEnemySubAtIndex(i);
+			test.makeNotWantToShoot();
+			enemySubs.addEnemySubAtIndex(test, i);
+		}
 	}
 
 	// SPAWNER: DIVERS
@@ -152,11 +189,23 @@ void TelaJogo::verificar()
 	// SPAWNER: ENEMY FISH
 	if (fcnt.getFrameNumber() % 120 == 0) // 120 -> a cada 2 segundos
 	{
-		if (rand() % 2 == 0) // 2 -> uma chance em três
+		if (rand() % 4 == 0) // 4 -> uma chance em quatro
 		{
 			if (enemyFishes.isSpawnerTurnedOn()) // se o spawner está ligado
 			{				
 				enemyFishes.spawnNewRandomEnemyFish();
+			}
+		}
+	}
+
+	// SPAWNER: ENEMY SUB
+	if (fcnt.getFrameNumber() % 120 == 0) // 120 -> a cada 2 segundos
+	{
+		if (rand() % 4 == 0) // 4 -> uma chance em quatro
+		{
+			if (enemySubs.isSpawnerTurnedOn()) // se o spawner está ligado
+			{
+				enemySubs.spawnNewRandomEnemySub();
 			}
 		}
 	}
@@ -242,7 +291,40 @@ void TelaJogo::verificar()
 		}
 	}
 
+	// COLISION: TIRO X ENEMY SUB
+	for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
+	{
+		for (int j = 0; j < tiros.getNumeroTotalUtilizado(); j++)
+		{
+			if (uniTestarColisao(
+				enemySubs.getEnemySubAtIndex(i).getSprite(),
+				enemySubs.getEnemySubAtIndex(i).getX(),
+				enemySubs.getEnemySubAtIndex(i).getY(),
+				0,
+				tiros.getTiroAtIndex(j).getSprite(),
+				tiros.getTiroAtIndex(j).getX(),
+				tiros.getTiroAtIndex(j).getY(),
+				0
+			))
+			{
+				// COLIDIU UM TIRO COM UM ENEMY SUB!
+
+				// adiciona o enemy sub ao score
+				interfac.matouUmEnemySub();
+
+				// destrói o tiro
+				tiros.removeTiroAtIndex(j);
+
+				// destrói o enemy fish
+				enemySubs.removeEnemySubAtIndex(i);
+			}
+		}
+	}
+
 	// COLLISION: PLAYER X ENEMY FISH
+	// TO DO
+
+	// COLLISION: PLAYER X ENEMY SUB
 	// TO DO
 
 	// COLLISION: PLAYER X AIR BUBBLE
@@ -268,5 +350,4 @@ void TelaJogo::verificar()
 			airBubbles.removeAirBubbleAtIndex(i);
 		}
 	}
-	// TO DO
 }

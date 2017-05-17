@@ -103,8 +103,10 @@
     <ClCompile Include="AirBubbleArray.cpp" />
     <ClCompile Include="Diver.cpp" />
     <ClCompile Include="DiverArray.cpp" />
-    <ClCompile Include="EnemyArray.cpp" />
+    <ClCompile Include="EnemyFishArray.cpp" />
     <ClCompile Include="EnemyFish.cpp" />
+    <ClCompile Include="EnemySub.cpp" />
+    <ClCompile Include="EnemySubArray.cpp" />
     <ClCompile Include="FrameCounter.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="JogoInterface.cpp" />
@@ -119,8 +121,10 @@
     <ClInclude Include="AirBubbleArray.h" />
     <ClInclude Include="Diver.h" />
     <ClInclude Include="DiverArray.h" />
-    <ClInclude Include="EnemyArray.h" />
+    <ClInclude Include="EnemyFishArray.h" />
     <ClInclude Include="EnemyFish.h" />
+    <ClInclude Include="EnemySub.h" />
+    <ClInclude Include="EnemySubArray.h" />
     <ClInclude Include="FrameCounter.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="JogoInterface.h" />

@@ -5,7 +5,8 @@
 #include "MyEnums.h"
 #include "DiverArray.h"
 #include "TiroArray.h"
-#include "EnemyArray.h"
+#include "EnemyFishArray.h"
+#include "EnemySubArray.h"
 #include "AirBubbleArray.h"
 #include "JogoInterface.h"
 #include <ctime>
@@ -33,5 +34,6 @@ private:
 	AirBubbleArray airBubbles;
 	TiroArray tiros;
 	DiverArray divers;
-	EnemyArray enemyFishes;
+	EnemyFishArray enemyFishes;
+	EnemySubArray enemySubs;
 };

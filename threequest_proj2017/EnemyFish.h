@@ -19,6 +19,7 @@ public:
 	Sprite getSprite();
 	int getX();
 	int getY();
+	ShotType getShotType();
 
 private:
 	int x;
@@ -27,6 +28,6 @@ private:
 	Sprite sprite;
 	Direction facingDirection;
 	bool isAlive;
-	ThreeColour colour;
+	ShotType shotType;
 };
 

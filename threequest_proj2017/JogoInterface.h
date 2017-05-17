@@ -15,15 +15,17 @@ public:
 
 	void pegouUmDiver();
 	void matouUmEnemyFish();
+	void matouUmEnemySub();
 
-	int getOxygenLeft();
+	//int getOxygenLeft();
 
 private:
 	int maxOxygen;
 	int oxygenLeft;
 
-	int qttyDivers;
+	int qttyDiver;
 	int qttyEnemyFish;
+	int qttyEnemySub;
 
 	Texto text;
 };

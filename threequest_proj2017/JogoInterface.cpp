@@ -13,8 +13,9 @@ void JogoInterface::inicializar()
 	maxOxygen = 6000;
 	oxygenLeft = maxOxygen;
 	
-	qttyDivers = 0;
+	qttyDiver = 0;
 	qttyEnemyFish = 0;
+	qttyEnemySub = 0;
 
 	gRecursos.carregarFonte("MONOFONT", "fontes/MONOFONT.TTF", 32);
 	text.setFonte("MONOFONT");
@@ -47,7 +48,7 @@ void JogoInterface::pegouUmaAirBubble()
 
 void JogoInterface::pegouUmDiver()
 {
-	qttyDivers++;
+	qttyDiver++;
 }
 
 void JogoInterface::matouUmEnemyFish()
@@ -55,7 +56,12 @@ void JogoInterface::matouUmEnemyFish()
 	qttyEnemyFish++;
 }
 
-int JogoInterface::getOxygenLeft()
+void JogoInterface::matouUmEnemySub()
 {
-	return oxygenLeft;
+	qttyEnemySub++;
 }
+
+//int JogoInterface::getOxygenLeft()
+//{
+//	return oxygenLeft;
+//}
