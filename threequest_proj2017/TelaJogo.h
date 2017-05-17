@@ -20,9 +20,13 @@ public:
 
 private:
 	FrameCounter fcnt;
+
 	Sprite gameBackground;
 	Sprite gameWaterSurface;
+
 	JogoInterface interfac;
+
 	Player player;
-	DiverArray divers;
+	TiroArray tiros;
+	DiverArray divers;	
 };

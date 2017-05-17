@@ -18,13 +18,13 @@ public:
 	void turnOnSpawner();
 
 	bool isSpawnerTurnedOn();
-	int retornaNumeroTotalDivers();
+	int getNumeroTotalUtilizado();
 	Diver getDiverAtIndex(int index_);
 	void removeDiverAtIndex(int index_);
 	
 private:
 	int numeroTotalUtilizado;
-	Diver array[10];
+	Diver array[20];
 	bool isTurnedOn;
 };
 

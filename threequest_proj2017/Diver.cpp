@@ -31,7 +31,7 @@ void Diver::inicializar()
 		sprite.setInverterX(true);
 	}
 
-	// definindo altura do spawn
+	// definindo y do spawn
 	int spawnHeight = rand() % 320;
 	y = 150 + spawnHeight;
 

@@ -33,6 +33,9 @@ void TelaJogo::inicializar()
 	// INICIALIZA O PLAYER
 	player.inicializar();
 
+	// INICIALIZA O TIRO ARRAY
+	tiros.inicializar();
+
 	// INICIALIZA A DIVER ARRAY
 	divers.inicializar();
 
@@ -63,6 +66,10 @@ void TelaJogo::desenhar()
 	divers.atualizar();
 	divers.desenhar();
 
+	// DESENHA A TIRO ARRAY
+	tiros.atualizar();
+	tiros.desenhar();
+
 	// DESENHA O PLAYER
 	player.atualizar();
 	player.desenhar();
@@ -84,6 +91,17 @@ void TelaJogo::verificar()
 		interfac.reduceOxygen();
 	}
 
+	// SE O PLAYER ATIROU
+	if (player.wantsToShoot()) 
+	{
+		// cria o tiro
+		Tiro tiro = Tiro();
+		tiro.inicializar(player.getShotType(), player.getX(), player.getY(), player.getDirection());
+		tiros.adicionaTiroNaLista(tiro);
+
+		// unset the flag
+		player.makeNotWantToShoot();
+	}
 	// SPAWNER: DIVERS
 	if (fcnt.getFrameNumber() % 180 == 0) // 180 -> a cada 3 segundos
 	{
@@ -97,7 +115,7 @@ void TelaJogo::verificar()
 	}
 
 	// COLISION: PLAYER X DIVERS
-	for (int i = 0; i < divers.retornaNumeroTotalDivers(); i++)
+	for (int i = 0; i < divers.getNumeroTotalUtilizado(); i++)
 	{
 		if (uniTestarColisao(
 			divers.getDiverAtIndex(i).getSprite(),
@@ -120,26 +138,26 @@ void TelaJogo::verificar()
 	}
 
 	// COLISION: TIRO X DIVERS
-	for (int i = 0; i < divers.retornaNumeroTotalDivers(); i++)
+	for (int i = 0; i < divers.getNumeroTotalUtilizado(); i++)
 	{
-		for (int j = 0; j < player.getTiroArray().getNumeroTotalUtilizado(); j++)
+		for (int j = 0; j < tiros.getNumeroTotalUtilizado(); j++)
 		{
 			if (uniTestarColisao(
 				divers.getDiverAtIndex(i).getSprite(),
 				divers.getDiverAtIndex(i).getX(),
 				divers.getDiverAtIndex(i).getY(),
 				0,
-				player.getTiroArray().getTiroAtIndex(j).getSprite(),				
-				player.getTiroArray().getTiroAtIndex(j).getX(),
-				player.getTiroArray().getTiroAtIndex(j).getY(),
+				tiros.getTiroAtIndex(j).getSprite(),
+				tiros.getTiroAtIndex(j).getX(),
+				tiros.getTiroAtIndex(j).getY(),
 				0
 			))
 			{
 				// COLIDIU UM TIRO COM UM DIVER!
 				// destrói o tiro
-				TiroArray test = player.getTiroArray();
+				TiroArray test = tiros;
 				test.removeTiroAtIndex(j);
-				player.setTiroArray(test);
+				tiros = test;
 
 				// destrói o diver
 				divers.removeDiverAtIndex(i);

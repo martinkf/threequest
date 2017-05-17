@@ -16,13 +16,15 @@ public:
 
 	void atirar();
 
+	ShotType getShotType();
 	int getX();
 	int getY();
 	Direction getDirection();
 	Sprite getSprite();
-	TiroArray getTiroArray();
-	void setTiroArray(TiroArray _input);
 	bool isPlayerOnSurface();
+
+	bool wantsToShoot();
+	void makeNotWantToShoot();
 
 private:
 	int x;
@@ -32,6 +34,6 @@ private:
 	Direction facingDirection;
 	bool isOnSurface;
 	ShotType shotType;
-	TiroArray tiroArray;
+	bool playerWantsToShoot;
 };
 

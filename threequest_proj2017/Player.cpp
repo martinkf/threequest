@@ -24,17 +24,13 @@ void Player::inicializar()
 	sprite.setInverterX(true);
 	speed = 3;
 	shotType = shotRegular;
-	tiroArray = TiroArray();
-	tiroArray.inicializar();
+	playerWantsToShoot = false;
 }
 
 void Player::atualizar()
 {
 	// avança a animação do sprite do player
 	sprite.avancarAnimacao();
-
-	// atualiza os tiros
-	tiroArray.atualizar();
 
 	// verificações referentes a movimentação
 	if (gTeclado.segurando[TECLA_CIMA] && y > 120)
@@ -100,16 +96,16 @@ void Player::desenhar()
 {
 	// desenha o player
 	sprite.desenhar(x, y);
-
-	// desenha os tiros
-	tiroArray.desenhar();
 }
 
 void Player::atirar()
 {
-	Tiro tiro = Tiro();
-	tiro.inicializar(shotType, x, y, facingDirection);
-	tiroArray.adicionaTiroNaLista(tiro);
+	playerWantsToShoot = true;	
+}
+
+ShotType Player::getShotType()
+{
+	return shotType;
 }
 
 int Player::getX()
@@ -132,17 +128,17 @@ Sprite Player::getSprite()
 	return sprite;
 }
 
-TiroArray Player::getTiroArray()
-{
-	return tiroArray;
-}
-
-void Player::setTiroArray(TiroArray _input)
-{
-	tiroArray = _input;
-}
-
 bool Player::isPlayerOnSurface()
 {
 	return isOnSurface;
+}
+
+bool Player::wantsToShoot()
+{
+	return playerWantsToShoot;
+}
+
+void Player::makeNotWantToShoot()
+{
+	playerWantsToShoot = false;
 }

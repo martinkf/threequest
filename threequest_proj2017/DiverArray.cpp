@@ -44,7 +44,7 @@ bool DiverArray::isSpawnerTurnedOn()
 	return isTurnedOn;
 }
 
-int DiverArray::retornaNumeroTotalDivers()
+int DiverArray::getNumeroTotalUtilizado()
 {
 	return numeroTotalUtilizado;
 }
