@@ -19,6 +19,7 @@ void Jogo::inicializar()
 	// INICIALIZA AS TELAS
 	telaSplash_inicializar();
 	telaJogo_inicializar();
+	telaMenu_inicializar();
 }
 
 void Jogo::executar()
@@ -33,6 +34,9 @@ void Jogo::executar()
 		{
 			case sTelaSplash:
 				telaSplash_executar();
+				break;
+			case sTelaMenu:
+				telaMenu_executar();
 				break;
 			case sTelaJogo:
 				telaJogo_executar();
@@ -90,9 +94,49 @@ void Jogo::telaSplash_desenhar()
 
 void Jogo::telaSplash_verificar()
 {
-	if (frameCounterSplash.getFrameNumber() == 240)
+	if (frameCounterSplash.getFrameNumber() == 180)
 	{
 		// SAI DESSA SPLASH SCREEN
+		setStatusJogo(sTelaMenu);
+	}
+}
+
+void Jogo::telaMenu_inicializar()
+{
+	// INICIALIZA O FRAMECOUNTER
+	frameCounterMenuTemp.inicializar();
+
+	// INICIALIZA O SPLASH PICTURE
+	if (!gRecursos.carregouSpriteSheet("menuBackground"))
+	{
+		gRecursos.carregarSpriteSheet("menuBackground", "imagens/spr_menuBackground.png");
+	}
+	menuBackground.setSpriteSheet("menuBackground");
+}
+
+void Jogo::telaMenu_executar()
+{
+	// ATUALIZA O FRAMECOUNTER
+	frameCounterMenuTemp.tick();
+
+	// DESENHA TUDO
+	telaMenu_desenhar();
+
+	// VERIFICA TUDO
+	telaMenu_verificar();
+}
+
+void Jogo::telaMenu_desenhar()
+{
+	// DESENHA O MENU BACKGROUND
+	menuBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
+}
+
+void Jogo::telaMenu_verificar()
+{
+	if (frameCounterMenuTemp.getFrameNumber() == 240) // ISSO TUDO É MUITO TEMPORÁRIO NÉ MDS  TE LIGA
+	{
+		// SAI DESSE MENU SCREEN
 		setStatusJogo(sTelaJogo);
 	}
 }
@@ -118,6 +162,16 @@ void Jogo::telaJogo_inicializar()
 		gRecursos.carregarSpriteSheet("waterSurface", "imagens/spr_waterSurface.png");
 	}
 	gameWaterSurface.setSpriteSheet("waterSurface");
+
+	// INICIALIZA O POPUP MENU BACKGROUND
+	if (!gRecursos.carregouSpriteSheet("popupBackground"))
+	{
+		gRecursos.carregarSpriteSheet("popupBackground", "imagens/spr_popupBackground.png");
+	}
+	popupBackground.setSpriteSheet("popupBackground");
+
+	// INICIALIZA A POPUP
+	popupNeedsDrawing = true;
 
 	// INICIALIZA O PLAYER
 	player.inicializar();
@@ -196,10 +250,23 @@ void Jogo::telaJogo_desenhar()
 
 	// DESENHA A WATER SURFACE
 	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 125);
+
+	// DESENHA O POPUP MENU
+	if (shouldDrawPopup()) 
+	{
+		popupBackground.desenhar(gJanela.getLargura() / 2, (gJanela.getAltura() / 2) - 50);
+	}
 }
 
 void Jogo::telaJogo_verificar()
 {
+	// TEMP TEST
+	// timer para sumir o popup
+	if (frameCounterJogo.getFrameNumber() == 360) 
+	{
+		popupNeedsDrawing = false;
+	}
+
 	// SE O PLAYER ESTÁ NA SUPERFÍCIE
 	if (player.isPlayerOnSurface())
 	{
@@ -676,4 +743,9 @@ void Jogo::telaJogo_verificar()
 			airBubbles.removeAirBubbleAtIndex(i);
 		}
 	}
+}
+
+bool Jogo::shouldDrawPopup()
+{
+	return popupNeedsDrawing;
 }

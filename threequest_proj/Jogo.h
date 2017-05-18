@@ -33,15 +33,26 @@ private:
 	FrameCounter frameCounterSplash;
 	Sprite splashPicture;
 
+	// métodos da tela inicial
+	void telaMenu_inicializar();
+	void telaMenu_executar();
+	void telaMenu_desenhar();
+	void telaMenu_verificar();
+	// atributos da tela inicial
+	FrameCounter frameCounterMenuTemp;
+	Sprite menuBackground;
+
 	// métodos da tela jogo
 	void telaJogo_inicializar();
 	void telaJogo_executar();
 	void telaJogo_desenhar();
 	void telaJogo_verificar();
+	bool shouldDrawPopup();
 	// atributos da tela jogo
 	FrameCounter frameCounterJogo;
 	Sprite gameBackground;
 	Sprite gameWaterSurface;
+	Sprite popupBackground;
 	JogoInterface interfac;
 	Player player;
 	AirBubbleArray airBubbles;
@@ -50,5 +61,6 @@ private:
 	DiverArray divers;
 	EnemyFishArray enemyFishes;
 	EnemySubArray enemySubs;
+	bool popupNeedsDrawing;
 };
 
