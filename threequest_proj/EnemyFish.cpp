@@ -64,6 +64,9 @@ void EnemyFish::inicializar()
 
 	// dizendo que está vivo
 	isAlive = true;
+
+	// dá um random id
+	id = rand();
 }
 
 void EnemyFish::atualizar()
@@ -103,6 +106,15 @@ bool EnemyFish::estaVivo()
 	return isAlive;
 }
 
+bool EnemyFish::verificaSemelhanca(EnemyFish input_)
+{
+	if (id == input_.getId())
+	{
+		return true;
+	}
+	return false;
+}
+
 Sprite EnemyFish::getSprite()
 {
 	return sprite;
@@ -121,4 +133,9 @@ int EnemyFish::getY()
 ShotType EnemyFish::getShotType()
 {
 	return shotType;
+}
+
+int EnemyFish::getId()
+{
+	return id;
 }

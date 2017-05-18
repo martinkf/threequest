@@ -70,6 +70,9 @@ void EnemySub::inicializar()
 
 	// não nasce já querendo atirar pls
 	subWantsToShoot = false;
+
+	// obtém uma random id
+	id = rand();
 }
 
 void EnemySub::atualizar()
@@ -139,6 +142,20 @@ ShotType EnemySub::getShotType()
 Direction EnemySub::getDirection()
 {
 	return facingDirection;
+}
+
+int EnemySub::getId()
+{
+	return id;
+}
+
+bool EnemySub::verificaSemelhanca(EnemySub input_)
+{
+	if (id == input_.getId())
+	{
+		return true;
+	}
+	return false;
 }
 
 void EnemySub::atirar()

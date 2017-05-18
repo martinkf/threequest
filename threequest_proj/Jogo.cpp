@@ -536,32 +536,35 @@ void Jogo::telaJogo_verificar()
 		}
 	}
 
-	// COLLISION: ENEMY FISH X ENEMY FISH
-	//for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
-	//{
-	//	for (int j = 0; j < enemyFishes.getNumeroTotalUtilizado(); j++)
-	//	{
-	//		if (uniTestarColisao(
-	//			enemyFishes.getEnemyFishAtIndex(i).getSprite(),
-	//			enemyFishes.getEnemyFishAtIndex(i).getX(),
-	//			enemyFishes.getEnemyFishAtIndex(i).getY(),
-	//			0,
-	//			enemyFishes.getEnemyFishAtIndex(j).getSprite(),
-	//			enemyFishes.getEnemyFishAtIndex(j).getX(),
-	//			enemyFishes.getEnemyFishAtIndex(j).getY(),
-	//			0
-	//			))
-	//		{
-	//			// COLIDIU UM ENEMY FISH COM UM ENEMY FISH!
+	//COLLISION: ENEMY FISH X ENEMY FISH
+	for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
+	{
+		for (int j = 0; j < enemyFishes.getNumeroTotalUtilizado(); j++)
+		{
+			if (uniTestarColisao(
+				enemyFishes.getEnemyFishAtIndex(i).getSprite(),
+				enemyFishes.getEnemyFishAtIndex(i).getX(),
+				enemyFishes.getEnemyFishAtIndex(i).getY(),
+				0,
+				enemyFishes.getEnemyFishAtIndex(j).getSprite(),
+				enemyFishes.getEnemyFishAtIndex(j).getX(),
+				enemyFishes.getEnemyFishAtIndex(j).getY(),
+				0
+				))
+			{
+				// COLIDIU UM ENEMY FISH COM UM ENEMY FISH!
+				// verificação necessária por motivos óbvios
+				if (!(enemyFishes.getEnemyFishAtIndex(i).verificaSemelhanca(enemyFishes.getEnemyFishAtIndex(j))))
+				{
+					// destrói o enemy fish i
+					enemyFishes.removeEnemyFishAtIndex(i);
 
-	//			// destrói o enemy fish
-	//			enemyFishes.removeEnemyFishAtIndex(i);
-
-	//			// destrói o enemy fish
-	//			enemyFishes.removeEnemyFishAtIndex(j);
-	//		}
-	//	}
-	//}
+					// destrói o enemy fish j
+					enemyFishes.removeEnemyFishAtIndex(j);
+				}				
+			}
+		}
+	}
 
 	// COLLISION: ENEMY FISH X ENEMY SUB
 	for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
@@ -591,31 +594,34 @@ void Jogo::telaJogo_verificar()
 	}
 
 	// COLLISION: ENEMY SUB X ENEMY SUB
-	//for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
-	//{
-	//	for (int j = 0; j < enemySubs.getNumeroTotalUtilizado(); j++)
-	//	{
-	//		if (uniTestarColisao(
-	//			enemySubs.getEnemySubAtIndex(i).getSprite(),
-	//			enemySubs.getEnemySubAtIndex(i).getX(),
-	//			enemySubs.getEnemySubAtIndex(i).getY(),
-	//			0,
-	//			enemySubs.getEnemySubAtIndex(j).getSprite(),
-	//			enemySubs.getEnemySubAtIndex(j).getX(),
-	//			enemySubs.getEnemySubAtIndex(j).getY(),
-	//			0
-	//			))
-	//		{
-	//			// COLIDIU UM ENEMY FISH COM UM ENEMY SUB!
+	for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
+	{
+		for (int j = 0; j < enemySubs.getNumeroTotalUtilizado(); j++)
+		{
+			if (uniTestarColisao(
+				enemySubs.getEnemySubAtIndex(i).getSprite(),
+				enemySubs.getEnemySubAtIndex(i).getX(),
+				enemySubs.getEnemySubAtIndex(i).getY(),
+				0,
+				enemySubs.getEnemySubAtIndex(j).getSprite(),
+				enemySubs.getEnemySubAtIndex(j).getX(),
+				enemySubs.getEnemySubAtIndex(j).getY(),
+				0
+				))
+			{
+				// COLIDIU UM ENEMY SUB COM UM ENEMY SUB!
+				// verificação necessária por motivos óbvios
+				if (!(enemySubs.getEnemySubAtIndex(i).verificaSemelhanca(enemySubs.getEnemySubAtIndex(j))))
+				{
+					// destrói o enemy sub I
+					enemySubs.removeEnemySubAtIndex(i);
 
-	//			// destrói o enemy sub
-	//			enemySubs.removeEnemySubAtIndex(i);
-
-	//			// destrói o enemy sub
-	//			enemySubs.removeEnemySubAtIndex(j);
-	//		}
-	//	}
-	//}
+					// destrói o enemy sub J
+					enemySubs.removeEnemySubAtIndex(j);
+				}
+			}
+		}
+	}
 
 	// COLLISION: PLAYER X ENEMY FISH
 	// TO DO

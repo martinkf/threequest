@@ -21,12 +21,16 @@ public:
 	int getY();
 	ShotType getShotType();
 	Direction getDirection();
+	int getId();
+
+	bool verificaSemelhanca(EnemySub input_);
 
 	void atirar();
 	bool wantsToShoot();
 	void makeNotWantToShoot();
 
 private:
+	int id;
 	int x;
 	int y;
 	int speed;

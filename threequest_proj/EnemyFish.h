@@ -16,12 +16,16 @@ public:
 	void destruir();
 	bool estaVivo();
 
+	bool verificaSemelhanca(EnemyFish input_);
+
 	Sprite getSprite();
 	int getX();
 	int getY();
 	ShotType getShotType();
+	int getId();
 
 private:
+	int id;
 	int x;
 	int y;
 	int speed;
