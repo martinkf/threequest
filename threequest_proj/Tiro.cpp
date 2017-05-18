@@ -15,8 +15,9 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 {
 	int xOffset = 0;
 	int yOffset = 0;
+	shotType = shotType_;
 
-	switch (shotType_)
+	switch (shotType)
 	{
 		case shotRegular:
 			if (!gRecursos.carregouSpriteSheet("shotRegular"))
@@ -24,7 +25,7 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 				gRecursos.carregarSpriteSheet("shotRegular", "imagens/spr_shotRegular.png");
 			}
 			sprite.setSpriteSheet("shotRegular");
-
+						
 			shotSpeed = 5;
 			xOffset = 44;
 			yOffset = 0;
@@ -130,4 +131,9 @@ int Tiro::getX()
 int Tiro::getY()
 {
 	return y;
+}
+
+ShotType Tiro::getShotType()
+{
+	return shotType;
 }

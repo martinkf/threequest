@@ -94,7 +94,10 @@ void EnemySub::atualizar()
 	int randm = rand() % 120;
 	if (randm == 0)
 	{
-		atirar();
+		if (shotType != shotBlue) // submarinos azuis não atiram :)
+		{
+			atirar();
+		}
 	}
 
 	// verifica out-of-bounds

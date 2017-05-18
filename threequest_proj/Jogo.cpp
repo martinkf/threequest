@@ -382,15 +382,20 @@ void Jogo::telaJogo_verificar()
 				tirosPlayer.getTiroAtIndex(j).getX(),
 				tirosPlayer.getTiroAtIndex(j).getY(),
 				0
-				))
+			))
 			{
 				// COLIDIU UM TIRO PLAYER COM UM DIVER!
+				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
+				{				
+					// destrói o tiro
+					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed) 
+					{
+						tirosPlayer.removeTiroAtIndex(j);
+					}
 
-				// destrói o tiro
-				tirosPlayer.removeTiroAtIndex(j);
-
-				// destrói o diver
-				divers.removeDiverAtIndex(i);
+					// destrói o diver
+					divers.removeDiverAtIndex(i);
+				}
 			}
 		}
 	}
@@ -414,7 +419,10 @@ void Jogo::telaJogo_verificar()
 				// COLIDIU UM TIRO PLAYER COM UM DIVER!
 
 				// destrói o tiro
-				tirosEnemy.removeTiroAtIndex(j);
+				if (tirosEnemy.getTiroAtIndex(j).getShotType() != shotRed)
+				{
+					tirosEnemy.removeTiroAtIndex(j);
+				}
 
 				// destrói o diver
 				divers.removeDiverAtIndex(i);
@@ -439,15 +447,20 @@ void Jogo::telaJogo_verificar()
 				))
 			{
 				// COLIDIU UM TIRO PLAYER COM UM ENEMY FISH!
+				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
+				{				
+					// adiciona o enemy fish ao score e ao three grid
+					interfac.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getShotType());
 
-				// adiciona o enemy fish ao score e ao three grid
-				interfac.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getShotType());
+					// destrói o tiro
+					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
+					{
+						tirosPlayer.removeTiroAtIndex(j);
+					}
 
-				// destrói o tiro
-				tirosPlayer.removeTiroAtIndex(j);
-
-				// destrói o enemy fish
-				enemyFishes.removeEnemyFishAtIndex(i);
+					// destrói o enemy fish
+					enemyFishes.removeEnemyFishAtIndex(i);
+				}
 			}
 		}
 	}
@@ -471,7 +484,10 @@ void Jogo::telaJogo_verificar()
 				// COLIDIU UM TIRO ENEMY COM UM ENEMY FISH!
 
 				// destrói o tiro
-				tirosEnemy.removeTiroAtIndex(j);
+				if (tirosEnemy.getTiroAtIndex(j).getShotType() != shotRed)
+				{
+					tirosEnemy.removeTiroAtIndex(j);
+				}
 
 				// destrói o enemy fish
 				enemyFishes.removeEnemyFishAtIndex(i);
@@ -496,15 +512,20 @@ void Jogo::telaJogo_verificar()
 				))
 			{
 				// COLIDIU UM TIRO PLAYER COM UM ENEMY SUB!
+				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
+				{
+					// adiciona o enemy sub ao score e ao three grid
+					interfac.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getShotType());
 
-				// adiciona o enemy sub ao score e ao three grid
-				interfac.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getShotType());
+					// destrói o tiro
+					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
+					{
+						tirosPlayer.removeTiroAtIndex(j);
+					}
 
-				// destrói o tiro
-				tirosPlayer.removeTiroAtIndex(j);
-
-				// destrói o enemy fish
-				enemySubs.removeEnemySubAtIndex(i);
+					// destrói o enemy fish
+					enemySubs.removeEnemySubAtIndex(i);
+				}				
 			}
 		}
 	}
@@ -528,7 +549,10 @@ void Jogo::telaJogo_verificar()
 				// COLIDIU UM TIRO COM UM ENEMY SUB!
 
 				// destrói o tiro
-				tirosEnemy.removeTiroAtIndex(j);
+				if (tirosEnemy.getTiroAtIndex(j).getShotType() != shotRed)
+				{
+					tirosEnemy.removeTiroAtIndex(j);
+				}
 
 				// destrói o enemy fish
 				enemySubs.removeEnemySubAtIndex(i);

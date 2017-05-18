@@ -19,8 +19,10 @@ public:
 	Sprite getSprite();
 	int getX();
 	int getY();
+	ShotType getShotType();
 
 private:
+	ShotType shotType;
 	Sprite sprite;
 	int x;
 	int y;
