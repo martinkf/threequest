@@ -112,7 +112,6 @@
     <ClCompile Include="JogoInterface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="TelaJogo.cpp" />
     <ClCompile Include="TiroArray.cpp" />
     <ClCompile Include="Tiro.cpp" />
   </ItemGroup>
@@ -130,7 +129,6 @@
     <ClInclude Include="JogoInterface.h" />
     <ClInclude Include="MyEnums.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="TelaJogo.h" />
     <ClInclude Include="TiroArray.h" />
     <ClInclude Include="Tiro.h" />
   </ItemGroup>

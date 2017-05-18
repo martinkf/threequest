@@ -24,9 +24,6 @@
     <ClCompile Include="TiroArray.cpp">
       <Filter>Classes: Element Arrays</Filter>
     </ClCompile>
-    <ClCompile Include="TelaJogo.cpp">
-      <Filter>Classes: Telas</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyFish.cpp">
       <Filter>Classes: Elements</Filter>
     </ClCompile>
@@ -72,9 +69,6 @@
     <ClInclude Include="TiroArray.h">
       <Filter>Classes: Element Arrays</Filter>
     </ClInclude>
-    <ClInclude Include="TelaJogo.h">
-      <Filter>Classes: Telas</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyFish.h">
       <Filter>Classes: Elements</Filter>
     </ClInclude>
@@ -106,9 +100,6 @@
     </Filter>
     <Filter Include="Classes: GUI">
       <UniqueIdentifier>{81d10076-4081-46ee-b082-29b76de57991}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes: Telas">
-      <UniqueIdentifier>{02fb82b4-ffff-4b99-859a-c3e2dd0ab825}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

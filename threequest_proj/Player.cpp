@@ -34,7 +34,7 @@ void Player::atualizar()
 	sprite.avancarAnimacao();
 
 	// verificações referentes a movimentação
-	if (gTeclado.segurando[TECLA_CIMA] && y > 120)
+	if ((gTeclado.segurando[TECLA_W] || gTeclado.segurando[TECLA_CIMA]) && y > 120)
 	{
 		int valorASubir = speed;
 		int novoY = y - valorASubir;
@@ -44,7 +44,12 @@ void Player::atualizar()
 		}
 		y = novoY;
 	}
-	if (gTeclado.segurando[TECLA_BAIXO] && y < 500)
+	if ((gTeclado.segurando[TECLA_D] || gTeclado.segurando[TECLA_DIR]) && x < (gJanela.getLargura() - sprite.getLargura() / 2) - 12)
+	{
+		x += speed;
+		facingDirection = facingRight;
+	}
+	if ((gTeclado.segurando[TECLA_S] || gTeclado.segurando[TECLA_BAIXO]) && y < 500)
 	{	
 		int valorADescer = speed;
 		int novoY = y + valorADescer;
@@ -54,17 +59,12 @@ void Player::atualizar()
 		}
 		y = novoY;
 	}
-	if (gTeclado.segurando[TECLA_ESQ] && x > (sprite.getLargura() / 2) + 12)
+	if ((gTeclado.segurando[TECLA_A] || gTeclado.segurando[TECLA_ESQ]) && x > (sprite.getLargura() / 2) + 12)
 	{
 		x -= speed;
 		facingDirection = facingLeft;
 		
-	}
-	if (gTeclado.segurando[TECLA_DIR] && x < (gJanela.getLargura() - sprite.getLargura() / 2) - 12)
-	{
-		x += speed;
-		facingDirection = facingRight;		
-	}
+	}	
 
 	// verificações referentes a direção (esq/dir)
 	if (facingDirection == facingRight) 
