@@ -34,6 +34,7 @@ void FrameCounter::tick()
 void FrameCounter::freeze()
 {
 	isFrozen = true;
+	counter = 1;
 }
 
 void FrameCounter::unfreeze()
