@@ -15,6 +15,7 @@ public:
 	void pegouUmaAirBubble();
 
 	void pegouUmDiver();
+	void matouUmDiver();
 	void matouUmEnemyFish(ShotType input_);
 	void matouUmEnemySub(ShotType input_);
 
@@ -36,6 +37,7 @@ private:
 	Sprite oxygenArray[500];
 
 	int qttyDiver;
+	int qttyDiverKilled;
 	int qttyEnemyFish;
 	int qttyEnemySub;
 

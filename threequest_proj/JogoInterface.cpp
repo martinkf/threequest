@@ -23,6 +23,7 @@ void JogoInterface::inicializar()
 	}
 
 	qttyDiver = 0;
+	qttyDiverKilled = 0;
 	qttyEnemyFish = 0;
 	qttyEnemySub = 0;
 
@@ -83,6 +84,11 @@ void JogoInterface::pegouUmaAirBubble()
 void JogoInterface::pegouUmDiver()
 {
 	qttyDiver++;
+}
+
+void JogoInterface::matouUmDiver()
+{
+	qttyDiverKilled++;
 }
 
 void JogoInterface::matouUmEnemyFish(ShotType input_)

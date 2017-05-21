@@ -622,7 +622,10 @@ void Jogo::telaJogo_verificar()
 			{
 				// COLIDIU UM TIRO PLAYER COM UM DIVER!
 				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
-				{				
+				{			
+					// adiciona o fato ao score
+					interfac.matouUmDiver();
+
 					// destrói o tiro
 					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed) 
 					{
