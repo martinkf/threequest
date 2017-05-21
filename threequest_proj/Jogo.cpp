@@ -14,7 +14,7 @@ void Jogo::inicializar()
 	uniInicializar(800, 600, false);	
 	
 	// INICIALIZA O STATUS DA TELA
-	status = sTelaJogo;
+	status = sTelaSplash;
 
 	// INICIALIZA AS TELAS
 	telaSplash_inicializar();
