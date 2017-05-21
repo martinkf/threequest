@@ -449,6 +449,7 @@ void Jogo::telaJogo_verificar()
 		switch (temp)
 		{
 		case 'n':
+			interfac.clearThreeGrid();
 			interfac.setFillStatus(enumFilling);
 			break;
 		case 'r':
@@ -470,6 +471,7 @@ void Jogo::telaJogo_verificar()
 			// FAZ AS COISAS LOUCAS QUE O THREE QUEST FAZ
 			// TO DO
 			// TODO
+			interfac.clearThreeGrid();
 			interfac.setFillStatus(enumFilling);
 			break;
 		}
