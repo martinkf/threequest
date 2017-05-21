@@ -21,7 +21,11 @@ void JogoInterface::inicializar()
 	text.setFonte("MONOFONT");
 	text.setAncora(0, 0.5);
 		
-	threeGridSize = 0;
+	threeGridPointer = 0;
+	threeGrid[0] = shotNull;
+	threeGrid[1] = shotNull;
+	threeGrid[2] = shotNull;
+	hasBeenFilled = false;
 }
 
 void JogoInterface::desenhar()
@@ -56,27 +60,30 @@ void JogoInterface::pegouUmDiver()
 void JogoInterface::matouUmEnemyFish(ShotType input_)
 {
 	qttyEnemyFish++;
-
-	if (threeGridSize < 3) 
-	{
-		adicionaAoThreeGrid(input_);
-	}
+	
+	adicionaAoThreeGrid(input_);
 }
 
 void JogoInterface::matouUmEnemySub(ShotType input_)
 {
 	qttyEnemySub++;
 
-	if (threeGridSize < 3)
-	{
-		adicionaAoThreeGrid(input_);
-	}
+	adicionaAoThreeGrid(input_);
 }
 
 void JogoInterface::adicionaAoThreeGrid(ShotType input_)
 {
-	threeGrid[threeGridSize] = input_;
-	threeGridSize++;
+	threeGrid[threeGridPointer] = input_;
+
+	if (threeGridPointer < 2)
+	{
+		threeGridPointer++;
+	}
+	else 
+	{
+		hasBeenFilled = true;
+		threeGridPointer = 0;
+	}
 }
 
 char JogoInterface::racionalizaThreeGrid()
@@ -104,16 +111,32 @@ char JogoInterface::racionalizaThreeGrid()
 	{
 		charToReturn = 'b';
 	}
+	else if ((threeGrid[0] != threeGrid[1]) && (threeGrid[0] != threeGrid[2]) && (threeGrid[1] != threeGrid[2]))
+	{
+		charToReturn = 't';
+	}
 	else
 	{
 		charToReturn = 'n';
 	}
 
-	threeGridSize = 0;
+	// temp
+	threeGrid[0] = shotNull;
+	threeGrid[1] = shotNull;
+	threeGrid[2] = shotNull;
+
+	// end temp
+
+	hasBeenFilled = false;
 	return charToReturn;
 }
 
-int JogoInterface::getThreeGridSize()
+ShotType JogoInterface::getThreeGridAtThisIndex(int index_)
 {
-	return threeGridSize;
+	return threeGrid[index_];
+}
+
+bool JogoInterface::getFillStatus()
+{
+	return hasBeenFilled;
 }

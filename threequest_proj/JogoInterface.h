@@ -20,7 +20,8 @@ public:
 
 	void adicionaAoThreeGrid(ShotType input_);
 	char racionalizaThreeGrid();
-	int getThreeGridSize();
+	ShotType getThreeGridAtThisIndex(int index_);
+	bool getFillStatus();
 	
 private:
 	int maxOxygen;
@@ -31,7 +32,8 @@ private:
 	int qttyEnemySub;
 
 	ShotType threeGrid[3];
-	int threeGridSize;
+	int threeGridPointer;
+	bool hasBeenFilled;
 
 	Texto text;
 };

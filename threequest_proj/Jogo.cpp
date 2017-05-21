@@ -14,7 +14,7 @@ void Jogo::inicializar()
 	uniInicializar(800, 600, false);	
 	
 	// INICIALIZA O STATUS DA TELA
-	status = sTelaSplash;
+	status = sTelaJogo;
 
 	// INICIALIZA AS TELAS
 	telaSplash_inicializar();
@@ -238,6 +238,27 @@ void Jogo::telaJogo_inicializar()
 	}
 	scoreOverlay.setSpriteSheet("scoreOverlay");
 
+	// INICIALIZA OS GRID SLOTS
+	if (!gRecursos.carregouSpriteSheet("gridEmpty"))
+	{
+		gRecursos.carregarSpriteSheet("gridEmpty", "imagens/spr_gridEmpty.png");
+	}
+	if (!gRecursos.carregouSpriteSheet("gridRed"))
+	{
+		gRecursos.carregarSpriteSheet("gridRed", "imagens/spr_gridRed.png");
+	}
+	if (!gRecursos.carregouSpriteSheet("gridGreen"))
+	{
+		gRecursos.carregarSpriteSheet("gridGreen", "imagens/spr_gridGreen.png");
+	}
+	if (!gRecursos.carregouSpriteSheet("gridBlue"))
+	{
+		gRecursos.carregarSpriteSheet("gridBlue", "imagens/spr_gridBlue.png");
+	}
+	gridSlotA.setSpriteSheet("gridEmpty");
+	gridSlotB.setSpriteSheet("gridEmpty");
+	gridSlotC.setSpriteSheet("gridEmpty");
+
 	// INICIALIZA O POPUP MENU BACKGROUND
 	if (!gRecursos.carregouSpriteSheet("popupBackground"))
 	{
@@ -278,11 +299,11 @@ void Jogo::telaJogo_executar()
 	// ATUALIZA O FRAMECOUNTER
 	frameCounterJogo.tick();
 
-	// DESENHA TUDO
-	telaJogo_desenhar();
-
 	// VERIFICA TUDO
 	telaJogo_verificar();
+
+	// DESENHA TUDO
+	telaJogo_desenhar();	
 }
 
 void Jogo::telaJogo_desenhar()
@@ -291,10 +312,7 @@ void Jogo::telaJogo_desenhar()
 	gameBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
 	int rateOfAnimation = 5;
 	if (frameCounterJogo.getFrameNumber() % rateOfAnimation == 0) gameBackground.avancarAnimacao();
-
-	// DESENHA A JOGO INTERFACE
-	interfac.desenhar();
-
+	
 	// DESENHA A DIVER ARRAY
 	divers.atualizar();
 	divers.desenhar();
@@ -328,6 +346,14 @@ void Jogo::telaJogo_desenhar()
 
 	// DESENHA O SCORE OVERLAY
 	scoreOverlay.desenhar(gJanela.getLargura() / 2, 559);
+
+	// DESENHA A JOGO INTERFACE
+	interfac.desenhar();
+
+	// DESENHA OS GRID SLOTS
+	gridSlotA.desenhar(42, 559);
+	gridSlotB.desenhar(113, 559);
+	gridSlotC.desenhar(184, 559);
 
 	// DESENHA O POPUP MENU
 	if (shouldDrawPopup()) 
@@ -364,10 +390,60 @@ void Jogo::telaJogo_verificar()
 
 		// come o oxigênio, matando-lhe lentamente
 		interfac.reduceOxygen();
-	}
+	}	
+
+	// ATUALIZA O SPRITE DAS GRID SLOTS COM RELAÇÃO A O QUE A ARRAY GUARDA
+	switch (interfac.getThreeGridAtThisIndex(0))
+	{
+	case shotRed:
+		gridSlotA.setSpriteSheet("gridRed");
+		break;
+	case shotGreen:
+		gridSlotA.setSpriteSheet("gridGreen");
+		break;
+	case shotBlue:
+		gridSlotA.setSpriteSheet("gridBlue");
+		break;
+	case shotNull:
+		gridSlotA.setSpriteSheet("gridEmpty");
+	default:
+		break;
+	};
+	switch (interfac.getThreeGridAtThisIndex(1))
+	{
+	case shotRed:
+		gridSlotB.setSpriteSheet("gridRed");
+		break;
+	case shotGreen:
+		gridSlotB.setSpriteSheet("gridGreen");
+		break;
+	case shotBlue:
+		gridSlotB.setSpriteSheet("gridBlue");
+		break;
+	case shotNull:
+		gridSlotB.setSpriteSheet("gridEmpty");
+	default:
+		break;
+	};
+	switch (interfac.getThreeGridAtThisIndex(2))
+	{
+	case shotRed:
+		gridSlotC.setSpriteSheet("gridRed");
+		break;
+	case shotGreen:
+		gridSlotC.setSpriteSheet("gridGreen");
+		break;
+	case shotBlue:
+		gridSlotC.setSpriteSheet("gridBlue");
+		break;
+	case shotNull:
+		gridSlotC.setSpriteSheet("gridEmpty");
+	default:
+		break;
+	};
 
 	// SE ACONTECEU UM FULL THREE GRID
-	if (interfac.getThreeGridSize() == 3)
+	if (interfac.getFillStatus())
 	{
 		char temp = interfac.racionalizaThreeGrid();
 		switch (temp)
@@ -387,6 +463,7 @@ void Jogo::telaJogo_verificar()
 			player.setShotTimeRemaining();
 			break;
 		case 't':
+			// nyi
 			break;
 		}
 	}
@@ -675,7 +752,7 @@ void Jogo::telaJogo_verificar()
 		}
 	}
 
-	// COLISION: TIRO ENEMY X ENEMY SUB
+	// COLLISION: TIRO ENEMY X ENEMY SUB
 	for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
 	{
 		for (int j = 0; j < tirosEnemy.getNumeroTotalUtilizado(); j++)
@@ -705,7 +782,7 @@ void Jogo::telaJogo_verificar()
 		}
 	}
 
-	//COLLISION: ENEMY FISH X ENEMY FISH
+	// COLLISION: ENEMY FISH X ENEMY FISH
 	for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
 	{
 		for (int j = 0; j < enemyFishes.getNumeroTotalUtilizado(); j++)
@@ -821,6 +898,8 @@ void Jogo::telaJogo_verificar()
 			airBubbles.removeAirBubbleAtIndex(i);
 		}
 	}
+
+	
 }
 
 bool Jogo::shouldDrawPopup()

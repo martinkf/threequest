@@ -56,6 +56,9 @@ private:
 	Sprite popupBackground;
 	Sprite scoreOverlay;
 	JogoInterface interfac;
+	Sprite gridSlotA;
+	Sprite gridSlotB;
+	Sprite gridSlotC;
 	Player player;
 	AirBubbleArray airBubbles;
 	TiroArray tirosEnemy;
