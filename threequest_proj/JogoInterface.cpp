@@ -33,9 +33,21 @@ void JogoInterface::inicializar()
 
 void JogoInterface::desenhar()
 {
-	// desenha o oxigênio
+	// desenha o oxigênio (temp)
 	text.setString("Oxigênio: " + to_string(oxygenLeft));	
 	text.desenhar(300, 550);
+
+	// desenha o qtty fish
+	text.setString(to_string(qttyEnemyFish));
+	text.desenhar(349, 574);
+
+	// desenha o qtty sub
+	text.setString(to_string(qttyEnemySub));
+	text.desenhar(561, 574);
+
+	// desenha o qtty diver
+	text.setString(to_string(qttyDiver));
+	text.desenhar(720, 574);
 }
 
 void JogoInterface::reduceOxygen()
