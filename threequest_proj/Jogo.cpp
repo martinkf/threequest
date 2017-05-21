@@ -342,7 +342,7 @@ void Jogo::telaJogo_desenhar()
 	player.desenhar();
 
 	// DESENHA A WATER SURFACE
-	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 125);
+	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 124);
 
 	// DESENHA O SCORE OVERLAY
 	scoreOverlay.desenhar(gJanela.getLargura() / 2, 559);
