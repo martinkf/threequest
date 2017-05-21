@@ -25,7 +25,6 @@ void Player::inicializar()
 	speed = 3;
 	shotType = shotRegular;
 	playerWantsToShoot = false;
-	shotTimeRemaining = 0;
 }
 
 void Player::atualizar()
@@ -147,19 +146,4 @@ bool Player::wantsToShoot()
 void Player::makeNotWantToShoot()
 {
 	playerWantsToShoot = false;
-}
-
-void Player::setShotTimeRemaining()
-{
-	shotTimeRemaining = 720;
-}
-
-int Player::getShotTimeRemaining()
-{
-	return shotTimeRemaining;
-}
-
-void Player::drainShotTimeRemaining()
-{
-	shotTimeRemaining--;
 }

@@ -24,11 +24,7 @@ public:
 	void changeShotType(ShotType _input);
 	bool wantsToShoot();
 	void makeNotWantToShoot();
-
-	void setShotTimeRemaining();
-	int getShotTimeRemaining();
-	void drainShotTimeRemaining();
-
+	
 private:
 	int x;
 	int y;
@@ -38,6 +34,5 @@ private:
 	bool isOnSurface;
 	ShotType shotType;
 	bool playerWantsToShoot;
-	int shotTimeRemaining;
 };
 

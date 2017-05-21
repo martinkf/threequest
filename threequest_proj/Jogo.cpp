@@ -443,39 +443,51 @@ void Jogo::telaJogo_verificar()
 	};
 
 	// SE ACONTECEU UM FULL THREE GRID
-	if (interfac.getFillStatus())
+	if (interfac.getFillStatus() == enumFilled)
 	{
 		char temp = interfac.racionalizaThreeGrid();
 		switch (temp)
 		{
 		case 'n':
+			interfac.setFillStatus(enumFilling);
 			break;
 		case 'r':
+			interfac.setFillStatus(enumFrozen);
+			interfac.setSpecialShotDuration();
 			player.changeShotType(shotRed);
-			player.setShotTimeRemaining();
 			break;
 		case 'g':
+			interfac.setFillStatus(enumFrozen);
+			interfac.setSpecialShotDuration();
 			player.changeShotType(shotGreen);
-			player.setShotTimeRemaining();
 			break;
 		case 'b':
+			interfac.setFillStatus(enumFrozen);
+			interfac.setSpecialShotDuration();
 			player.changeShotType(shotBlue);
-			player.setShotTimeRemaining();
 			break;
 		case 't':
-			// nyi
+			// FAZ AS COISAS LOUCAS QUE O THREE QUEST FAZ
+			// TO DO
+			// TODO
+			interfac.setFillStatus(enumFilling);
 			break;
 		}
 	}
 
 	// SE O SHOT FOR SPECIAL, DIMINUIR ELE AOS POUCOS
-	if (player.getShotTimeRemaining() > 0)
+	if (interfac.getFillStatus() == enumFrozen)
 	{
-		player.drainShotTimeRemaining();
-	}
-	else
-	{
-		player.changeShotType(shotRegular);
+		if (interfac.getSpecialShotDuration() > 0)
+		{
+			interfac.drainSpecialShotDuration();
+		}
+		else
+		{
+			interfac.clearThreeGrid();
+ 			interfac.setFillStatus(enumFilling);
+			player.changeShotType(shotRegular);
+		}
 	}
 
 	// SE O PLAYER ATIROU

@@ -21,7 +21,14 @@ public:
 	void adicionaAoThreeGrid(ShotType input_);
 	char racionalizaThreeGrid();
 	ShotType getThreeGridAtThisIndex(int index_);
-	bool getFillStatus();
+	void clearThreeGrid();
+
+	void setFillStatus(GridStatus input_);
+	GridStatus getFillStatus();
+
+	void setSpecialShotDuration();
+	void drainSpecialShotDuration();
+	int getSpecialShotDuration();
 	
 private:
 	int maxOxygen;
@@ -33,7 +40,9 @@ private:
 
 	ShotType threeGrid[3];
 	int threeGridPointer;
-	bool hasBeenFilled;
+	GridStatus gridStatus;
+
+	int specialShotDuration;
 
 	Texto text;
 };

@@ -25,7 +25,10 @@ void JogoInterface::inicializar()
 	threeGrid[0] = shotNull;
 	threeGrid[1] = shotNull;
 	threeGrid[2] = shotNull;
-	hasBeenFilled = false;
+	
+	gridStatus = enumFilling;
+
+	specialShotDuration = 0;
 }
 
 void JogoInterface::desenhar()
@@ -73,16 +76,19 @@ void JogoInterface::matouUmEnemySub(ShotType input_)
 
 void JogoInterface::adicionaAoThreeGrid(ShotType input_)
 {
-	threeGrid[threeGridPointer] = input_;
+	if (gridStatus == enumFilling) 
+	{
+		threeGrid[threeGridPointer] = input_;
 
-	if (threeGridPointer < 2)
-	{
-		threeGridPointer++;
-	}
-	else 
-	{
-		hasBeenFilled = true;
-		threeGridPointer = 0;
+		if (threeGridPointer < 2)
+		{
+			threeGridPointer++;
+		}
+		else 
+		{
+			gridStatus = enumFilled;
+			threeGridPointer = 0;
+		}
 	}
 }
 
@@ -119,15 +125,7 @@ char JogoInterface::racionalizaThreeGrid()
 	{
 		charToReturn = 'n';
 	}
-
-	// temp
-	threeGrid[0] = shotNull;
-	threeGrid[1] = shotNull;
-	threeGrid[2] = shotNull;
-
-	// end temp
-
-	hasBeenFilled = false;
+	
 	return charToReturn;
 }
 
@@ -136,7 +134,34 @@ ShotType JogoInterface::getThreeGridAtThisIndex(int index_)
 	return threeGrid[index_];
 }
 
-bool JogoInterface::getFillStatus()
+void JogoInterface::clearThreeGrid()
 {
-	return hasBeenFilled;
+	threeGrid[0] = shotNull;
+	threeGrid[1] = shotNull;
+	threeGrid[2] = shotNull;
+}
+
+void JogoInterface::setFillStatus(GridStatus input_)
+{
+	gridStatus = input_;
+}
+
+GridStatus JogoInterface::getFillStatus()
+{
+	return gridStatus;
+}
+
+void JogoInterface::setSpecialShotDuration()
+{
+	specialShotDuration = 720;
+}
+
+void JogoInterface::drainSpecialShotDuration()
+{
+	specialShotDuration--;
+}
+
+int JogoInterface::getSpecialShotDuration()
+{
+	return specialShotDuration;
 }
