@@ -22,7 +22,6 @@ public:
 
 private:
 	StatusJogo status;
-	void setStatusJogo(StatusJogo input_);
 
 	// métodos da tela splash
 	void telaSplash_inicializar();
@@ -33,13 +32,15 @@ private:
 	FrameCounter frameCounterSplash;
 	Sprite splashPicture;
 
-	// métodos da tela inicial
+	// métodos da tela menu
 	void telaMenu_inicializar();
 	void telaMenu_executar();
 	void telaMenu_desenhar();
 	void telaMenu_verificar();
-	// atributos da tela inicial
-	FrameCounter frameCounterMenuTemp;
+	// atributos da tela menu
+	int currentChoice;
+	int selectionFishY;
+	Sprite selectionFish;
 	Sprite menuBackground;
 
 	// métodos da tela jogo

@@ -56,11 +56,6 @@ void Jogo::finalizar()
 	uniFinalizar();
 }
 
-void Jogo::setStatusJogo(StatusJogo input_)
-{
-	status = input_;
-}
-
 void Jogo::telaSplash_inicializar()
 {
 	// INICIALIZA O FRAMECOUNTER
@@ -79,11 +74,11 @@ void Jogo::telaSplash_executar()
 	// ATUALIZA O FRAMECOUNTER
 	frameCounterSplash.tick();
 
-	// DESENHA TUDO
-	telaSplash_desenhar();
-
 	// VERIFICA TUDO
 	telaSplash_verificar();
+
+	// DESENHA TUDO
+	telaSplash_desenhar();	
 }
 
 void Jogo::telaSplash_desenhar()
@@ -97,47 +92,120 @@ void Jogo::telaSplash_verificar()
 	if (frameCounterSplash.getFrameNumber() == 180)
 	{
 		// SAI DESSA SPLASH SCREEN
-		setStatusJogo(sTelaMenu);
+		status = sTelaMenu;
+	}
+	if (gTeclado.pressionou[TECLA_ESPACO] || gTeclado.pressionou[TECLA_ENTER])
+	{
+		status = sTelaMenu;
 	}
 }
 
 void Jogo::telaMenu_inicializar()
 {
-	// INICIALIZA O FRAMECOUNTER
-	frameCounterMenuTemp.inicializar();
+	// INICIALIZA O INT DE CURRENT CHOICE
+	currentChoice = 0;
 
-	// INICIALIZA O SPLASH PICTURE
+	// INICIALIZA O SELECTION FISH Y
+	selectionFishY = 300;
+
+	// INICIALIZA O MENU PICTURE
 	if (!gRecursos.carregouSpriteSheet("menuBackground"))
 	{
 		gRecursos.carregarSpriteSheet("menuBackground", "imagens/spr_menuBackground.png");
 	}
 	menuBackground.setSpriteSheet("menuBackground");
+
+	// INICIALIZA O SELECTION FISH
+	if (!gRecursos.carregouSpriteSheet("fishRed"))
+	{
+		gRecursos.carregarSpriteSheet("fishRed", "imagens/spr_fishRed.png", 1, 4);
+	}
+	selectionFish.setSpriteSheet("fishRed");
+	selectionFish.setInverterX(true);
 }
 
 void Jogo::telaMenu_executar()
 {
-	// ATUALIZA O FRAMECOUNTER
-	frameCounterMenuTemp.tick();
-
-	// DESENHA TUDO
-	telaMenu_desenhar();
-
 	// VERIFICA TUDO
 	telaMenu_verificar();
+
+	// DESENHA TUDO
+	telaMenu_desenhar();	
 }
 
 void Jogo::telaMenu_desenhar()
 {
 	// DESENHA O MENU BACKGROUND
 	menuBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
+
+	// DESENHA O SELECTION FISH
+	selectionFish.desenhar(200, selectionFishY);
 }
 
 void Jogo::telaMenu_verificar()
 {
-	if (frameCounterMenuTemp.getFrameNumber() == 240) // ISSO TUDO É MUITO TEMPORÁRIO NÉ MDS  TE LIGA
+	// AVANÇA ANIMAÇÃO DO SELECTION FISH
+	selectionFish.avancarAnimacao();
+
+	// POSICIONA O SELECTION FISH DE ACORDO COM O SELECTION INT
+	switch (currentChoice)
 	{
-		// SAI DESSE MENU SCREEN
-		setStatusJogo(sTelaJogo);
+		case 0: // NEW GAME
+			selectionFishY = 278;
+			break;
+		case 1: // INSTRUCTIONS
+			selectionFishY = 346;
+			break;
+		case 2: // CREDITS
+			selectionFishY = 414;
+			break;
+		case 3: // EXIT
+			selectionFishY = 482;
+			break;
+	}
+
+	// VERIFICA KEYBOARD PRESSES
+	if (gTeclado.pressionou[TECLA_W] || gTeclado.pressionou[TECLA_CIMA])
+	{
+		if (currentChoice > 0) 
+		{
+			currentChoice--;
+		}
+		else 
+		{
+			currentChoice = 3;
+		}
+	}
+	if (gTeclado.pressionou[TECLA_S] || gTeclado.pressionou[TECLA_BAIXO])
+	{
+		if (currentChoice < 3)
+		{
+			currentChoice++;
+		}
+		else
+		{
+			currentChoice = 0;
+		}
+	}
+	if (gTeclado.pressionou[TECLA_ESPACO] || gTeclado.pressionou[TECLA_ENTER])
+	{
+		switch (currentChoice)
+		{
+		case 0: // NEW GAME
+			status = sTelaJogo;
+			break;
+		case 1: // INSTRUCTIONS
+			// status = sTelaInstructions; 
+			// nyi
+			break;
+		case 2: // CREDITS
+			frameCounterSplash.freeze();
+			status = sTelaSplash;
+			break;
+		case 3: // EXIT
+			// nyi
+			break;
+		}
 	}
 }
 

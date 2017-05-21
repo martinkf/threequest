@@ -13,18 +13,32 @@ FrameCounter::~FrameCounter()
 void FrameCounter::inicializar()
 {
 	counter = 1;
+	isFrozen = false;
 }
 
 void FrameCounter::tick()
 {
-	if (counter + 1 > 720)
+	if (!isFrozen) 
 	{
-		counter = 1;
+		if (counter + 1 > 720)
+		{
+			counter = 1;
+		}
+		else
+		{
+			counter++;
+		}
 	}
-	else
-	{
-		counter++;
-	}
+}
+
+void FrameCounter::freeze()
+{
+	isFrozen = true;
+}
+
+void FrameCounter::unfreeze()
+{
+	isFrozen = false;
 }
 
 int FrameCounter::getFrameNumber()

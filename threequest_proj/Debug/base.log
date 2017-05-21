@@ -1,15 +1,21 @@
 ﻿  Jogo.cpp
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(150): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(436): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(462): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(494): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(524): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(559): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(589): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(624): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(654): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(684): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(711): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(745): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(218): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(504): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(530): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(562): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(592): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(627): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(657): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(692): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(722): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(752): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(779): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(813): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  FrameCounter.cpp
+  Generating Code...
+  Compiling...
+  main.cpp
+  Player.cpp
+  Generating Code...
   base.vcxproj -> C:\Users\marti\Desktop\libUnicornio-master\projetos\threequest_proj\bin\base-debug.exe
   base.vcxproj -> C:\Users\marti\Desktop\libUnicornio-master\projetos\threequest_proj\bin\base-debug.pdb (Full PDB)
