@@ -33,7 +33,7 @@ public:
 private:
 	int maxOxygen;
 	int oxygenLeft;
-	Sprite oxygenArray[418];
+	Sprite oxygenArray[500];
 
 	int qttyDiver;
 	int qttyEnemyFish;

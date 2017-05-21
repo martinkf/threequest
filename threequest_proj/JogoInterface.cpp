@@ -10,14 +10,14 @@ JogoInterface::~JogoInterface()
 
 void JogoInterface::inicializar()
 {	
-	maxOxygen = 5852; // 6000 at first, 5852 = 418 x 14
+	maxOxygen = 6000; // 6000 at first = 500 x 12
 	oxygenLeft = maxOxygen;
 	
 	if (!gRecursos.carregouSpriteSheet("oxygenInfinitesimal"))
 	{
 		gRecursos.carregarSpriteSheet("oxygenInfinitesimal", "imagens/spr_oxygenInfinitesimal.png");
 	}
-	for (int i = 0; i < 418; i++)
+	for (int i = 0; i < 500; i++)
 	{
 		oxygenArray[i].setSpriteSheet("oxygenInfinitesimal");
 	}
@@ -45,9 +45,9 @@ void JogoInterface::inicializar()
 void JogoInterface::desenhar()
 {
 	// desenha o oxigênio
-	for (int i = 0; i < (oxygenLeft / 14); i++)
+	for (int i = 0; i < (oxygenLeft / 12); i++)
 	{
-		oxygenArray[i].desenhar(370 + i, 534);
+		oxygenArray[i].desenhar(288 + i, 534);
 	}
 
 	// desenha o qtty fish
