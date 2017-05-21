@@ -14,7 +14,7 @@ void Jogo::inicializar()
 	uniInicializar(800, 600, false);	
 	
 	// INICIALIZA O STATUS DA TELA
-	status = sTelaSplash;
+	status = sTelaJogo;
 
 	// INICIALIZA AS TELAS
 	telaSplash_inicializar();
@@ -163,6 +163,13 @@ void Jogo::telaJogo_inicializar()
 	}
 	gameWaterSurface.setSpriteSheet("waterSurface");
 
+	// INICIALIZA O SCORE OVERLAY
+	if (!gRecursos.carregouSpriteSheet("scoreOverlay"))
+	{
+		gRecursos.carregarSpriteSheet("scoreOverlay", "imagens/spr_scoreOverlay.png");
+	}
+	scoreOverlay.setSpriteSheet("scoreOverlay");
+
 	// INICIALIZA O POPUP MENU BACKGROUND
 	if (!gRecursos.carregouSpriteSheet("popupBackground"))
 	{
@@ -250,6 +257,9 @@ void Jogo::telaJogo_desenhar()
 
 	// DESENHA A WATER SURFACE
 	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 125);
+
+	// DESENHA O SCORE OVERLAY
+	scoreOverlay.desenhar(gJanela.getLargura() / 2, 559);
 
 	// DESENHA O POPUP MENU
 	if (shouldDrawPopup()) 

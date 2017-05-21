@@ -53,6 +53,7 @@ private:
 	Sprite gameBackground;
 	Sprite gameWaterSurface;
 	Sprite popupBackground;
+	Sprite scoreOverlay;
 	JogoInterface interfac;
 	Player player;
 	AirBubbleArray airBubbles;
