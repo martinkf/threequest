@@ -371,7 +371,7 @@ void Jogo::telaJogo_verificar()
 		popupNeedsDrawing = false;
 	}
 
-	// SE O PLAYER ESTÁ NA SUPERFÍCIE
+	// SE O PLAYER ESTÁ NA SUPERFÍCIE, DESLIGA OS SPAWNERS
 	if (player.isPlayerOnSurface())
 	{
 		// desliga os spawners
@@ -387,10 +387,13 @@ void Jogo::telaJogo_verificar()
 		airBubbles.turnOnSpawner();
 		enemyFishes.turnOnSpawner();
 		enemySubs.turnOnSpawner();
-
-		// come o oxigênio, matando-lhe lentamente
-		interfac.reduceOxygen();
 	}	
+
+	// RACIONALIZA SE DEVE COMER OXYGEN
+	if (!player.isPlayerOnSurface() && !(interfac.getFillStatus() == enumFrozen))
+	{
+		interfac.reduceOxygen();
+	}
 
 	// ATUALIZA O SPRITE DAS GRID SLOTS COM RELAÇÃO A O QUE A ARRAY GUARDA
 	switch (interfac.getThreeGridAtThisIndex(0))
@@ -454,16 +457,19 @@ void Jogo::telaJogo_verificar()
 			break;
 		case 'r':
 			interfac.setFillStatus(enumFrozen);
+			interfac.pegouUmaAirBubble();
 			interfac.setSpecialShotDuration();
 			player.changeShotType(shotRed);
 			break;
 		case 'g':
 			interfac.setFillStatus(enumFrozen);
+			interfac.pegouUmaAirBubble();
 			interfac.setSpecialShotDuration();
 			player.changeShotType(shotGreen);
 			break;
 		case 'b':
 			interfac.setFillStatus(enumFrozen);
+			interfac.pegouUmaAirBubble();
 			interfac.setSpecialShotDuration();
 			player.changeShotType(shotBlue);
 			break;

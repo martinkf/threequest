@@ -184,7 +184,7 @@ GridStatus JogoInterface::getFillStatus()
 
 void JogoInterface::setSpecialShotDuration()
 {
-	specialShotDuration = 720;
+	specialShotDuration = 1000;
 }
 
 void JogoInterface::drainSpecialShotDuration()
