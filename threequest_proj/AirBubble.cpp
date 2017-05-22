@@ -74,3 +74,13 @@ int AirBubble::getY()
 {
 	return y;
 }
+
+bool AirBubble::isInitialized()
+{
+	return initialized;
+}
+
+void AirBubble::reset()
+{
+	initialized = false;
+}

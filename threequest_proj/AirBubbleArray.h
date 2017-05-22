@@ -22,7 +22,7 @@ public:
 
 private:
 	int numeroTotalUtilizado;
-	AirBubble array[200];
+	AirBubble array[100];
 	bool isTurnedOn;
 };
 

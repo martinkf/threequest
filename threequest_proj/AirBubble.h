@@ -18,10 +18,15 @@ public:
 	int getX();
 	int getY();
 
+	bool isInitialized();
+	void reset();
+
 private:
 	int x;
 	int y;
 	Sprite sprite;
 	bool isAlive;
+
+	bool initialized = false;
 };
 

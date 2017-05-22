@@ -14,20 +14,30 @@ void TiroArray::inicializar()
 }
 
 void TiroArray::atualizar()
-{
+{	
+	// atualiza seu numero de real size
+	numeroTotalUtilizado = 0;
+	for (int i = 0; i < 100; i++)
+	{
+		if (array[i].isInitialized())
+		{
+			numeroTotalUtilizado++;
+		}
+	}
+
+	// confere seus elementinhos mortos e os remove
 	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
 	{
-		Tiro test;
-		test = array[i];
-		if (test.estaVivo())
-		{
-			test.atualizar();
-			array[i] = test;
-		}
-		else
+		if (!array[i].estaVivo()) 
 		{
 			removeTiroAtIndex(i);
 		}
+	}
+
+	// atualiza cada um dos seus elementinhos
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		array[i].atualizar();
 	}
 }
 
@@ -55,21 +65,22 @@ Tiro TiroArray::getTiroAtIndex(int index_)
 void TiroArray::adicionaTiroNaLista(Tiro tiro_)
 {
 	array[numeroTotalUtilizado] = tiro_;
-	numeroTotalUtilizado++;
 }
 
 void TiroArray::removeTiroAtIndex(int index_)
-{	
-	for (int i = index_; i < (numeroTotalUtilizado - 1); i++)
+{
+	for (int i = 0; i < ( 99 - index_); i++)
 	{
-		array[i] = array[i + 1];
+		array[index_ + i] = array[index_ + i + 1];
 	}
-	numeroTotalUtilizado--;
 }
 
 void TiroArray::clearEverything()
 {
-	numeroTotalUtilizado = 0;
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		array[i].reset();
+	}
 }
 
 void TiroArray::clearEverythingButBlueFreezers()

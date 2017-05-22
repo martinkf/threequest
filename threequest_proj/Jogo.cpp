@@ -844,6 +844,7 @@ void Jogo::telaJogo_collisionPlayerEnemyTiro()
 			score.reduceOxygenByAmount(650);
 
 			// destrói o enemy tiro
+			tirosEnemy.getTiroAtIndex(i).destruir();
 			tirosEnemy.removeTiroAtIndex(i);
 		}
 	}
@@ -874,6 +875,7 @@ void Jogo::telaJogo_collisionFriendlyTiroDiver()
 				// destrói o tiro
 				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
 				{
+					tirosPlayer.getTiroAtIndex(j).destruir();
 					tirosPlayer.removeTiroAtIndex(j);
 				}
 
@@ -921,7 +923,8 @@ void Jogo::telaJogo_collisionFriendlyTiroFish()
 
 				// destrói o tiro
 				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
-				{
+				{					
+					tirosPlayer.getTiroAtIndex(j).destruir();
 					tirosPlayer.removeTiroAtIndex(j);
 				}
 
@@ -970,6 +973,7 @@ void Jogo::telaJogo_collisionFriendlyTiroSub()
 				// destrói o tiro
 				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
 				{
+					tirosPlayer.getTiroAtIndex(j).destruir();
 					tirosPlayer.removeTiroAtIndex(j);
 				}
 
@@ -1007,6 +1011,7 @@ void Jogo::telaJogo_collisionEnemyTiroDiver()
 				// destrói o tiro
 				if (tirosEnemy.getTiroAtIndex(j).getShotType() != shotRed)
 				{
+					tirosEnemy.getTiroAtIndex(j).destruir();
 					tirosEnemy.removeTiroAtIndex(j);
 				}
 
@@ -1044,6 +1049,7 @@ void Jogo::telaJogo_collisionEnemyTiroFish()
 				// destrói o tiro
 				if (tirosEnemy.getTiroAtIndex(j).getShotType() != shotRed)
 				{
+					tirosEnemy.getTiroAtIndex(j).destruir();
 					tirosEnemy.removeTiroAtIndex(j);
 				}
 
@@ -1081,6 +1087,7 @@ void Jogo::telaJogo_collisionEnemyTiroSub()
 				// destrói o tiro
 				if (tirosEnemy.getTiroAtIndex(j).getShotType() != shotRed)
 				{
+					tirosEnemy.getTiroAtIndex(j).destruir();
 					tirosEnemy.removeTiroAtIndex(j);
 				}
 

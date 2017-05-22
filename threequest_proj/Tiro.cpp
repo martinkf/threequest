@@ -1,11 +1,8 @@
 #include "Tiro.h"
 
-
-
 Tiro::Tiro()
 {
 }
-
 
 Tiro::~Tiro()
 {
@@ -13,6 +10,8 @@ Tiro::~Tiro()
 
 void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 {
+	initialized = true;
+
 	int xOffset = 0;
 	int yOffset = 0;
 	shotType = shotType_;
@@ -83,27 +82,32 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 
 void Tiro::atualizar()
 {
-	if (shotType != shotBlue) // tiros azuis não se movem
-	{
-		if (shotDirection == facingLeft)
+	if (isAlive) {
+		if (shotType != shotBlue) // tiros azuis não se movem
 		{
-			x -= shotSpeed;
+			if (shotDirection == facingLeft)
+			{
+				x -= shotSpeed;
+			}
+			else
+			{
+				x += shotSpeed;
+			}
 		}
-		else
-		{
-			x += shotSpeed;
-		}
-	}
 	
-	if (x < -sprite.getLargura() / 2 || x > gJanela.getLargura() + sprite.getLargura() / 2)
-	{
-		destruir();
+		if (x < -sprite.getLargura() / 2 || x > gJanela.getLargura() + sprite.getLargura() / 2)
+		{
+			destruir();
+		}
 	}
 }
 
 void Tiro::desenhar()
 {
-	sprite.desenhar(x, y);
+	if (isAlive) 
+	{
+		sprite.desenhar(x, y);
+	}
 }
 
 void Tiro::destruir()
@@ -134,4 +138,14 @@ int Tiro::getY()
 ShotType Tiro::getShotType()
 {
 	return shotType;
+}
+
+bool Tiro::isInitialized()
+{
+	return initialized;
+}
+
+void Tiro::reset()
+{
+	initialized = false;
 }

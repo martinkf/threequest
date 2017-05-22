@@ -21,6 +21,9 @@ public:
 	int getY();
 	ShotType getShotType();
 
+	bool isInitialized();
+	void reset();
+
 private:
 	ShotType shotType;
 	Sprite sprite;
@@ -29,5 +32,6 @@ private:
 	Direction shotDirection;
 	bool isAlive;
 	int shotSpeed;
+	bool initialized = false;
 };
 
