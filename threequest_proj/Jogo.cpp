@@ -425,7 +425,7 @@ void Jogo::telaJogo_desenhar()
 	gridSlotC.desenhar(184, 559);
 
 	// DESENHA O POPUP MENU
-	if (shouldDrawPopup()) 
+	if (telaJogo_shouldDrawPopup())
 	{
 		popupBackground.desenhar(gJanela.getLargura() / 2, (gJanela.getAltura() / 2) - 50);
 	}
@@ -505,7 +505,8 @@ void Jogo::telaJogo_verificar()
 			player.changeShotType(shotBlue);
 			break;
 		case 't':
-			clearAllThreats();
+			score.obteveThreeQuest();
+			telaJogo_clearAllThreats();
 			score.clearThreeGrid();
 			score.setFillStatus(enumFilling);
 			break;
@@ -1112,12 +1113,12 @@ void Jogo::telaJogo_verificar()
 	}	
 }
 
-bool Jogo::shouldDrawPopup()
+bool Jogo::telaJogo_shouldDrawPopup()
 {
 	return popupNeedsDrawing;
 }
 
-void Jogo::clearAllThreats()
+void Jogo::telaJogo_clearAllThreats()
 {
 	// mata todos os inimigos fish em tela
 	for (int i = (enemyFishes.getNumeroTotalUtilizado() - 1); i >= 0; i--)

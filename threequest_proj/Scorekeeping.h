@@ -21,6 +21,7 @@ public:
 	void matouUmEnemySub(ShotType input_);
 	void matouUmEnemyFishSemGrid();
 	void matouUmEnemySubSemGrid();
+	void obteveThreeQuest();
 
 	void adicionaAoThreeGrid(ShotType input_);
 	char racionalizaThreeGrid();
@@ -48,6 +49,7 @@ private:
 	int qttyDiverKilled;
 	int qttyEnemyFish;
 	int qttyEnemySub;
+	int qttyThreeQuest;
 
 	ShotType threeGrid[3];
 	int threeGridPointer;

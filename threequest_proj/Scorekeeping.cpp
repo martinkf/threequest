@@ -26,6 +26,7 @@ void Scorekeeping::inicializar()
 	qttyDiverKilled = 0;
 	qttyEnemyFish = 0;
 	qttyEnemySub = 0;
+	qttyThreeQuest = 0;
 
 	gRecursos.carregarFonte("MONOFONT", "fontes/MONOFONT.TTF", 32);
 	text.setFonte("MONOFONT");
@@ -171,6 +172,11 @@ void Scorekeeping::matouUmEnemyFishSemGrid()
 void Scorekeeping::matouUmEnemySubSemGrid()
 {
 	qttyEnemySub++;
+}
+
+void Scorekeeping::obteveThreeQuest()
+{
+	qttyThreeQuest++;
 }
 
 void Scorekeeping::adicionaAoThreeGrid(ShotType input_)

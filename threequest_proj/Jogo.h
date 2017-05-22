@@ -49,8 +49,8 @@ private:
 	void telaJogo_executar();
 	void telaJogo_desenhar();
 	void telaJogo_verificar();
-	bool shouldDrawPopup();
-	void clearAllThreats();
+	bool telaJogo_shouldDrawPopup();
+	void telaJogo_clearAllThreats();
 	// atributos da tela jogo
 	FrameCounter frameCounterJogo;
 	Sprite gameBackground;
