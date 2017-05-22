@@ -40,10 +40,18 @@ void JogoInterface::inicializar()
 
 	specialShotDuration = 0;
 
+	if (!gRecursos.carregouSpriteSheet("redInfinitesimal"))
+	{
+		gRecursos.carregarSpriteSheet("redInfinitesimal", "imagens/spr_redInfinitesimal.png");
+	}
 	if (!gRecursos.carregouSpriteSheet("greenInfinitesimal"))
 	{
 		gRecursos.carregarSpriteSheet("greenInfinitesimal", "imagens/spr_greenInfinitesimal.png");
-	}	
+	}
+	if (!gRecursos.carregouSpriteSheet("blueInfinitesimal"))
+	{
+		gRecursos.carregarSpriteSheet("blueInfinitesimal", "imagens/spr_blueInfinitesimal.png");
+	}
 
 	contentBarIsDisplaying = barOxygen;
 	isDisplayingScore = true;
@@ -205,10 +213,24 @@ GridStatus JogoInterface::getFillStatus()
 
 void JogoInterface::setSpecialShotType(ShotType input_)
 {
-	// to do, só green
+	string temp;
+
+	switch (input_)
+	{
+	case shotRed:
+		temp = "redInfinitesimal";
+		break;
+	case shotGreen:
+		temp = "greenInfinitesimal";
+		break;
+	case shotBlue:
+		temp = "blueInfinitesimal";
+		break;
+	}
+
 	for (int i = 0; i < 500; i++)
 	{
-		specialShotArray[i].setSpriteSheet("greenInfinitesimal");
+		specialShotArray[i].setSpriteSheet(temp);
 	}
 }
 

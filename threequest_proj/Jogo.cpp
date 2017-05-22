@@ -236,9 +236,17 @@ void Jogo::telaJogo_inicializar()
 	{
 		gRecursos.carregarSpriteSheet("scoreOverlay", "imagens/spr_scoreOverlay.png");
 	}
+	if (!gRecursos.carregouSpriteSheet("scoreOverlaySpRed"))
+	{
+		gRecursos.carregarSpriteSheet("scoreOverlaySpRed", "imagens/spr_scoreOverlaySpRed.png");
+	}
 	if (!gRecursos.carregouSpriteSheet("scoreOverlaySpGreen"))
 	{
 		gRecursos.carregarSpriteSheet("scoreOverlaySpGreen", "imagens/spr_scoreOverlaySpGreen.png");
+	}
+	if (!gRecursos.carregouSpriteSheet("scoreOverlaySpBlue"))
+	{
+		gRecursos.carregarSpriteSheet("scoreOverlaySpBlue", "imagens/spr_scoreOverlaySpBlue.png");
 	}
 	scoreOverlay.setSpriteSheet("scoreOverlay");
 
@@ -463,6 +471,10 @@ void Jogo::telaJogo_verificar()
 			interfac.setFillStatus(enumFrozen);
 			interfac.pegouUmaAirBubble();
 			interfac.setSpecialShotDuration();
+			scoreOverlay.setSpriteSheet("scoreOverlaySpRed");
+			interfac.setSpecialShotType(shotRed);
+			interfac.setContentBarContext(barSpecialShot);
+			interfac.stopDisplayingScore();
 			player.changeShotType(shotRed);
 			break;
 		case 'g':
@@ -479,6 +491,10 @@ void Jogo::telaJogo_verificar()
 			interfac.setFillStatus(enumFrozen);
 			interfac.pegouUmaAirBubble();
 			interfac.setSpecialShotDuration();
+			scoreOverlay.setSpriteSheet("scoreOverlaySpBlue");
+			interfac.setSpecialShotType(shotBlue);
+			interfac.setContentBarContext(barSpecialShot);
+			interfac.stopDisplayingScore();
 			player.changeShotType(shotBlue);
 			break;
 		case 't':
