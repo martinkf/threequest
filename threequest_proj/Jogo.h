@@ -2,7 +2,7 @@
 #include "libUnicornio.h"
 #include "MyEnums.h"
 #include "FrameCounter.h"
-#include "JogoInterface.h"
+#include "Scorekeeping.h"
 #include "Player.h"
 #include "AirBubbleArray.h"
 #include "TiroArray.h"
@@ -49,13 +49,14 @@ private:
 	void telaJogo_desenhar();
 	void telaJogo_verificar();
 	bool shouldDrawPopup();
+	void clearAllThreats();
 	// atributos da tela jogo
 	FrameCounter frameCounterJogo;
 	Sprite gameBackground;
 	Sprite gameWaterSurface;
 	Sprite popupBackground;
 	Sprite scoreOverlay;
-	JogoInterface interfac;
+	Scorekeeping score;
 	Sprite gridSlotA;
 	Sprite gridSlotB;
 	Sprite gridSlotC;

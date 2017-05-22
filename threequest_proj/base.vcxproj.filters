@@ -18,9 +18,6 @@
     <ClCompile Include="FrameCounter.cpp">
       <Filter>Classes: Helper files</Filter>
     </ClCompile>
-    <ClCompile Include="JogoInterface.cpp">
-      <Filter>Classes: GUI</Filter>
-    </ClCompile>
     <ClCompile Include="TiroArray.cpp">
       <Filter>Classes: Element Arrays</Filter>
     </ClCompile>
@@ -41,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="EnemyFishArray.cpp">
       <Filter>Classes: Element Arrays</Filter>
+    </ClCompile>
+    <ClCompile Include="Scorekeeping.cpp">
+      <Filter>Classes: GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +63,6 @@
     <ClInclude Include="MyEnums.h">
       <Filter>Classes: Helper files</Filter>
     </ClInclude>
-    <ClInclude Include="JogoInterface.h">
-      <Filter>Classes: GUI</Filter>
-    </ClInclude>
     <ClInclude Include="TiroArray.h">
       <Filter>Classes: Element Arrays</Filter>
     </ClInclude>
@@ -86,6 +83,9 @@
     </ClInclude>
     <ClInclude Include="EnemyFishArray.h">
       <Filter>Classes: Element Arrays</Filter>
+    </ClInclude>
+    <ClInclude Include="Scorekeeping.h">
+      <Filter>Classes: GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

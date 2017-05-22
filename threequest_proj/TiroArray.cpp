@@ -63,3 +63,8 @@ void TiroArray::removeTiroAtIndex(int index_)
 	}
 	numeroTotalUtilizado--;
 }
+
+void TiroArray::clearEverything()
+{
+	numeroTotalUtilizado = 0;
+}

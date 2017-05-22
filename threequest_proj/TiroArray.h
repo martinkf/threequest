@@ -17,6 +17,8 @@ public:
 	void adicionaTiroNaLista(Tiro tiro_);
 	void removeTiroAtIndex(int index_);
 
+	void clearEverything();
+
 private:
 	int numeroTotalUtilizado;
 	Tiro array[300];

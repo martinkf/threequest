@@ -19,7 +19,7 @@ public:
 	int getNumeroTotalUtilizado();
 	EnemyFish getEnemyFishAtIndex(int index_);
 	void removeEnemyFishAtIndex(int index_);
-
+	
 private:
 	int numeroTotalUtilizado;
 	EnemyFish array[20];

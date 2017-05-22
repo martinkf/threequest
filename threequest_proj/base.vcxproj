@@ -109,7 +109,7 @@
     <ClCompile Include="EnemySubArray.cpp" />
     <ClCompile Include="FrameCounter.cpp" />
     <ClCompile Include="Jogo.cpp" />
-    <ClCompile Include="JogoInterface.cpp" />
+    <ClCompile Include="Scorekeeping.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TiroArray.cpp" />
@@ -126,7 +126,7 @@
     <ClInclude Include="EnemySubArray.h" />
     <ClInclude Include="FrameCounter.h" />
     <ClInclude Include="Jogo.h" />
-    <ClInclude Include="JogoInterface.h" />
+    <ClInclude Include="Scorekeeping.h" />
     <ClInclude Include="MyEnums.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="TiroArray.h" />

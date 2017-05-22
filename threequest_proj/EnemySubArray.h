@@ -21,7 +21,7 @@ public:
 	void removeEnemySubAtIndex(int index_);
 
 	void addEnemySubAtIndex(EnemySub _input, int _index);
-
+	
 private:
 	int numeroTotalUtilizado;
 	EnemySub array[20];

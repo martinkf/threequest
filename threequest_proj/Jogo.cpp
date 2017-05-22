@@ -303,7 +303,7 @@ void Jogo::telaJogo_inicializar()
 	enemySubs.inicializar();
 
 	// INICIALIZA A JOGO INTERFACE
-	interfac.inicializar();
+	score.inicializar();
 }
 
 void Jogo::telaJogo_executar()
@@ -360,7 +360,7 @@ void Jogo::telaJogo_desenhar()
 	scoreOverlay.desenhar(gJanela.getLargura() / 2, 559);
 
 	// DESENHA A JOGO INTERFACE
-	interfac.desenhar();
+	score.desenhar();
 
 	// DESENHA OS GRID SLOTS
 	gridSlotA.desenhar(42, 559);
@@ -402,13 +402,13 @@ void Jogo::telaJogo_verificar()
 	}	
 
 	// RACIONALIZA SE DEVE COMER OXYGEN
-	if (!player.isPlayerOnSurface() && !(interfac.getFillStatus() == enumFrozen))
+	if (!player.isPlayerOnSurface() && !(score.getFillStatus() == enumFrozen))
 	{
-		interfac.reduceOxygen();
+		score.reduceOxygen();
 	}
 
 	// ATUALIZA O SPRITE DAS GRID SLOTS COM RELAÇÃO A O QUE A ARRAY GUARDA
-	switch (interfac.getThreeGridAtThisIndex(0))
+	switch (score.getThreeGridAtThisIndex(0))
 	{
 	case shotRed:
 		gridSlotA.setSpriteSheet("gridRed");
@@ -424,7 +424,7 @@ void Jogo::telaJogo_verificar()
 	default:
 		break;
 	};
-	switch (interfac.getThreeGridAtThisIndex(1))
+	switch (score.getThreeGridAtThisIndex(1))
 	{
 	case shotRed:
 		gridSlotB.setSpriteSheet("gridRed");
@@ -440,7 +440,7 @@ void Jogo::telaJogo_verificar()
 	default:
 		break;
 	};
-	switch (interfac.getThreeGridAtThisIndex(2))
+	switch (score.getThreeGridAtThisIndex(2))
 	{
 	case shotRed:
 		gridSlotC.setSpriteSheet("gridRed");
@@ -458,71 +458,73 @@ void Jogo::telaJogo_verificar()
 	};
 
 	// SE ACONTECEU UM FULL THREE GRID
-	if (interfac.getFillStatus() == enumFilled)
+	if (score.getFillStatus() == enumFilled)
 	{
-		char temp = interfac.racionalizaThreeGrid();
+		char temp = score.racionalizaThreeGrid();
 		switch (temp)
 		{
 		case 'n':
-			interfac.clearThreeGrid();
-			interfac.setFillStatus(enumFilling);
+			score.clearThreeGrid();
+			score.setFillStatus(enumFilling);
 			break;
 		case 'r':
-			interfac.setFillStatus(enumFrozen);
-			interfac.pegouUmaAirBubble();
-			interfac.setSpecialShotDuration();
+			score.setFillStatus(enumFrozen);
+			score.pegouUmaAirBubble();
+			score.setSpecialShotDuration();
 			scoreOverlay.setSpriteSheet("scoreOverlaySpRed");
-			interfac.setSpecialShotType(shotRed);
-			interfac.setContentBarContext(barSpecialShot);
-			interfac.stopDisplayingScore();
+			score.setSpecialShotType(shotRed);
+			score.setContentBarContext(barSpecialShot);
+			score.stopDisplayingScore();
 			player.changeShotType(shotRed);
 			break;
 		case 'g':
-			interfac.setFillStatus(enumFrozen);
-			interfac.pegouUmaAirBubble();
-			interfac.setSpecialShotDuration();
+			score.setFillStatus(enumFrozen);
+			score.pegouUmaAirBubble();
+			score.setSpecialShotDuration();
 			scoreOverlay.setSpriteSheet("scoreOverlaySpGreen");
-			interfac.setSpecialShotType(shotGreen);
-			interfac.setContentBarContext(barSpecialShot);
-			interfac.stopDisplayingScore();
+			score.setSpecialShotType(shotGreen);
+			score.setContentBarContext(barSpecialShot);
+			score.stopDisplayingScore();
 			player.changeShotType(shotGreen);
 			break;
 		case 'b':
-			interfac.setFillStatus(enumFrozen);
-			interfac.pegouUmaAirBubble();
-			interfac.setSpecialShotDuration();
+			score.setFillStatus(enumFrozen);
+			score.pegouUmaAirBubble();
+			score.setSpecialShotDuration();
 			scoreOverlay.setSpriteSheet("scoreOverlaySpBlue");
-			interfac.setSpecialShotType(shotBlue);
-			interfac.setContentBarContext(barSpecialShot);
-			interfac.stopDisplayingScore();
+			score.setSpecialShotType(shotBlue);
+			score.setContentBarContext(barSpecialShot);
+			score.stopDisplayingScore();
 			player.changeShotType(shotBlue);
 			break;
 		case 't':
 			// FAZ AS COISAS LOUCAS QUE O THREE QUEST FAZ
+			clearAllThreats();
+			score.fillUpOxygen();
 			// TO DO
 			// TODO
-			interfac.clearThreeGrid();
-			interfac.setFillStatus(enumFilling);
+			score.clearThreeGrid();
+			score.setFillStatus(enumFilling);
 			break;
 		}
 	}
 
 	// SE O SHOT FOR SPECIAL, DIMINUIR ELE AOS POUCOS
-	if (interfac.getFillStatus() == enumFrozen)
+	if (score.getFillStatus() == enumFrozen)
 	{
-		if (interfac.getSpecialShotDuration() > 0)
+		if (score.getSpecialShotDuration() > 0)
 		{
-			interfac.drainSpecialShotDuration();
+			score.drainSpecialShotDuration();
 		}
 		else
 		{
 			// FIM DO SPECIAL SHOT. VOLTAR AO NORMAL.
-			interfac.clearThreeGrid();
- 			interfac.setFillStatus(enumFilling);
+			score.clearThreeGrid();
+ 			score.setFillStatus(enumFilling);
 			player.changeShotType(shotRegular);
 			scoreOverlay.setSpriteSheet("scoreOverlay");
-			interfac.setContentBarContext(barOxygen);
-			interfac.resumeDisplayingScore();
+			score.setContentBarContext(barOxygen);
+			score.resumeDisplayingScore();
 		}
 	}
 
@@ -631,7 +633,7 @@ void Jogo::telaJogo_verificar()
 			// COLIDIU UM DIVER COM O PLAYER!
 
 			// adiciona um diver ao score
-			interfac.pegouUmDiver();
+			score.pegouUmDiver();
 
 			// destrói o diver
 			divers.removeDiverAtIndex(i);
@@ -658,7 +660,7 @@ void Jogo::telaJogo_verificar()
 				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
 				{			
 					// adiciona o fato ao score
-					interfac.matouUmDiver();
+					score.matouUmDiver();
 
 					// destrói o tiro
 					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed) 
@@ -723,7 +725,7 @@ void Jogo::telaJogo_verificar()
 				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
 				{				
 					// adiciona o enemy fish ao score e ao three grid
-					interfac.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getShotType());
+					score.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getShotType());
 
 					// destrói o tiro
 					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
@@ -788,7 +790,7 @@ void Jogo::telaJogo_verificar()
 				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
 				{
 					// adiciona o enemy sub ao score e ao three grid
-					interfac.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getShotType());
+					score.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getShotType());
 
 					// destrói o tiro
 					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
@@ -943,17 +945,44 @@ void Jogo::telaJogo_verificar()
 			// COLIDIU UMA AIR BUBBLE COM O PLAYER!
 
 			// acrescenta um pouco de oxigênio de volta ao jogo
-			interfac.pegouUmaAirBubble();
+			score.pegouUmaAirBubble();
 
 			// destrói a air bubble
 			airBubbles.removeAirBubbleAtIndex(i);
 		}
-	}
-
-	
+	}	
 }
 
 bool Jogo::shouldDrawPopup()
 {
 	return popupNeedsDrawing;
+}
+
+void Jogo::clearAllThreats()
+{
+	// mata todos os inimigos fish em tela
+	for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
+	{
+		// adiciona o enemy fish ao score
+		score.matouUmEnemyFishSemGrid();
+
+		// destrói o enemy fish
+		enemyFishes.removeEnemyFishAtIndex(i);
+	}
+
+	// mata todos os inimigos sub em tela
+	for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
+	{
+		// adiciona o enemy sub ao score
+		score.matouUmEnemySubSemGrid();
+		
+		// destrói o enemy sub
+		enemySubs.removeEnemySubAtIndex(i);
+	}
+
+	// limpa a array de tiros inimigos
+	tirosEnemy.clearEverything();
+	
+	// limpa a array de tiros meus
+	tirosPlayer.clearEverything();
 }
