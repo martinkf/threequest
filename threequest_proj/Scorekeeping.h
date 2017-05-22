@@ -11,7 +11,8 @@ public:
 	void inicializar();
 	void desenhar();
 
-	void reduceOxygen();
+	void drainOxygen();
+	void reduceOxygenByAmount(int oxygenLoss_);
 	void pegouUmaAirBubble();
 	void fillUpOxygen();
 

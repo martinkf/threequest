@@ -93,20 +93,32 @@ void Scorekeeping::desenhar()
 	}
 }
 
-void Scorekeeping::reduceOxygen()
+void Scorekeeping::drainOxygen()
 {
 	oxygenLeft--;
 }
 
+void Scorekeeping::reduceOxygenByAmount(int oxygenLoss_)
+{
+	if (oxygenLeft - oxygenLoss_ < 0 )
+	{
+		oxygenLeft = 0;
+	}
+	else
+	{
+		oxygenLeft -= oxygenLoss_;
+	}
+}
+
 void Scorekeeping::pegouUmaAirBubble()
 {
-	if (oxygenLeft + 500 > maxOxygen)
+	if (oxygenLeft + 700 > maxOxygen)
 	{
 		oxygenLeft = maxOxygen;
 	}
 	else
 	{
-		oxygenLeft += 500;
+		oxygenLeft += 700;
 	}
 }
 
@@ -118,6 +130,15 @@ void Scorekeeping::fillUpOxygen()
 void Scorekeeping::pegouUmDiver()
 {
 	qttyDiver++;
+
+	if (oxygenLeft + 350 > maxOxygen)
+	{
+		oxygenLeft = maxOxygen;
+	}
+	else
+	{
+		oxygenLeft += 350;
+	}
 }
 
 void Scorekeeping::matouUmDiver()
@@ -214,6 +235,7 @@ void Scorekeeping::clearThreeGrid()
 	threeGrid[0] = shotNull;
 	threeGrid[1] = shotNull;
 	threeGrid[2] = shotNull;
+	threeGridPointer = 0;
 }
 
 void Scorekeeping::setFillStatus(GridStatus input_)

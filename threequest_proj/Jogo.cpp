@@ -411,7 +411,7 @@ void Jogo::telaJogo_verificar()
 	// RACIONALIZA SE DEVE COMER OXYGEN
 	if (!player.isPlayerOnSurface() && !(score.getFillStatus() == enumFrozen))
 	{
-		score.reduceOxygen();
+		score.drainOxygen();
 	}
 
 	// ATUALIZA O SPRITE DAS GRID SLOTS COM RELAÇÃO A O QUE A ARRAY GUARDA
@@ -505,11 +505,8 @@ void Jogo::telaJogo_verificar()
 			player.changeShotType(shotBlue);
 			break;
 		case 't':
-			// FAZ AS COISAS LOUCAS QUE O THREE QUEST FAZ
 			clearAllThreats();
 			score.fillUpOxygen();
-			// TO DO
-			// TODO
 			score.clearThreeGrid();
 			score.setFillStatus(enumFilling);
 			break;
@@ -534,6 +531,13 @@ void Jogo::telaJogo_verificar()
 			score.resumeDisplayingScore();
 		}
 	}
+
+	// SE FOI PRESSIONADO O BOTÃO DE GRID RESET
+	if (gTeclado.pressionou[TECLA_SHIFT_ESQ])
+	{
+		// reseta o grid
+		score.clearThreeGrid();
+	}	
 
 	// SE O PLAYER ATIROU
 	if (player.wantsToShoot())
@@ -624,7 +628,7 @@ void Jogo::telaJogo_verificar()
 	}
 
 	// COLLISION: PLAYER X DIVERS
-	for (int i = 0; i < divers.getNumeroTotalUtilizado(); i++)
+	for (int i = (divers.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
 		if (uniTestarColisao(
 			divers.getDiverAtIndex(i).getSprite(),
@@ -647,10 +651,116 @@ void Jogo::telaJogo_verificar()
 		}
 	}
 
-	// COLLISION: TIRO PLAYER X DIVERS
-	for (int i = 0; i < divers.getNumeroTotalUtilizado(); i++)
+	// COLLISION: PLAYER X AIR BUBBLE
+	for (int i = (airBubbles.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
-		for (int j = 0; j < tirosPlayer.getNumeroTotalUtilizado(); j++)
+		if (uniTestarColisao(
+			airBubbles.getAirBubbleAtIndex(i).getSprite(),
+			airBubbles.getAirBubbleAtIndex(i).getX(),
+			airBubbles.getAirBubbleAtIndex(i).getY(),
+			0,
+			player.getSprite(),
+			player.getX(),
+			player.getY(),
+			0
+		))
+		{
+			// COLIDIU UMA AIR BUBBLE COM O PLAYER!
+
+			// acrescenta um pouco de oxigênio de volta ao jogo
+			score.pegouUmaAirBubble();
+
+			// destrói a air bubble
+			airBubbles.removeAirBubbleAtIndex(i);
+		}
+	}
+
+	// COLLISION: PLAYER X ENEMY FISH
+	for (int i = (enemyFishes.getNumeroTotalUtilizado() - 1); i >= 0; i--)
+	{
+		if (uniTestarColisao(
+			enemyFishes.getEnemyFishAtIndex(i).getSprite(),
+			enemyFishes.getEnemyFishAtIndex(i).getX(),
+			enemyFishes.getEnemyFishAtIndex(i).getY(),
+			0,
+			player.getSprite(),
+			player.getX(),
+			player.getY(),
+			0
+		))
+		{
+			// COLIDIU UM ENEMY FISH COM O PLAYER!
+
+			// remove um pouco de o2 do player
+			score.reduceOxygenByAmount(400);
+
+			// cria uma explosão
+			Explosion testD;
+			testD.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
+			explosions.adicionaExplosionNaLista(testD);
+
+			// destrói o enemy fish
+			enemyFishes.removeEnemyFishAtIndex(i);
+		}
+	}
+
+	// COLLISION: PLAYER X ENEMY SUB
+	for (int i = (enemySubs.getNumeroTotalUtilizado() - 1); i >= 0; i--)
+	{
+		if (uniTestarColisao(
+			enemySubs.getEnemySubAtIndex(i).getSprite(),
+			enemySubs.getEnemySubAtIndex(i).getX(),
+			enemySubs.getEnemySubAtIndex(i).getY(),
+			0,
+			player.getSprite(),
+			player.getX(),
+			player.getY(),
+			0
+		))
+		{
+			// COLIDIU UM ENEMY SUB COM O PLAYER!
+
+			// remove um pouco de o2 do player
+			score.reduceOxygenByAmount(600);
+
+			// cria uma explosão
+			Explosion testE;
+			testE.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
+			explosions.adicionaExplosionNaLista(testE);
+
+			// destrói o enemy sub
+			enemySubs.removeEnemySubAtIndex(i);
+		}
+	}
+
+	// COLLISION: PLAYER X ENEMY TIRO
+	for (int i = (tirosEnemy.getNumeroTotalUtilizado() - 1); i >= 0; i--)
+	{
+		if (uniTestarColisao(
+			tirosEnemy.getTiroAtIndex(i).getSprite(),
+			tirosEnemy.getTiroAtIndex(i).getX(),
+			tirosEnemy.getTiroAtIndex(i).getY(),
+			0,
+			player.getSprite(),
+			player.getX(),
+			player.getY(),
+			0
+		))
+		{
+			// COLIDIU UM ENEMY TIRO COM O PLAYER!
+
+			// remove um pouco de o2 do player
+			score.reduceOxygenByAmount(650);
+
+			// destrói o enemy tiro
+			tirosEnemy.removeTiroAtIndex(i);
+		}
+	}
+
+	// COLLISION: TIRO PLAYER X DIVERS
+	for (int i = (divers.getNumeroTotalUtilizado() - 1); i >= 0; i--)
+	{
+		for (int j = (tirosPlayer.getNumeroTotalUtilizado() - 1); j >= 0; j--)
 		{
 			if (uniTestarColisao(
 				divers.getDiverAtIndex(i).getSprite(),
@@ -687,10 +797,90 @@ void Jogo::telaJogo_verificar()
 		}
 	}
 
-	// COLLISION: TIRO ENEMY X DIVERS
-	for (int i = 0; i < divers.getNumeroTotalUtilizado(); i++)
+	// COLLISION: TIRO PLAYER X ENEMY FISH
+	for (int i = (enemyFishes.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
-		for (int j = 0; j < tirosEnemy.getNumeroTotalUtilizado(); j++)
+		for (int j = (tirosPlayer.getNumeroTotalUtilizado() - 1); j >= 0; j--)
+		{
+			if (uniTestarColisao(
+				enemyFishes.getEnemyFishAtIndex(i).getSprite(),
+				enemyFishes.getEnemyFishAtIndex(i).getX(),
+				enemyFishes.getEnemyFishAtIndex(i).getY(),
+				0,
+				tirosPlayer.getTiroAtIndex(j).getSprite(),
+				tirosPlayer.getTiroAtIndex(j).getX(),
+				tirosPlayer.getTiroAtIndex(j).getY(),
+				0
+			))
+			{
+				// COLIDIU UM TIRO PLAYER COM UM ENEMY FISH!
+				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
+				{
+					// adiciona o enemy fish ao score e ao three grid
+					score.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getShotType());
+
+					// destrói o tiro
+					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
+					{
+						tirosPlayer.removeTiroAtIndex(j);
+					}
+
+					// cria uma explosão
+					Explosion test3;
+					test3.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
+					explosions.adicionaExplosionNaLista(test3);
+
+					// destrói o enemy fish
+					enemyFishes.removeEnemyFishAtIndex(i);
+				}
+			}
+		}
+	}
+
+	// COLLISION: TIRO PLAYER X ENEMY SUB
+	for (int i = (enemySubs.getNumeroTotalUtilizado() - 1); i >= 0; i--)
+	{
+		for (int j = (tirosPlayer.getNumeroTotalUtilizado() - 1); j >= 0; j--)
+		{
+			if (uniTestarColisao(
+				enemySubs.getEnemySubAtIndex(i).getSprite(),
+				enemySubs.getEnemySubAtIndex(i).getX(),
+				enemySubs.getEnemySubAtIndex(i).getY(),
+				0,
+				tirosPlayer.getTiroAtIndex(j).getSprite(),
+				tirosPlayer.getTiroAtIndex(j).getX(),
+				tirosPlayer.getTiroAtIndex(j).getY(),
+				0
+			))
+			{
+				// COLIDIU UM TIRO PLAYER COM UM ENEMY SUB!
+				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
+				{
+					// adiciona o enemy sub ao score e ao three grid
+					score.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getShotType());
+
+					// destrói o tiro
+					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
+					{
+						tirosPlayer.removeTiroAtIndex(j);
+					}
+
+					// cria uma explosão
+					Explosion test5;
+					test5.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
+					explosions.adicionaExplosionNaLista(test5);
+
+					// destrói o enemy sub
+					enemySubs.removeEnemySubAtIndex(i);
+				}
+			}
+		}
+	}
+
+	// COLLISION: TIRO ENEMY X DIVERS
+	for (int i = (divers.getNumeroTotalUtilizado() - 1); i >= 0; i--)
+	{
+		for (int j = (tirosEnemy.getNumeroTotalUtilizado() - 1); j >= 0; j--)
 		{
 			if (uniTestarColisao(
 				divers.getDiverAtIndex(i).getSprite(),
@@ -720,52 +910,12 @@ void Jogo::telaJogo_verificar()
 				divers.removeDiverAtIndex(i);
 			}
 		}
-	}
-
-	// COLLISION: TIRO PLAYER X ENEMY FISH
-	for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
-	{
-		for (int j = 0; j < tirosPlayer.getNumeroTotalUtilizado(); j++)
-		{
-			if (uniTestarColisao(
-				enemyFishes.getEnemyFishAtIndex(i).getSprite(),
-				enemyFishes.getEnemyFishAtIndex(i).getX(),
-				enemyFishes.getEnemyFishAtIndex(i).getY(),
-				0,
-				tirosPlayer.getTiroAtIndex(j).getSprite(),
-				tirosPlayer.getTiroAtIndex(j).getX(),
-				tirosPlayer.getTiroAtIndex(j).getY(),
-				0
-				))
-			{
-				// COLIDIU UM TIRO PLAYER COM UM ENEMY FISH!
-				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
-				{				
-					// adiciona o enemy fish ao score e ao three grid
-					score.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getShotType());
-
-					// destrói o tiro
-					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
-					{
-						tirosPlayer.removeTiroAtIndex(j);
-					}
-
-					// cria uma explosão
-					Explosion test3;
-					test3.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
-					explosions.adicionaExplosionNaLista(test3);
-
-					// destrói o enemy fish
-					enemyFishes.removeEnemyFishAtIndex(i);
-				}
-			}
-		}
-	}
+	}	
 
 	// COLLISION: TIRO ENEMY X ENEMY FISH
-	for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
+	for (int i = (enemyFishes.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
-		for (int j = 0; j < tirosEnemy.getNumeroTotalUtilizado(); j++)
+		for (int j = (tirosEnemy.getNumeroTotalUtilizado() - 1); j >= 0; j--)
 		{
 			if (uniTestarColisao(
 				enemyFishes.getEnemyFishAtIndex(i).getSprite(),
@@ -797,50 +947,10 @@ void Jogo::telaJogo_verificar()
 		}
 	}
 
-	// COLLISION: TIRO PLAYER X ENEMY SUB
-	for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
-	{
-		for (int j = 0; j < tirosPlayer.getNumeroTotalUtilizado(); j++)
-		{
-			if (uniTestarColisao(
-				enemySubs.getEnemySubAtIndex(i).getSprite(),
-				enemySubs.getEnemySubAtIndex(i).getX(),
-				enemySubs.getEnemySubAtIndex(i).getY(),
-				0,
-				tirosPlayer.getTiroAtIndex(j).getSprite(),
-				tirosPlayer.getTiroAtIndex(j).getX(),
-				tirosPlayer.getTiroAtIndex(j).getY(),
-				0
-				))
-			{
-				// COLIDIU UM TIRO PLAYER COM UM ENEMY SUB!
-				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
-				{
-					// adiciona o enemy sub ao score e ao three grid
-					score.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getShotType());
-
-					// destrói o tiro
-					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
-					{
-						tirosPlayer.removeTiroAtIndex(j);
-					}
-
-					// cria uma explosão
-					Explosion test5;
-					test5.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
-					explosions.adicionaExplosionNaLista(test5);
-
-					// destrói o enemy sub
-					enemySubs.removeEnemySubAtIndex(i);
-				}				
-			}
-		}
-	}
-
 	// COLLISION: TIRO ENEMY X ENEMY SUB
-	for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
+	for (int i = (enemySubs.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
-		for (int j = 0; j < tirosEnemy.getNumeroTotalUtilizado(); j++)
+		for (int j = (tirosEnemy.getNumeroTotalUtilizado() - 1); j >= 0 ; j--)
 		{
 			if (uniTestarColisao(
 				enemySubs.getEnemySubAtIndex(i).getSprite(),
@@ -873,9 +983,9 @@ void Jogo::telaJogo_verificar()
 	}
 
 	// COLLISION: ENEMY FISH X ENEMY FISH
-	for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
+	for (int i = (enemyFishes.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
-		for (int j = 0; j < enemyFishes.getNumeroTotalUtilizado(); j++)
+		for (int j = (enemyFishes.getNumeroTotalUtilizado() - 1); j >= 0; j--)
 		{
 			if (uniTestarColisao(
 				enemyFishes.getEnemyFishAtIndex(i).getSprite(),
@@ -913,9 +1023,9 @@ void Jogo::telaJogo_verificar()
 	}
 
 	// COLLISION: ENEMY FISH X ENEMY SUB
-	for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
+	for (int i = (enemyFishes.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
-		for (int j = 0; j < enemySubs.getNumeroTotalUtilizado(); j++)
+		for (int j = (enemySubs.getNumeroTotalUtilizado() - 1); j >= 0; j--)
 		{
 			if (uniTestarColisao(
 				enemyFishes.getEnemyFishAtIndex(i).getSprite(),
@@ -950,9 +1060,9 @@ void Jogo::telaJogo_verificar()
 	}
 
 	// COLLISION: ENEMY SUB X ENEMY SUB
-	for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
+	for (int i = (enemySubs.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
-		for (int j = 0; j < enemySubs.getNumeroTotalUtilizado(); j++)
+		for (int j = (enemySubs.getNumeroTotalUtilizado() - 1); j >= 0; j--)
 		{
 			if (uniTestarColisao(
 				enemySubs.getEnemySubAtIndex(i).getSprite(),
@@ -986,36 +1096,6 @@ void Jogo::telaJogo_verificar()
 					enemySubs.removeEnemySubAtIndex(j);
 				}
 			}
-		}
-	}
-
-	// COLLISION: PLAYER X ENEMY FISH
-	// TO DO
-
-	// COLLISION: PLAYER X ENEMY SUB
-	// TO DO
-
-	// COLLISION: PLAYER X AIR BUBBLE
-	for (int i = 0; i < airBubbles.getNumeroTotalUtilizado(); i++)
-	{
-		if (uniTestarColisao(
-			airBubbles.getAirBubbleAtIndex(i).getSprite(),
-			airBubbles.getAirBubbleAtIndex(i).getX(),
-			airBubbles.getAirBubbleAtIndex(i).getY(),
-			0,
-			player.getSprite(),
-			player.getX(),
-			player.getY(),
-			0
-			))
-		{
-			// COLIDIU UMA AIR BUBBLE COM O PLAYER!
-
-			// acrescenta um pouco de oxigênio de volta ao jogo
-			score.pegouUmaAirBubble();
-
-			// destrói a air bubble
-			airBubbles.removeAirBubbleAtIndex(i);
 		}
 	}	
 }
