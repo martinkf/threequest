@@ -39,5 +39,6 @@ private:
 	bool isAlive;
 	ShotType shotType;
 	bool subWantsToShoot;
+	int shotCooldown;
 };
 

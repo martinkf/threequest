@@ -556,7 +556,7 @@ void Jogo::telaJogo_verificar()
 	}
 
 	// SE ALGUM ENEMY SUB ATIROU
-	for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
+	for (int i = (enemySubs.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
 		if (enemySubs.getEnemySubAtIndex(i).wantsToShoot())
 		{

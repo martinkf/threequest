@@ -70,9 +70,10 @@ void EnemySub::inicializar()
 
 	// não nasce já querendo atirar pls
 	subWantsToShoot = false;
+	shotCooldown = 0;
 
 	// obtém uma random id
-	id = rand();
+	id = rand();	
 }
 
 void EnemySub::atualizar()
@@ -90,13 +91,22 @@ void EnemySub::atualizar()
 		x -= speed;
 	}
 
+	// reduz o cooldown do tiro, caso tenha
+	if (shotCooldown > 0) 
+	{
+		shotCooldown--;
+	}
+
 	// 1 chance em 120, a cada frame, de atirar. chance média de 2 segundos por tiro
 	int randm = rand() % 120;
 	if (randm == 0)
 	{
 		if (shotType != shotBlue) // submarinos azuis não atiram :)
 		{
-			atirar();
+			if (shotCooldown == 0) // somente atira se não está em cooldown
+			{
+				atirar();
+			}
 		}
 	}
 
@@ -164,6 +174,7 @@ bool EnemySub::verificaSemelhanca(EnemySub input_)
 void EnemySub::atirar()
 {
 	subWantsToShoot = true;
+	shotCooldown = 120;
 }
 
 bool EnemySub::wantsToShoot()
