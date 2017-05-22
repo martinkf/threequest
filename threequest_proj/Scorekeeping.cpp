@@ -122,11 +122,6 @@ void Scorekeeping::pegouUmaAirBubble()
 	}
 }
 
-void Scorekeeping::fillUpOxygen()
-{
-	oxygenLeft = maxOxygen;
-}
-
 void Scorekeeping::pegouUmDiver()
 {
 	qttyDiver++;

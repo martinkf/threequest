@@ -506,7 +506,6 @@ void Jogo::telaJogo_verificar()
 			break;
 		case 't':
 			clearAllThreats();
-			score.fillUpOxygen();
 			score.clearThreeGrid();
 			score.setFillStatus(enumFilling);
 			break;

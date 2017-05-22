@@ -14,7 +14,6 @@ public:
 	void drainOxygen();
 	void reduceOxygenByAmount(int oxygenLoss_);
 	void pegouUmaAirBubble();
-	void fillUpOxygen();
 
 	void pegouUmDiver();
 	void matouUmDiver();
