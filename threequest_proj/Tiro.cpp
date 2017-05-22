@@ -83,8 +83,8 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 
 void Tiro::atualizar()
 {
-	if (isAlive)
-	{		
+	if (shotType != shotBlue) // tiros azuis não se movem
+	{
 		if (shotDirection == facingLeft)
 		{
 			x -= shotSpeed;
@@ -93,19 +93,17 @@ void Tiro::atualizar()
 		{
 			x += shotSpeed;
 		}
-		if (x < -sprite.getLargura() / 2 || x > gJanela.getLargura() + sprite.getLargura() / 2)
-		{
-			destruir();
-		}
+	}
+	
+	if (x < -sprite.getLargura() / 2 || x > gJanela.getLargura() + sprite.getLargura() / 2)
+	{
+		destruir();
 	}
 }
 
 void Tiro::desenhar()
 {
-	if (isAlive)
-	{
-		sprite.desenhar(x, y);
-	}
+	sprite.desenhar(x, y);
 }
 
 void Tiro::destruir()

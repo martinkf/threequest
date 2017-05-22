@@ -6,13 +6,13 @@ c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(692
 c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(721): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(750): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(776): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(816): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(856): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(896): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(931): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(966): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(1001): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(1041): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(1078): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(814): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(860): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(906): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(941): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(976): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(1011): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(1051): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(1088): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   base.vcxproj -> C:\Users\marti\Desktop\libUnicornio-master\projetos\threequest_proj\bin\base-debug.exe
   base.vcxproj -> C:\Users\marti\Desktop\libUnicornio-master\projetos\threequest_proj\bin\base-debug.pdb (Full PDB)

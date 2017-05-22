@@ -35,7 +35,10 @@ void TiroArray::desenhar()
 {
 	for (int i = 0; i < numeroTotalUtilizado; i++)
 	{
-		array[i].desenhar();
+		if (array[i].estaVivo()) 
+		{
+			array[i].desenhar();
+		}
 	}
 }
 

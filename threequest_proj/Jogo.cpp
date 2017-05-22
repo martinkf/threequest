@@ -776,25 +776,23 @@ void Jogo::telaJogo_verificar()
 			))
 			{
 				// COLIDIU UM TIRO PLAYER COM UM DIVER!
-				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
-				{			
-					// adiciona o fato ao score
-					score.matouUmDiver();
 
-					// destrói o tiro
-					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed) 
-					{
-						tirosPlayer.removeTiroAtIndex(j);
-					}
+				// adiciona o fato ao score
+				score.matouUmDiver();
 
-					// cria uma explosão
-					Explosion test;
-					test.inicializar(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
-					explosions.adicionaExplosionNaLista(test);
-
-					// destrói o diver
-					divers.removeDiverAtIndex(i);
+				// destrói o tiro
+				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed) 
+				{
+					tirosPlayer.removeTiroAtIndex(j);
 				}
+
+				// cria uma explosão
+				Explosion test;
+				test.inicializar(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
+				explosions.adicionaExplosionNaLista(test);
+
+				// destrói o diver
+				divers.removeDiverAtIndex(i);				
 			}
 		}
 	}
@@ -816,25 +814,31 @@ void Jogo::telaJogo_verificar()
 			))
 			{
 				// COLIDIU UM TIRO PLAYER COM UM ENEMY FISH!
-				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
+				
+				// adiciona o enemy fish ao score e ao three grid
+				// adiciona ao three grid se foi um tiro normal/red/green, mas adiciona somente ao score se foi blue
+				if (tirosPlayer.getTiroAtIndex(j).getShotType() == shotBlue)
 				{
-					// adiciona o enemy fish ao score e ao three grid
-					score.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getShotType());
-
-					// destrói o tiro
-					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
-					{
-						tirosPlayer.removeTiroAtIndex(j);
-					}
-
-					// cria uma explosão
-					Explosion test3;
-					test3.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
-					explosions.adicionaExplosionNaLista(test3);
-
-					// destrói o enemy fish
-					enemyFishes.removeEnemyFishAtIndex(i);
+					score.matouUmEnemyFishSemGrid();
 				}
+				else
+				{
+					score.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getShotType());
+				}
+
+				// destrói o tiro
+				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
+				{
+					tirosPlayer.removeTiroAtIndex(j);
+				}
+
+				// cria uma explosão
+				Explosion test3;
+				test3.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
+				explosions.adicionaExplosionNaLista(test3);
+
+				// destrói o enemy fish
+				enemyFishes.removeEnemyFishAtIndex(i);				
 			}
 		}
 	}
@@ -856,25 +860,31 @@ void Jogo::telaJogo_verificar()
 			))
 			{
 				// COLIDIU UM TIRO PLAYER COM UM ENEMY SUB!
-				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotBlue) // tiros azuis do player não matam!
+				
+				// adiciona o enemy sub ao score e ao three grid
+				// adiciona ao three grid se foi um tiro normal/red/green, mas adiciona somente ao score se foi blue
+				if (tirosPlayer.getTiroAtIndex(j).getShotType() == shotBlue)
 				{
-					// adiciona o enemy sub ao score e ao three grid
-					score.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getShotType());
-
-					// destrói o tiro
-					if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
-					{
-						tirosPlayer.removeTiroAtIndex(j);
-					}
-
-					// cria uma explosão
-					Explosion test5;
-					test5.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
-					explosions.adicionaExplosionNaLista(test5);
-
-					// destrói o enemy sub
-					enemySubs.removeEnemySubAtIndex(i);
+					score.matouUmEnemySubSemGrid();
 				}
+				else
+				{
+					score.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getShotType());
+				}
+
+				// destrói o tiro
+				if (tirosPlayer.getTiroAtIndex(j).getShotType() != shotRed)
+				{
+					tirosPlayer.removeTiroAtIndex(j);
+				}
+
+				// cria uma explosão
+				Explosion test5;
+				test5.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
+				explosions.adicionaExplosionNaLista(test5);
+
+				// destrói o enemy sub
+				enemySubs.removeEnemySubAtIndex(i);				
 			}
 		}
 	}
