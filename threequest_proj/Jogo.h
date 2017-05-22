@@ -24,33 +24,63 @@ public:
 private:
 	StatusJogo status;
 
+	// tela splash / créditos
+
 	// métodos da tela splash
 	void telaSplash_inicializar();
 	void telaSplash_executar();
 	void telaSplash_desenhar();
 	void telaSplash_verificar();
+
 	// atributos da tela splash
 	FrameCounter frameCounterSplash;
 	Sprite splashPicture;
+
+
+	// tela menu
 
 	// métodos da tela menu
 	void telaMenu_inicializar();
 	void telaMenu_executar();
 	void telaMenu_desenhar();
 	void telaMenu_verificar();
+
 	// atributos da tela menu
 	int currentChoice;
 	int selectionFishY;
 	Sprite selectionFish;
 	Sprite menuBackground;
 
+
+
+	// tela jogo
+
 	// métodos da tela jogo
 	void telaJogo_inicializar();
 	void telaJogo_executar();
 	void telaJogo_desenhar();
 	void telaJogo_verificar();
+	
 	bool telaJogo_shouldDrawPopup();
 	void telaJogo_clearAllThreats();
+
+	void telaJogo_collisionPlayerDiver();
+	void telaJogo_collisionPlayerBubble();
+	void telaJogo_collisionPlayerFish();
+	void telaJogo_collisionPlayerSub();
+	void telaJogo_collisionPlayerEnemyTiro();
+	void telaJogo_collisionFriendlyTiroDiver();
+	void telaJogo_collisionFriendlyTiroFish();
+	void telaJogo_collisionFriendlyTiroSub();
+	void telaJogo_collisionEnemyTiroDiver();
+	void telaJogo_collisionEnemyTiroFish();
+	void telaJogo_collisionEnemyTiroSub();
+	void telaJogo_collisionFishDiver();
+	void telaJogo_collisionFishFish();
+	void telaJogo_collisionFishSub();
+	void telaJogo_collisionSubDiver();
+	void telaJogo_collisionSubSub();
+
 	// atributos da tela jogo
 	FrameCounter frameCounterJogo;
 	Sprite gameBackground;
