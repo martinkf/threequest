@@ -1,4 +1,9 @@
-﻿  Jogo.cpp
+﻿  EnemyFishArray.cpp
+  Generating Code...
+  Compiling...
+  main.cpp
+  Player.cpp
+  Jogo.cpp
 c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(218): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(644): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(668): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
@@ -14,5 +19,10 @@ c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(976
 c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(1011): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(1051): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
 c:\users\marti\desktop\libunicornio-master\projetos\threequest_proj\jogo.cpp(1088): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  ExplosionArray.cpp
+  EnemySubArray.cpp
+  Generating Code...
   base.vcxproj -> C:\Users\marti\Desktop\libUnicornio-master\projetos\threequest_proj\bin\base-debug.exe
   base.vcxproj -> C:\Users\marti\Desktop\libUnicornio-master\projetos\threequest_proj\bin\base-debug.pdb (Full PDB)

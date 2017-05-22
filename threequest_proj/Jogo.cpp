@@ -369,51 +369,6 @@ void Jogo::telaJogo_desenhar()
 	// DESENHA A JOGO INTERFACE
 	score.desenhar();
 
-	// DESENHA OS GRID SLOTS
-	gridSlotA.desenhar(42, 559);
-	gridSlotB.desenhar(113, 559);
-	gridSlotC.desenhar(184, 559);
-
-	// DESENHA O POPUP MENU
-	if (shouldDrawPopup()) 
-	{
-		popupBackground.desenhar(gJanela.getLargura() / 2, (gJanela.getAltura() / 2) - 50);
-	}
-}
-
-void Jogo::telaJogo_verificar()
-{
-	// TEMP TEST
-	// timer para sumir o popup
-	if (frameCounterJogo.getFrameNumber() == 360) 
-	{
-		popupNeedsDrawing = false;
-	}
-
-	// SE O PLAYER ESTÁ NA SUPERFÍCIE, DESLIGA OS SPAWNERS
-	if (player.isPlayerOnSurface())
-	{
-		// desliga os spawners
-		divers.turnOffSpawner();
-		airBubbles.turnOffSpawner();
-		enemyFishes.turnOffSpawner();
-		enemySubs.turnOffSpawner();
-	}
-	else
-	{
-		// liga os spawners
-		divers.turnOnSpawner();
-		airBubbles.turnOnSpawner();
-		enemyFishes.turnOnSpawner();
-		enemySubs.turnOnSpawner();
-	}	
-
-	// RACIONALIZA SE DEVE COMER OXYGEN
-	if (!player.isPlayerOnSurface() && !(score.getFillStatus() == enumFrozen))
-	{
-		score.drainOxygen();
-	}
-
 	// ATUALIZA O SPRITE DAS GRID SLOTS COM RELAÇÃO A O QUE A ARRAY GUARDA
 	switch (score.getThreeGridAtThisIndex(0))
 	{
@@ -464,6 +419,51 @@ void Jogo::telaJogo_verificar()
 		break;
 	};
 
+	// DESENHA OS GRID SLOTS
+	gridSlotA.desenhar(42, 559);
+	gridSlotB.desenhar(113, 559);
+	gridSlotC.desenhar(184, 559);
+
+	// DESENHA O POPUP MENU
+	if (shouldDrawPopup()) 
+	{
+		popupBackground.desenhar(gJanela.getLargura() / 2, (gJanela.getAltura() / 2) - 50);
+	}
+}
+
+void Jogo::telaJogo_verificar()
+{
+	// TEMP TEST
+	// timer para sumir o popup
+	if (frameCounterJogo.getFrameNumber() == 360) 
+	{
+		popupNeedsDrawing = false;
+	}
+
+	// SE O PLAYER ESTÁ NA SUPERFÍCIE, DESLIGA OS SPAWNERS
+	if (player.isPlayerOnSurface())
+	{
+		// desliga os spawners
+		divers.turnOffSpawner();
+		airBubbles.turnOffSpawner();
+		enemyFishes.turnOffSpawner();
+		enemySubs.turnOffSpawner();
+	}
+	else
+	{
+		// liga os spawners
+		divers.turnOnSpawner();
+		airBubbles.turnOnSpawner();
+		enemyFishes.turnOnSpawner();
+		enemySubs.turnOnSpawner();
+	}	
+
+	// RACIONALIZA SE DEVE COMER OXYGEN
+	if (!player.isPlayerOnSurface() && !(score.getFillStatus() == enumFrozen))
+	{
+		score.drainOxygen();
+	}
+
 	// SE ACONTECEU UM FULL THREE GRID
 	if (score.getFillStatus() == enumFilled)
 	{
@@ -477,7 +477,7 @@ void Jogo::telaJogo_verificar()
 		case 'r':
 			score.setFillStatus(enumFrozen);
 			score.pegouUmaAirBubble();
-			score.setSpecialShotDuration();
+			score.setSpecialShotDuration(1000);
 			scoreOverlay.setSpriteSheet("scoreOverlaySpRed");
 			score.setSpecialShotType(shotRed);
 			score.setContentBarContext(barSpecialShot);
@@ -487,7 +487,7 @@ void Jogo::telaJogo_verificar()
 		case 'g':
 			score.setFillStatus(enumFrozen);
 			score.pegouUmaAirBubble();
-			score.setSpecialShotDuration();
+			score.setSpecialShotDuration(1000);
 			scoreOverlay.setSpriteSheet("scoreOverlaySpGreen");
 			score.setSpecialShotType(shotGreen);
 			score.setContentBarContext(barSpecialShot);
@@ -497,10 +497,10 @@ void Jogo::telaJogo_verificar()
 		case 'b':
 			score.setFillStatus(enumFrozen);
 			score.pegouUmaAirBubble();
-			score.setSpecialShotDuration();
+			score.setSpecialShotDuration(500);
 			scoreOverlay.setSpriteSheet("scoreOverlaySpBlue");
 			score.setSpecialShotType(shotBlue);
-			score.setContentBarContext(barSpecialShot);
+			score.setContentBarContext(barBlueFreezer);
 			score.stopDisplayingScore();
 			player.changeShotType(shotBlue);
 			break;
@@ -1153,5 +1153,5 @@ void Jogo::clearAllThreats()
 	tirosEnemy.clearEverything();
 	
 	// limpa a array de tiros meus
-	tirosPlayer.clearEverything();
+	tirosPlayer.clearEverythingButBlueFreezers();
 }

@@ -15,7 +15,7 @@ void TiroArray::inicializar()
 
 void TiroArray::atualizar()
 {
-	for (int i = 0; i < numeroTotalUtilizado; i++)
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
 	{
 		Tiro test;
 		test = array[i];
@@ -33,7 +33,7 @@ void TiroArray::atualizar()
 
 void TiroArray::desenhar()
 {
-	for (int i = 0; i < numeroTotalUtilizado; i++)
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
 	{
 		if (array[i].estaVivo()) 
 		{
@@ -70,4 +70,15 @@ void TiroArray::removeTiroAtIndex(int index_)
 void TiroArray::clearEverything()
 {
 	numeroTotalUtilizado = 0;
+}
+
+void TiroArray::clearEverythingButBlueFreezers()
+{
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		if (array[i].getShotType() != shotBlue)
+		{
+			removeTiroAtIndex(i);
+		}
+	}
 }

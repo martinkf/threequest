@@ -31,7 +31,7 @@ public:
 	GridStatus getFillStatus();
 
 	void setSpecialShotType(ShotType input_);
-	void setSpecialShotDuration();
+	void setSpecialShotDuration(int input_);
 	void drainSpecialShotDuration();
 	int getSpecialShotDuration();
 

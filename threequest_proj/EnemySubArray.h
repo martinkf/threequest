@@ -24,7 +24,7 @@ public:
 	
 private:
 	int numeroTotalUtilizado;
-	EnemySub array[20];
+	EnemySub array[100];
 	bool isTurnedOn;
 };
 

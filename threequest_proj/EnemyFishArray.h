@@ -22,7 +22,7 @@ public:
 	
 private:
 	int numeroTotalUtilizado;
-	EnemyFish array[20];
+	EnemyFish array[100];
 	bool isTurnedOn;
 };
 

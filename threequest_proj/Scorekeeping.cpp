@@ -69,6 +69,14 @@ void Scorekeeping::desenhar()
 			oxygenArray[i].desenhar(288 + i, 534);
 		}
 	}
+	else if (contentBarIsDisplaying == barBlueFreezer) 
+	{
+		// desenha o blue freezer duration
+		for (int i = 0; i < specialShotDuration; i++)
+		{
+			specialShotArray[i].desenhar(288 + i, 534);
+		}
+	} 
 	else // ou seja, contentBarIsDisplaying == barSpecialShot
 	{
 		for (int i = 0; i < (specialShotDuration / 2); i++)
@@ -266,9 +274,9 @@ void Scorekeeping::setSpecialShotType(ShotType input_)
 	}
 }
 
-void Scorekeeping::setSpecialShotDuration()
+void Scorekeeping::setSpecialShotDuration(int input_)
 {
-	specialShotDuration = 1000;
+	specialShotDuration = input_;
 }
 
 void Scorekeeping::drainSpecialShotDuration()

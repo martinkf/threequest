@@ -18,6 +18,7 @@ public:
 	void removeTiroAtIndex(int index_);
 
 	void clearEverything();
+	void clearEverythingButBlueFreezers();
 
 private:
 	int numeroTotalUtilizado;
