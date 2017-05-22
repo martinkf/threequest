@@ -534,9 +534,12 @@ void Jogo::telaJogo_verificar()
 	// SE FOI PRESSIONADO O BOTÃO DE GRID RESET
 	if (gTeclado.pressionou[TECLA_SHIFT_ESQ])
 	{
-		// reseta o grid
-		score.clearThreeGrid();
-	}	
+		if (score.getFillStatus() == enumFilling)
+		{
+			// reseta o grid
+			score.clearThreeGrid();
+		}
+	}
 
 	// SE O PLAYER ATIROU
 	if (player.wantsToShoot())
