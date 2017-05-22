@@ -42,6 +42,12 @@
     <ClCompile Include="Scorekeeping.cpp">
       <Filter>Classes: GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>Classes: Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionArray.cpp">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Jogo.h" />
@@ -87,6 +93,12 @@
     <ClInclude Include="Scorekeeping.h">
       <Filter>Classes: GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>Classes: Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="ExplosionArray.h">
+      <Filter>Classes: Element Arrays</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Classes: Element Arrays">
@@ -101,5 +113,8 @@
     <Filter Include="Classes: GUI">
       <UniqueIdentifier>{81d10076-4081-46ee-b082-29b76de57991}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="base.rc" />
   </ItemGroup>
 </Project>

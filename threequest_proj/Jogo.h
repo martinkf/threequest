@@ -9,6 +9,7 @@
 #include "DiverArray.h"
 #include "EnemyFishArray.h"
 #include "EnemySubArray.h"
+#include "ExplosionArray.h"
 
 class Jogo
 {
@@ -67,6 +68,7 @@ private:
 	DiverArray divers;
 	EnemyFishArray enemyFishes;
 	EnemySubArray enemySubs;
+	ExplosionArray explosions;
 	bool popupNeedsDrawing;
 };
 

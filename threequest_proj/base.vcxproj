@@ -107,6 +107,8 @@
     <ClCompile Include="EnemyFish.cpp" />
     <ClCompile Include="EnemySub.cpp" />
     <ClCompile Include="EnemySubArray.cpp" />
+    <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="ExplosionArray.cpp" />
     <ClCompile Include="FrameCounter.cpp" />
     <ClCompile Include="Jogo.cpp" />
     <ClCompile Include="Scorekeeping.cpp" />
@@ -124,6 +126,8 @@
     <ClInclude Include="EnemyFish.h" />
     <ClInclude Include="EnemySub.h" />
     <ClInclude Include="EnemySubArray.h" />
+    <ClInclude Include="Explosion.h" />
+    <ClInclude Include="ExplosionArray.h" />
     <ClInclude Include="FrameCounter.h" />
     <ClInclude Include="Jogo.h" />
     <ClInclude Include="Scorekeeping.h" />
@@ -131,6 +135,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="TiroArray.h" />
     <ClInclude Include="Tiro.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="base.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

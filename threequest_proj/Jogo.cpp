@@ -302,7 +302,10 @@ void Jogo::telaJogo_inicializar()
 	// INICIALIZA A ENEMY SUB ARRAY
 	enemySubs.inicializar();
 
-	// INICIALIZA A JOGO INTERFACE
+	// INICIALIZA A EXPLOSION ARRAY
+	explosions.inicializar();
+
+	// INICIALIZA A SCOREKEEPING
 	score.inicializar();
 }
 
@@ -348,6 +351,10 @@ void Jogo::telaJogo_desenhar()
 	// DESENHA A ENEMY SUBS ARRAY
 	enemySubs.atualizar();
 	enemySubs.desenhar();
+
+	// DESENHA A EXPLOSIONS ARRAY
+	explosions.atualizar();
+	explosions.desenhar();
 
 	// DESENHA O PLAYER
 	player.atualizar();
@@ -571,7 +578,7 @@ void Jogo::telaJogo_verificar()
 	// SPAWNER: DIVERS
 	if (frameCounterJogo.getFrameNumber() % 180 == 0) // 180 -> a cada 3 segundos
 	{
-		if (rand() % 6 == 0) // 6 -> uma chance em seis
+		if (rand() % 4 == 0) // 4 -> uma chance em quatro
 		{
 			if (divers.isSpawnerTurnedOn()) // se o spawner está ligado
 			{
@@ -595,7 +602,7 @@ void Jogo::telaJogo_verificar()
 	// SPAWNER: ENEMY FISH
 	if (frameCounterJogo.getFrameNumber() % 120 == 0) // 120 -> a cada 2 segundos
 	{
-		if (rand() % 4 == 0) // 4 -> uma chance em quatro
+		if (rand() % 2 == 0) // 2 -> uma chance em dois
 		{
 			if (enemyFishes.isSpawnerTurnedOn()) // se o spawner está ligado
 			{
@@ -607,7 +614,7 @@ void Jogo::telaJogo_verificar()
 	// SPAWNER: ENEMY SUB
 	if (frameCounterJogo.getFrameNumber() % 120 == 0) // 120 -> a cada 2 segundos
 	{
-		if (rand() % 4 == 0) // 4 -> uma chance em quatro
+		if (rand() % 2 == 0) // 2 -> uma chance em dois
 		{
 			if (enemySubs.isSpawnerTurnedOn()) // se o spawner está ligado
 			{
@@ -668,6 +675,11 @@ void Jogo::telaJogo_verificar()
 						tirosPlayer.removeTiroAtIndex(j);
 					}
 
+					// cria uma explosão
+					Explosion test;
+					test.inicializar(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
+					explosions.adicionaExplosionNaLista(test);
+
 					// destrói o diver
 					divers.removeDiverAtIndex(i);
 				}
@@ -698,6 +710,11 @@ void Jogo::telaJogo_verificar()
 				{
 					tirosEnemy.removeTiroAtIndex(j);
 				}
+
+				// cria uma explosão
+				Explosion test2;
+				test2.inicializar(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
+				explosions.adicionaExplosionNaLista(test2);
 
 				// destrói o diver
 				divers.removeDiverAtIndex(i);
@@ -733,6 +750,11 @@ void Jogo::telaJogo_verificar()
 						tirosPlayer.removeTiroAtIndex(j);
 					}
 
+					// cria uma explosão
+					Explosion test3;
+					test3.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
+					explosions.adicionaExplosionNaLista(test3);
+
 					// destrói o enemy fish
 					enemyFishes.removeEnemyFishAtIndex(i);
 				}
@@ -763,6 +785,11 @@ void Jogo::telaJogo_verificar()
 				{
 					tirosEnemy.removeTiroAtIndex(j);
 				}
+
+				// cria uma explosão
+				Explosion test4;
+				test4.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
+				explosions.adicionaExplosionNaLista(test4);
 
 				// destrói o enemy fish
 				enemyFishes.removeEnemyFishAtIndex(i);
@@ -798,7 +825,12 @@ void Jogo::telaJogo_verificar()
 						tirosPlayer.removeTiroAtIndex(j);
 					}
 
-					// destrói o enemy fish
+					// cria uma explosão
+					Explosion test5;
+					test5.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
+					explosions.adicionaExplosionNaLista(test5);
+
+					// destrói o enemy sub
 					enemySubs.removeEnemySubAtIndex(i);
 				}				
 			}
@@ -829,6 +861,11 @@ void Jogo::telaJogo_verificar()
 					tirosEnemy.removeTiroAtIndex(j);
 				}
 
+				// cria uma explosão
+				Explosion test6;
+				test6.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
+				explosions.adicionaExplosionNaLista(test6);
+
 				// destrói o enemy fish
 				enemySubs.removeEnemySubAtIndex(i);
 			}
@@ -855,8 +892,18 @@ void Jogo::telaJogo_verificar()
 				// verificação necessária por motivos óbvios
 				if (!(enemyFishes.getEnemyFishAtIndex(i).verificaSemelhanca(enemyFishes.getEnemyFishAtIndex(j))))
 				{
+					// cria uma explosão
+					Explosion test7;
+					test7.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
+					explosions.adicionaExplosionNaLista(test7);
+
 					// destrói o enemy fish i
 					enemyFishes.removeEnemyFishAtIndex(i);
+
+					// cria uma explosão
+					Explosion test8;
+					test8.inicializar(enemyFishes.getEnemyFishAtIndex(j).getX(), enemyFishes.getEnemyFishAtIndex(j).getY());
+					explosions.adicionaExplosionNaLista(test8);
 
 					// destrói o enemy fish j
 					enemyFishes.removeEnemyFishAtIndex(j);
@@ -883,8 +930,18 @@ void Jogo::telaJogo_verificar()
 			{
 				// COLIDIU UM ENEMY FISH COM UM ENEMY SUB!
 
+				// cria uma explosão
+				Explosion test9;
+				test9.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
+				explosions.adicionaExplosionNaLista(test9);
+
 				// destrói o enemy fish
 				enemyFishes.removeEnemyFishAtIndex(i);
+
+				// cria uma explosão
+				Explosion testA;
+				testA.inicializar(enemySubs.getEnemySubAtIndex(j).getX(), enemySubs.getEnemySubAtIndex(j).getY());
+				explosions.adicionaExplosionNaLista(testA);
 
 				// destrói o enemy sub
 				enemySubs.removeEnemySubAtIndex(j);
@@ -912,8 +969,18 @@ void Jogo::telaJogo_verificar()
 				// verificação necessária por motivos óbvios
 				if (!(enemySubs.getEnemySubAtIndex(i).verificaSemelhanca(enemySubs.getEnemySubAtIndex(j))))
 				{
+					// cria uma explosão
+					Explosion testB;
+					testB.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
+					explosions.adicionaExplosionNaLista(testB);
+
 					// destrói o enemy sub I
 					enemySubs.removeEnemySubAtIndex(i);
+
+					// cria uma explosão
+					Explosion testC;
+					testC.inicializar(enemySubs.getEnemySubAtIndex(j).getX(), enemySubs.getEnemySubAtIndex(j).getY());
+					explosions.adicionaExplosionNaLista(testC);
 
 					// destrói o enemy sub J
 					enemySubs.removeEnemySubAtIndex(j);
@@ -961,21 +1028,31 @@ bool Jogo::shouldDrawPopup()
 void Jogo::clearAllThreats()
 {
 	// mata todos os inimigos fish em tela
-	for (int i = 0; i < enemyFishes.getNumeroTotalUtilizado(); i++)
+	for (int i = (enemyFishes.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
 		// adiciona o enemy fish ao score
 		score.matouUmEnemyFishSemGrid();
+
+		// cria uma explosão
+		Explosion test;
+		test.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
+		explosions.adicionaExplosionNaLista(test);
 
 		// destrói o enemy fish
 		enemyFishes.removeEnemyFishAtIndex(i);
 	}
 
 	// mata todos os inimigos sub em tela
-	for (int i = 0; i < enemySubs.getNumeroTotalUtilizado(); i++)
+	for (int i = (enemySubs.getNumeroTotalUtilizado() - 1 ); i >= 0; i--)
 	{
 		// adiciona o enemy sub ao score
 		score.matouUmEnemySubSemGrid();
-		
+
+		// cria uma explosão
+		Explosion test2;
+		test2.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
+		explosions.adicionaExplosionNaLista(test2);
+
 		// destrói o enemy sub
 		enemySubs.removeEnemySubAtIndex(i);
 	}
