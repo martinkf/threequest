@@ -40,28 +40,49 @@ void JogoInterface::inicializar()
 
 	specialShotDuration = 0;
 
+	if (!gRecursos.carregouSpriteSheet("greenInfinitesimal"))
+	{
+		gRecursos.carregarSpriteSheet("greenInfinitesimal", "imagens/spr_greenInfinitesimal.png");
+	}	
+
+	contentBarIsDisplaying = barOxygen;
+	isDisplayingScore = true;
+
 	
 }
 
 void JogoInterface::desenhar()
 {
-	// desenha o oxigênio
-	for (int i = 0; i < (oxygenLeft / 12); i++)
+	if (contentBarIsDisplaying == barOxygen)
 	{
-		oxygenArray[i].desenhar(288 + i, 534);
+		// desenha o oxigênio
+		for (int i = 0; i < (oxygenLeft / 12); i++)
+		{
+			oxygenArray[i].desenhar(288 + i, 534);
+		}
+	}
+	else // ou seja, contentBarIsDisplaying == barSpecialShot
+	{
+		for (int i = 0; i < (specialShotDuration / 2); i++)
+		{
+			specialShotArray[i].desenhar(288 + i, 534);
+		}
 	}
 
-	// desenha o qtty fish
-	text.setString(to_string(qttyEnemyFish));
-	text.desenhar(349, 574);
+	if (isDisplayingScore == true) 
+	{
+		// desenha o qtty fish
+		text.setString(to_string(qttyEnemyFish));
+		text.desenhar(349, 574);
 
-	// desenha o qtty sub
-	text.setString(to_string(qttyEnemySub));
-	text.desenhar(561, 574);
+		// desenha o qtty sub
+		text.setString(to_string(qttyEnemySub));
+		text.desenhar(561, 574);
 
-	// desenha o qtty diver
-	text.setString(to_string(qttyDiver));
-	text.desenhar(720, 574);
+		// desenha o qtty diver
+		text.setString(to_string(qttyDiver));
+		text.desenhar(720, 574);
+	}
 }
 
 void JogoInterface::reduceOxygen()
@@ -182,6 +203,15 @@ GridStatus JogoInterface::getFillStatus()
 	return gridStatus;
 }
 
+void JogoInterface::setSpecialShotType(ShotType input_)
+{
+	// to do, só green
+	for (int i = 0; i < 500; i++)
+	{
+		specialShotArray[i].setSpriteSheet("greenInfinitesimal");
+	}
+}
+
 void JogoInterface::setSpecialShotDuration()
 {
 	specialShotDuration = 1000;
@@ -195,4 +225,19 @@ void JogoInterface::drainSpecialShotDuration()
 int JogoInterface::getSpecialShotDuration()
 {
 	return specialShotDuration;
+}
+
+void JogoInterface::resumeDisplayingScore()
+{
+	isDisplayingScore = true;
+}
+
+void JogoInterface::stopDisplayingScore()
+{
+	isDisplayingScore = false;
+}
+
+void JogoInterface::setContentBarContext(BarType input_)
+{
+	contentBarIsDisplaying = input_;
 }

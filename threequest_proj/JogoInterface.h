@@ -27,9 +27,14 @@ public:
 	void setFillStatus(GridStatus input_);
 	GridStatus getFillStatus();
 
+	void setSpecialShotType(ShotType input_);
 	void setSpecialShotDuration();
 	void drainSpecialShotDuration();
 	int getSpecialShotDuration();
+
+	void resumeDisplayingScore();
+	void stopDisplayingScore();
+	void setContentBarContext(BarType input_);
 	
 private:
 	int maxOxygen;
@@ -46,7 +51,11 @@ private:
 	GridStatus gridStatus;
 
 	int specialShotDuration;
+	Sprite specialShotArray[500];
 
 	Texto text;
+
+	BarType contentBarIsDisplaying;
+	bool isDisplayingScore;
 };
 

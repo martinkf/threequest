@@ -231,10 +231,14 @@ void Jogo::telaJogo_inicializar()
 	}
 	gameWaterSurface.setSpriteSheet("waterSurface");
 
-	// INICIALIZA O SCORE OVERLAY
+	// INICIALIZA OS SCORE OVERLAYS
 	if (!gRecursos.carregouSpriteSheet("scoreOverlay"))
 	{
 		gRecursos.carregarSpriteSheet("scoreOverlay", "imagens/spr_scoreOverlay.png");
+	}
+	if (!gRecursos.carregouSpriteSheet("scoreOverlaySpGreen"))
+	{
+		gRecursos.carregarSpriteSheet("scoreOverlaySpGreen", "imagens/spr_scoreOverlaySpGreen.png");
 	}
 	scoreOverlay.setSpriteSheet("scoreOverlay");
 
@@ -465,6 +469,10 @@ void Jogo::telaJogo_verificar()
 			interfac.setFillStatus(enumFrozen);
 			interfac.pegouUmaAirBubble();
 			interfac.setSpecialShotDuration();
+			scoreOverlay.setSpriteSheet("scoreOverlaySpGreen");
+			interfac.setSpecialShotType(shotGreen);
+			interfac.setContentBarContext(barSpecialShot);
+			interfac.stopDisplayingScore();
 			player.changeShotType(shotGreen);
 			break;
 		case 'b':
@@ -492,9 +500,13 @@ void Jogo::telaJogo_verificar()
 		}
 		else
 		{
+			// FIM DO SPECIAL SHOT. VOLTAR AO NORMAL.
 			interfac.clearThreeGrid();
  			interfac.setFillStatus(enumFilling);
 			player.changeShotType(shotRegular);
+			scoreOverlay.setSpriteSheet("scoreOverlay");
+			interfac.setContentBarContext(barOxygen);
+			interfac.resumeDisplayingScore();
 		}
 	}
 
