@@ -40,6 +40,7 @@ public:
 	void resumeDisplayingScore();
 	void stopDisplayingScore();
 	void setContentBarContext(BarType input_);
+	BarType getContentBarContext();
 
 	void startDisplayingResults();
 	void stopDisplayingResults();

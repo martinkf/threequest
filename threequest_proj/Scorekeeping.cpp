@@ -355,6 +355,11 @@ void Scorekeeping::setContentBarContext(BarType input_)
 	contentBarIsDisplaying = input_;
 }
 
+BarType Scorekeeping::getContentBarContext()
+{
+	return contentBarIsDisplaying;
+}
+
 void Scorekeeping::startDisplayingResults()
 {
 	isDisplayingResults = true;

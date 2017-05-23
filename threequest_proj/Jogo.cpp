@@ -896,7 +896,10 @@ void Jogo::telaJogo_collisionPlayerFish()
 			// COLIDIU UM ENEMY FISH COM O PLAYER!
 
 			// remove um pouco de o2 do player
-			score.reduceOxygenByAmount(400);
+			if(score.getContentBarContext() == barOxygen)
+			{
+				score.reduceOxygenByAmount(400);
+			}
 
 			// cria uma explosão
 			Explosion test;
@@ -925,9 +928,12 @@ void Jogo::telaJogo_collisionPlayerSub()
 		))
 		{
 			// COLIDIU UM ENEMY SUB COM O PLAYER!
-
+						
 			// remove um pouco de o2 do player
-			score.reduceOxygenByAmount(600);
+			if (score.getContentBarContext() == barOxygen)
+			{
+				score.reduceOxygenByAmount(600);
+			}
 
 			// cria uma explosão
 			Explosion test;
@@ -956,9 +962,12 @@ void Jogo::telaJogo_collisionPlayerEnemyTiro()
 		))
 		{
 			// COLIDIU UM ENEMY TIRO COM O PLAYER!
-
+						
 			// remove um pouco de o2 do player
-			score.reduceOxygenByAmount(650);
+			if (score.getContentBarContext() == barOxygen)
+			{
+				score.reduceOxygenByAmount(650);
+			}
 
 			// destrói o enemy tiro
 			tirosEnemy.getTiroAtIndex(i).destruir();
