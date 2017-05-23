@@ -276,13 +276,18 @@ void Jogo::telaJogo_inicializar()
 	{
 		gRecursos.carregarSpriteSheet("popupBackground", "imagens/spr_popupBackground.png");
 	}
-	popupBackground.setSpriteSheet("popupBackground");
-
-	// INICIALIZA A POPUP
-	popupNeedsDrawing = true;
+	if (!gRecursos.carregouSpriteSheet("popupLifes2"))
+	{
+		gRecursos.carregarSpriteSheet("popupLifes2", "imagens/spr_popupLifes2.png");
+	}
+	popupBackground.setSpriteSheet("popupLifes2");
 
 	// INICIALIZA O PLAYER
 	player.inicializar();
+
+	// INICIALIZA A POPUP
+	popupNeedsDrawing = true;
+	player.freeze();	
 
 	// INICIALIZA O TIRO ENEMY ARRAY
 	tirosEnemy.inicializar();
@@ -433,11 +438,14 @@ void Jogo::telaJogo_desenhar()
 
 void Jogo::telaJogo_verificar()
 {
-	// TEMP TEST
-	// timer para sumir o popup
-	if (frameCounterJogo.getFrameNumber() == 360) 
+	// Verifica se quer skippar o popup
+	if (telaJogo_shouldDrawPopup())
 	{
-		popupNeedsDrawing = false;
+		if (gTeclado.pressionou[TECLA_ESPACO])
+		{
+			popupNeedsDrawing = false;
+			player.unfreeze();
+		}
 	}
 
 	// SE O PLAYER ESTÁ NA SUPERFÍCIE, DESLIGA OS SPAWNERS

@@ -25,6 +25,9 @@ public:
 	bool wantsToShoot();
 	void makeNotWantToShoot();
 	
+	void freeze();
+	void unfreeze();
+
 private:
 	int x;
 	int y;
@@ -32,7 +35,8 @@ private:
 	Sprite sprite;
 	Direction facingDirection;
 	bool isOnSurface;
+	bool isFrozen;
 	ShotType shotType;
-	bool playerWantsToShoot;
+	bool playerWantsToShoot;	
 };
 
