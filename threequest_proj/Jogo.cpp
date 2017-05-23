@@ -371,7 +371,10 @@ void Jogo::telaJogo_verificar()
 	if (score.getOxygenLeft() < 0)
 	{
 		// MORTE POR ASFIXIA.
-		telaJogo_mortePorAsfixia();
+		if (gameStarted == true)
+		{
+			telaJogo_mortePorAsfixia();
+		}
 	}
 
 	// SE ACONTECEU UM FULL THREE GRID
@@ -511,7 +514,7 @@ void Jogo::telaJogo_verificar()
 		{
 			if (airBubbles.isSpawnerTurnedOn()) // se o spawner está ligado
 			{
-				airBubbles.spawnNewRandomAirBubble();
+				//airBubbles.spawnNewRandomAirBubble();
 			}
 		}
 	}

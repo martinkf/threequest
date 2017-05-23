@@ -400,7 +400,7 @@ int Scorekeeping::calculaTotalScore()
 	if (deathBonus == true) // morreu de submergência, não asfixia
 	{
 		sum += 5000;
-		sum += ((maxOxygen - oxygenLeft) * 10);
+		sum += ((maxOxygen - oxygenLeft) * 2);
 	}
 
 	return sum;
