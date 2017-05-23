@@ -329,9 +329,18 @@ void Jogo::telaJogo_verificar()
 		if (gTeclado.pressionou[TECLA_ESPACO])
 		{
 			popupNeedsDrawing = false;
-			player.unfreeze();			
+			player.unfreeze();
 			score.clearAllScores();
 			score.stopDisplayingResults();
+			
+			if (score.getNumberOfLives() < 1)
+			{
+				// reseta o número de lives
+				score.resetLives();
+
+				// volta para o menu
+				status = sTelaMenu;
+			}
 		}
 	}
 

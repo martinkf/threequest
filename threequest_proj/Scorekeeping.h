@@ -46,6 +46,7 @@ public:
 
 	int getNumberOfLives();
 	void removeALife();
+	void resetLives();
 	void clearAllScores();
 	
 	void setDeathBonus(bool input_);

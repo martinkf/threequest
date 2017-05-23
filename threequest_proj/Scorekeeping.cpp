@@ -375,6 +375,11 @@ void Scorekeeping::removeALife()
 	lives--;
 }
 
+void Scorekeeping::resetLives()
+{
+	lives = 3;
+}
+
 void Scorekeeping::clearAllScores()
 {
 	int temp = lives;
