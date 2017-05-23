@@ -106,6 +106,13 @@ void Jogo::telaSplash_verificar()
 
 void Jogo::telaMenu_inicializar()
 {
+	// INICIALIZA A MENU MUSIC
+	if (!gRecursos.carregouMusica("menuMusic")) 
+	{
+		gRecursos.carregarMusica("menuMusic", "musica/music_main.mp3");
+	}
+	musicIsPlaying = false;
+
 	// INICIALIZA O INT DE CURRENT CHOICE
 	currentChoice = 0;
 
@@ -130,6 +137,13 @@ void Jogo::telaMenu_inicializar()
 
 void Jogo::telaMenu_executar()
 {
+	// TOCA A MÚSICA
+	if (!musicIsPlaying) 
+	{
+		gMusica.tocar("menuMusic", true);
+		musicIsPlaying = true;
+	}
+
 	// VERIFICA TUDO
 	telaMenu_verificar();
 
@@ -242,6 +256,36 @@ void Jogo::telaMenu_desenhar()
 
 void Jogo::telaJogo_inicializar()
 {
+	// CARREGA OS SONS
+	if (!gRecursos.carregouAudio("sound_dead"))
+	{
+		gRecursos.carregarAudio("sound_dead", "som/sound_dead.mp3");
+	}
+	if (!gRecursos.carregouAudio("sound_enemyShot"))
+	{
+		gRecursos.carregarAudio("sound_enemyShot", "som/sound_enemyShot.mp3");
+	}
+	if (!gRecursos.carregouAudio("sound_explosion"))
+	{
+		gRecursos.carregarAudio("sound_explosion", "som/sound_explosion.mp3");
+	}
+	if (!gRecursos.carregouAudio("sound_gotStuff"))
+	{
+		gRecursos.carregarAudio("sound_gotStuff", "som/sound_gotStuff.mp3");
+	}
+	if (!gRecursos.carregouAudio("sound_playerShot"))
+	{
+		gRecursos.carregarAudio("sound_playerShot", "som/sound_playerShot.mp3");
+	}
+	if (!gRecursos.carregouAudio("sound_playerSpecialShot"))
+	{
+		gRecursos.carregarAudio("sound_playerSpecialShot", "som/sound_playerSpecialShot.mp3");
+	}
+	if (!gRecursos.carregouAudio("sound_tq"))
+	{
+		gRecursos.carregarAudio("sound_tq", "som/sound_tq.mp3");
+	}
+
 	// INICIALIZA O FRAMECOUNTER
 	frameCounterJogo.inicializar();
 
@@ -342,6 +386,13 @@ void Jogo::telaJogo_inicializar()
 
 void Jogo::telaJogo_executar()
 {
+	// QUERO MESMO PARAR A MÚSICA?
+	if (musicIsPlaying) 
+	{ 
+		musicIsPlaying = false;
+		gMusica.parar();
+	}
+
 	// ATUALIZA O FRAMECOUNTER
 	frameCounterJogo.tick();
 
@@ -428,6 +479,9 @@ void Jogo::telaJogo_verificar()
 			score.setFillStatus(enumFilling);
 			break;
 		case 'r':
+			som.setAudio("sound_tq");
+			som.tocar();
+
 			score.setFillStatus(enumFrozen);
 			score.pegouUmaAirBubble();
 			score.setSpecialShotDuration(1000);
@@ -438,6 +492,9 @@ void Jogo::telaJogo_verificar()
 			player.changeShotType(shotRed);
 			break;
 		case 'g':
+			som.setAudio("sound_tq");
+			som.tocar();
+
 			score.setFillStatus(enumFrozen);
 			score.pegouUmaAirBubble();
 			score.setSpecialShotDuration(1000);
@@ -448,6 +505,9 @@ void Jogo::telaJogo_verificar()
 			player.changeShotType(shotGreen);
 			break;
 		case 'b':
+			som.setAudio("sound_tq");
+			som.tocar();
+
 			score.setFillStatus(enumFrozen);
 			score.pegouUmaAirBubble();
 			score.setSpecialShotDuration(500);
@@ -458,6 +518,9 @@ void Jogo::telaJogo_verificar()
 			player.changeShotType(shotBlue);
 			break;
 		case 't':
+			som.setAudio("sound_tq");
+			som.tocar();
+
 			score.obteveThreeQuest();
 			telaJogo_clearAllThreats();
 			score.clearThreeGrid();
@@ -508,6 +571,17 @@ void Jogo::telaJogo_verificar()
 			);
 		tirosPlayer.adicionaTiroNaLista(tiro);
 
+		// dá play no som
+		if (player.getShotType() == shotRegular)
+		{
+			som.setAudio("sound_playerShot");
+		}
+		else
+		{
+			som.setAudio("sound_playerSpecialShot");
+		}
+		som.tocar();
+
 		// unset the flag
 		player.makeNotWantToShoot();
 	}
@@ -532,6 +606,10 @@ void Jogo::telaJogo_verificar()
 			test = enemySubs.getEnemySubAtIndex(i);
 			test.makeNotWantToShoot();
 			enemySubs.addEnemySubAtIndex(test, i);
+
+			// dá play no som			
+			som.setAudio("sound_enemyShot");
+			som.tocar();
 		}
 	}
 
@@ -619,6 +697,10 @@ void Jogo::telaJogo_verificar()
 
 void Jogo::telaJogo_mortePorSubmergencia()
 {
+	// dá play no som
+	som.setAudio("sound_dead");
+	som.tocar();
+
 	// paralisa o jogo por enquanto
 	gameStarted = false;
 
@@ -644,6 +726,10 @@ void Jogo::telaJogo_mortePorSubmergencia()
 
 void Jogo::telaJogo_mortePorAsfixia()
 {
+	// dá play no som
+	som.setAudio("sound_dead");
+	som.tocar();
+
 	// paralisa o jogo por enquanto
 	gameStarted = false;
 
@@ -843,6 +929,10 @@ void Jogo::telaJogo_collisionPlayerDiver()
 		{
 			// COLIDIU UM DIVER COM O PLAYER!
 
+			// dá play no som
+			som.setAudio("sound_gotStuff");
+			som.tocar();
+
 			// adiciona um diver ao score
 			score.pegouUmDiver();
 
@@ -868,6 +958,10 @@ void Jogo::telaJogo_collisionPlayerBubble()
 		))
 		{
 			// COLIDIU UMA AIR BUBBLE COM O PLAYER!
+
+			// dá play no som
+			som.setAudio("sound_gotStuff");
+			som.tocar();
 
 			// acrescenta um pouco de oxigênio de volta ao jogo
 			score.pegouUmaAirBubble();
@@ -900,6 +994,10 @@ void Jogo::telaJogo_collisionPlayerFish()
 			{
 				score.reduceOxygenByAmount(400);
 			}
+
+			// dá play no som
+			som.setAudio("sound_explosion");
+			som.tocar();
 
 			// cria uma explosão
 			Explosion test;
@@ -935,6 +1033,10 @@ void Jogo::telaJogo_collisionPlayerSub()
 				score.reduceOxygenByAmount(600);
 			}
 
+			// dá play no som
+			som.setAudio("sound_explosion");
+			som.tocar();
+
 			// cria uma explosão
 			Explosion test;
 			test.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
@@ -968,6 +1070,10 @@ void Jogo::telaJogo_collisionPlayerEnemyTiro()
 			{
 				score.reduceOxygenByAmount(650);
 			}
+
+			// dá play no som
+			som.setAudio("sound_explosion");
+			som.tocar();
 
 			// destrói o enemy tiro
 			tirosEnemy.getTiroAtIndex(i).destruir();
@@ -1004,6 +1110,10 @@ void Jogo::telaJogo_collisionFriendlyTiroDiver()
 					tirosPlayer.getTiroAtIndex(j).destruir();
 					tirosPlayer.removeTiroAtIndex(j);
 				}
+
+				// dá play no som
+				som.setAudio("sound_explosion");
+				som.tocar();
 
 				// cria uma explosão
 				Explosion test;
@@ -1054,6 +1164,10 @@ void Jogo::telaJogo_collisionFriendlyTiroFish()
 					tirosPlayer.removeTiroAtIndex(j);
 				}
 
+				// dá play no som
+				som.setAudio("sound_explosion");
+				som.tocar();
+
 				// cria uma explosão
 				Explosion test;
 				test.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
@@ -1103,6 +1217,10 @@ void Jogo::telaJogo_collisionFriendlyTiroSub()
 					tirosPlayer.removeTiroAtIndex(j);
 				}
 
+				// dá play no som
+				som.setAudio("sound_explosion");
+				som.tocar();
+
 				// cria uma explosão
 				Explosion test;
 				test.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
@@ -1140,6 +1258,10 @@ void Jogo::telaJogo_collisionEnemyTiroDiver()
 					tirosEnemy.getTiroAtIndex(j).destruir();
 					tirosEnemy.removeTiroAtIndex(j);
 				}
+
+				// dá play no som
+				som.setAudio("sound_explosion");
+				som.tocar();
 
 				// cria uma explosão
 				Explosion test;
@@ -1179,6 +1301,10 @@ void Jogo::telaJogo_collisionEnemyTiroFish()
 					tirosEnemy.removeTiroAtIndex(j);
 				}
 
+				// dá play no som
+				som.setAudio("sound_explosion");
+				som.tocar();
+
 				// cria uma explosão
 				Explosion test;
 				test.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
@@ -1217,6 +1343,10 @@ void Jogo::telaJogo_collisionEnemyTiroSub()
 					tirosEnemy.removeTiroAtIndex(j);
 				}
 
+				// dá play no som
+				som.setAudio("sound_explosion");
+				som.tocar();
+
 				// cria uma explosão
 				Explosion test;
 				test.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
@@ -1248,6 +1378,10 @@ void Jogo::telaJogo_collisionFishDiver()
 			{
 				// COLIDIU UM ENEMY FISH COM UM DIVER!
 				
+				// dá play no som
+				som.setAudio("sound_explosion");
+				som.tocar();
+
 				// cria uma explosão
 				Explosion test;
 				test.inicializar(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
@@ -1289,6 +1423,10 @@ void Jogo::telaJogo_collisionFishFish()
 					// destrói o enemy fish i
 					enemyFishes.removeEnemyFishAtIndex(i);
 
+					// dá play no som
+					som.setAudio("sound_explosion");
+					som.tocar();
+
 					// cria uma explosão
 					Explosion test2;
 					test2.inicializar(enemyFishes.getEnemyFishAtIndex(j).getX(), enemyFishes.getEnemyFishAtIndex(j).getY());
@@ -1329,6 +1467,10 @@ void Jogo::telaJogo_collisionFishSub()
 				// destrói o enemy fish
 				enemyFishes.removeEnemyFishAtIndex(i);
 
+				// dá play no som
+				som.setAudio("sound_explosion");
+				som.tocar();
+
 				// cria uma explosão
 				Explosion test2;
 				test2.inicializar(enemySubs.getEnemySubAtIndex(j).getX(), enemySubs.getEnemySubAtIndex(j).getY());
@@ -1359,6 +1501,10 @@ void Jogo::telaJogo_collisionSubDiver()
 			))
 			{
 				// COLIDIU UM ENEMY SUB COM UM DIVER!
+
+				// dá play no som
+				som.setAudio("sound_explosion");
+				som.tocar();
 
 				// cria uma explosão
 				Explosion test;
@@ -1400,6 +1546,10 @@ void Jogo::telaJogo_collisionSubSub()
 
 					// destrói o enemy sub I
 					enemySubs.removeEnemySubAtIndex(i);
+
+					// dá play no som
+					som.setAudio("sound_explosion");
+					som.tocar();
 
 					// cria uma explosão
 					Explosion test2;

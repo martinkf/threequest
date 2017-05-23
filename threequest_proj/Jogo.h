@@ -23,6 +23,7 @@ public:
 
 private:
 	StatusJogo status;
+	bool musicIsPlaying;
 
 	// tela splash / créditos
 
@@ -117,5 +118,6 @@ private:
 	ExplosionArray explosions;
 	bool popupNeedsDrawing;
 	bool gameStarted;
+	Som som;
 };
 
