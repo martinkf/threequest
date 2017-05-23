@@ -20,6 +20,8 @@ public:
 	AirBubble getAirBubbleAtIndex(int index_);
 	void removeAirBubbleAtIndex(int index_);
 
+	void clearEverything();
+
 private:
 	int numeroTotalUtilizado;
 	AirBubble array[100];

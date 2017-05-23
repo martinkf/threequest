@@ -19,7 +19,7 @@ void Player::inicializar()
 
 	x = gJanela.getLargura() / 2;
 	y = 120;
-	isOnSurface = false;
+	isOnSurface = true;
 	facingDirection = facingRight;
 	sprite.setInverterX(true);
 	speed = 3;

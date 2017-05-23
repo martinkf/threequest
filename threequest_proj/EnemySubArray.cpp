@@ -85,3 +85,11 @@ void EnemySubArray::addEnemySubAtIndex(EnemySub _input, int _index)
 {
 	array[_index] = _input;
 }
+
+void EnemySubArray::clearEverything()
+{
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		removeEnemySubAtIndex(i);
+	}
+}

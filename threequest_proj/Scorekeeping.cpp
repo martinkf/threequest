@@ -27,8 +27,12 @@ void Scorekeeping::inicializar()
 	qttyEnemyFish = 0;
 	qttyEnemySub = 0;
 	qttyThreeQuest = 0;
+	totalScore = 0;
 
-	gRecursos.carregarFonte("MONOFONT", "fontes/MONOFONT.TTF", 32);
+	if (!gRecursos.carregouFonte("MONOFONT"))
+	{
+		gRecursos.carregarFonte("MONOFONT", "fontes/MONOFONT.TTF", 32);
+	}
 	text.setFonte("MONOFONT");
 	text.setAncora(0, 0.5);
 		
@@ -38,6 +42,8 @@ void Scorekeeping::inicializar()
 	threeGrid[2] = shotNull;
 	
 	gridStatus = enumFilling;
+
+	lives = 3;
 
 	specialShotDuration = 0;
 
@@ -56,8 +62,9 @@ void Scorekeeping::inicializar()
 
 	contentBarIsDisplaying = barOxygen;
 	isDisplayingScore = true;
+	isDisplayingResults = false;	
 
-	
+	deathBonus = false;
 }
 
 void Scorekeeping::desenhar()
@@ -100,6 +107,39 @@ void Scorekeeping::desenhar()
 		text.setString(to_string(qttyDiver));
 		text.desenhar(720, 574);
 	}
+
+	if (isDisplayingResults == true)
+	{
+		// desenha o qtty fish
+		text.setString(to_string(qttyEnemyFish));
+		text.desenhar(345, 125);
+
+		// desenha o qtty sub
+		text.setString(to_string(qttyEnemySub));
+		text.desenhar(555, 125);
+
+		// desenha o qtty diver
+		text.setString(to_string(qttyDiver));
+		text.desenhar(345, 192);
+
+		// desenha o qtty diver fail
+		text.setString(to_string(qttyDiverKilled));
+		text.desenhar(555, 192);
+
+		// desenha o qtty threequest
+		text.setString(to_string(qttyThreeQuest));
+		text.desenhar(416, 254);
+
+		// atualiza o score total
+		totalScore = calculaTotalScore();
+		// desenha o score total
+		text.setString(to_string(totalScore));
+		text.desenhar(564, 348);
+
+		// desenha a quantidade de vidas
+		text.setString(to_string(lives));
+		text.desenhar(600, 394);
+	}
 }
 
 void Scorekeeping::drainOxygen()
@@ -129,6 +169,11 @@ void Scorekeeping::pegouUmaAirBubble()
 	{
 		oxygenLeft += 700;
 	}
+}
+
+int Scorekeeping::getOxygenLeft()
+{
+	return oxygenLeft;
 }
 
 void Scorekeeping::pegouUmDiver()
@@ -308,4 +353,55 @@ void Scorekeeping::stopDisplayingScore()
 void Scorekeeping::setContentBarContext(BarType input_)
 {
 	contentBarIsDisplaying = input_;
+}
+
+void Scorekeeping::startDisplayingResults()
+{
+	isDisplayingResults = true;
+}
+
+void Scorekeeping::stopDisplayingResults()
+{
+	isDisplayingResults = false;
+}
+
+int Scorekeeping::getNumberOfLives()
+{
+	return lives;
+}
+
+void Scorekeeping::removeALife()
+{
+	lives--;
+}
+
+void Scorekeeping::clearAllScores()
+{
+	int temp = lives;
+	inicializar();
+	lives = temp;
+}
+
+void Scorekeeping::setDeathBonus(bool input_)
+{
+	deathBonus = input_;
+}
+
+int Scorekeeping::calculaTotalScore()
+{
+	int scoreFish = qttyEnemyFish * 200;
+	int scoreSub = qttyEnemySub * 500;
+	int scoreDiver = qttyDiver * 500;
+	int scoreDiverDeath = -(qttyDiverKilled * 500);
+	int scoreThreeQuest = qttyThreeQuest * 1500;
+
+	int sum = scoreFish + scoreSub + scoreDiver + scoreDiverDeath + scoreThreeQuest;
+	
+	if (deathBonus == true) // morreu de submergência, não asfixia
+	{
+		sum += 5000;
+		sum += ((maxOxygen - oxygenLeft) * 10);
+	}
+
+	return sum;
 }

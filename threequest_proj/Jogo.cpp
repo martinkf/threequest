@@ -271,23 +271,18 @@ void Jogo::telaJogo_inicializar()
 	gridSlotB.setSpriteSheet("gridEmpty");
 	gridSlotC.setSpriteSheet("gridEmpty");
 
-	// INICIALIZA O POPUP MENU BACKGROUND
-	if (!gRecursos.carregouSpriteSheet("popupBackground"))
+	// INICIALIZA O POPUP MENU BACKGROUND	
+	if (!gRecursos.carregouSpriteSheet("popupScoreBg"))
 	{
-		gRecursos.carregarSpriteSheet("popupBackground", "imagens/spr_popupBackground.png");
-	}
-	if (!gRecursos.carregouSpriteSheet("popupLifes2"))
-	{
-		gRecursos.carregarSpriteSheet("popupLifes2", "imagens/spr_popupLifes2.png");
-	}
-	popupBackground.setSpriteSheet("popupLifes2");
+		gRecursos.carregarSpriteSheet("popupScoreBg", "imagens/spr_popupScoreBg.png");
+	}	
+	popupBackground.setSpriteSheet("popupScoreBg");
 
 	// INICIALIZA O PLAYER
 	player.inicializar();
 
 	// INICIALIZA A POPUP
-	popupNeedsDrawing = true;
-	player.freeze();	
+	popupNeedsDrawing = false;
 
 	// INICIALIZA O TIRO ENEMY ARRAY
 	tirosEnemy.inicializar();
@@ -326,125 +321,17 @@ void Jogo::telaJogo_executar()
 	telaJogo_desenhar();	
 }
 
-void Jogo::telaJogo_desenhar()
-{
-	// DESENHA O BACKGROUND
-	gameBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
-	int rateOfAnimation = 5;
-	if (frameCounterJogo.getFrameNumber() % rateOfAnimation == 0) gameBackground.avancarAnimacao();
-	
-	// DESENHA A DIVER ARRAY
-	divers.atualizar();
-	divers.desenhar();
-
-	// DESENHA A TIRO ENEMY ARRAY
-	tirosEnemy.atualizar();
-	tirosEnemy.desenhar();
-
-	// DESENHA A TIRO PLAYER ARRAY
-	tirosPlayer.atualizar();
-	tirosPlayer.desenhar();
-
-	// DESENHA A AIR BUBBLE ARRAY
-	airBubbles.atualizar();
-	airBubbles.desenhar();
-
-	// DESENHA A ENEMY FISHES ARRAY
-	enemyFishes.atualizar();
-	enemyFishes.desenhar();
-
-	// DESENHA A ENEMY SUBS ARRAY
-	enemySubs.atualizar();
-	enemySubs.desenhar();
-
-	// DESENHA A EXPLOSIONS ARRAY
-	explosions.atualizar();
-	explosions.desenhar();
-
-	// DESENHA O PLAYER
-	player.atualizar();
-	player.desenhar();
-
-	// DESENHA A WATER SURFACE
-	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 124);
-
-	// DESENHA O SCORE OVERLAY
-	scoreOverlay.desenhar(gJanela.getLargura() / 2, 559);
-
-	// DESENHA A JOGO INTERFACE
-	score.desenhar();
-
-	// ATUALIZA O SPRITE DAS GRID SLOTS COM RELAÇÃO A O QUE A ARRAY GUARDA
-	switch (score.getThreeGridAtThisIndex(0))
-	{
-	case shotRed:
-		gridSlotA.setSpriteSheet("gridRed");
-		break;
-	case shotGreen:
-		gridSlotA.setSpriteSheet("gridGreen");
-		break;
-	case shotBlue:
-		gridSlotA.setSpriteSheet("gridBlue");
-		break;
-	case shotNull:
-		gridSlotA.setSpriteSheet("gridEmpty");
-	default:
-		break;
-	};
-	switch (score.getThreeGridAtThisIndex(1))
-	{
-	case shotRed:
-		gridSlotB.setSpriteSheet("gridRed");
-		break;
-	case shotGreen:
-		gridSlotB.setSpriteSheet("gridGreen");
-		break;
-	case shotBlue:
-		gridSlotB.setSpriteSheet("gridBlue");
-		break;
-	case shotNull:
-		gridSlotB.setSpriteSheet("gridEmpty");
-	default:
-		break;
-	};
-	switch (score.getThreeGridAtThisIndex(2))
-	{
-	case shotRed:
-		gridSlotC.setSpriteSheet("gridRed");
-		break;
-	case shotGreen:
-		gridSlotC.setSpriteSheet("gridGreen");
-		break;
-	case shotBlue:
-		gridSlotC.setSpriteSheet("gridBlue");
-		break;
-	case shotNull:
-		gridSlotC.setSpriteSheet("gridEmpty");
-	default:
-		break;
-	};
-
-	// DESENHA OS GRID SLOTS
-	gridSlotA.desenhar(42, 559);
-	gridSlotB.desenhar(113, 559);
-	gridSlotC.desenhar(184, 559);
-
-	// DESENHA O POPUP MENU
-	if (telaJogo_shouldDrawPopup())
-	{
-		popupBackground.desenhar(gJanela.getLargura() / 2, (gJanela.getAltura() / 2) - 50);
-	}
-}
-
 void Jogo::telaJogo_verificar()
 {
 	// Verifica se quer skippar o popup
-	if (telaJogo_shouldDrawPopup())
+	if (popupNeedsDrawing)
 	{
 		if (gTeclado.pressionou[TECLA_ESPACO])
 		{
 			popupNeedsDrawing = false;
-			player.unfreeze();
+			player.unfreeze();			
+			score.clearAllScores();
+			score.stopDisplayingResults();
 		}
 	}
 
@@ -456,6 +343,12 @@ void Jogo::telaJogo_verificar()
 		airBubbles.turnOffSpawner();
 		enemyFishes.turnOffSpawner();
 		enemySubs.turnOffSpawner();
+
+		if (gameStarted == true) 
+		{
+			// MORTE POR SUBMERGÊNCIA
+			telaJogo_mortePorSubmergencia();
+		}
 	}
 	else
 	{
@@ -464,12 +357,21 @@ void Jogo::telaJogo_verificar()
 		airBubbles.turnOnSpawner();
 		enemyFishes.turnOnSpawner();
 		enemySubs.turnOnSpawner();
+
+		gameStarted = true;
 	}	
 
 	// RACIONALIZA SE DEVE COMER OXYGEN
 	if (!player.isPlayerOnSurface() && !(score.getFillStatus() == enumFrozen))
 	{
 		score.drainOxygen();
+	}
+
+	// RACIONALIZA SE MORREU POR ASFIXIA
+	if (score.getOxygenLeft() < 0)
+	{
+		// MORTE POR ASFIXIA.
+		telaJogo_mortePorAsfixia();
 	}
 
 	// SE ACONTECEU UM FULL THREE GRID
@@ -670,12 +572,177 @@ void Jogo::telaJogo_verificar()
 	telaJogo_collisionSubDiver();
 	// COLLISION: ENEMY SUB X ENEMY SUB
 	telaJogo_collisionSubSub();
-
 }
 
-bool Jogo::telaJogo_shouldDrawPopup()
+void Jogo::telaJogo_mortePorSubmergencia()
 {
-	return popupNeedsDrawing;
+	// paralisa o jogo por enquanto
+	gameStarted = false;
+
+	// volta a chamar a popup
+	popupNeedsDrawing = true;
+
+	// limpa todos os elementos do oceano, bons ou maus
+	telaJogo_clearAll();
+
+	// desenha o score information
+	score.setDeathBonus(true);
+	score.startDisplayingResults();
+
+	// remove uma vida
+	score.removeALife();
+
+	// reinicia o player
+	player.inicializar();
+
+	// congela o movimento do player por enquanto
+	player.freeze();
+}
+
+void Jogo::telaJogo_mortePorAsfixia()
+{
+	// paralisa o jogo por enquanto
+	gameStarted = false;
+
+	// volta a chamar a popup
+	popupNeedsDrawing = true;
+
+	// limpa todos os elementos do oceano, bons ou maus
+	telaJogo_clearAll();
+
+	// desenha o score information
+	score.setDeathBonus(false);
+	score.startDisplayingResults();
+
+	// remove uma vida
+	score.removeALife();
+
+	// reinicia o player
+	player.inicializar();
+
+	// congela o movimento do player por enquanto
+	player.freeze();
+}
+
+
+void Jogo::telaJogo_desenhar()
+{
+	// DESENHA O BACKGROUND
+	gameBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
+	int rateOfAnimation = 5;
+	if (frameCounterJogo.getFrameNumber() % rateOfAnimation == 0) gameBackground.avancarAnimacao();
+
+	// DESENHA A DIVER ARRAY
+	divers.atualizar();
+	divers.desenhar();
+
+	// DESENHA A TIRO ENEMY ARRAY
+	tirosEnemy.atualizar();
+	tirosEnemy.desenhar();
+
+	// DESENHA A TIRO PLAYER ARRAY
+	tirosPlayer.atualizar();
+	tirosPlayer.desenhar();
+
+	// DESENHA A AIR BUBBLE ARRAY
+	airBubbles.atualizar();
+	airBubbles.desenhar();
+
+	// DESENHA A ENEMY FISHES ARRAY
+	enemyFishes.atualizar();
+	enemyFishes.desenhar();
+
+	// DESENHA A ENEMY SUBS ARRAY
+	enemySubs.atualizar();
+	enemySubs.desenhar();
+
+	// DESENHA A EXPLOSIONS ARRAY
+	explosions.atualizar();
+	explosions.desenhar();
+
+	// DESENHA O PLAYER
+	player.atualizar();
+	player.desenhar();
+
+	// DESENHA A WATER SURFACE
+	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 124);
+
+	// DESENHA O SCORE OVERLAY
+	scoreOverlay.desenhar(gJanela.getLargura() / 2, 559);
+
+	// ATUALIZA O SPRITE DAS GRID SLOTS COM RELAÇÃO A O QUE A ARRAY GUARDA
+	switch (score.getThreeGridAtThisIndex(0))
+	{
+	case shotRed:
+		gridSlotA.setSpriteSheet("gridRed");
+		break;
+	case shotGreen:
+		gridSlotA.setSpriteSheet("gridGreen");
+		break;
+	case shotBlue:
+		gridSlotA.setSpriteSheet("gridBlue");
+		break;
+	case shotNull:
+		gridSlotA.setSpriteSheet("gridEmpty");
+	default:
+		break;
+	};
+	switch (score.getThreeGridAtThisIndex(1))
+	{
+	case shotRed:
+		gridSlotB.setSpriteSheet("gridRed");
+		break;
+	case shotGreen:
+		gridSlotB.setSpriteSheet("gridGreen");
+		break;
+	case shotBlue:
+		gridSlotB.setSpriteSheet("gridBlue");
+		break;
+	case shotNull:
+		gridSlotB.setSpriteSheet("gridEmpty");
+	default:
+		break;
+	};
+	switch (score.getThreeGridAtThisIndex(2))
+	{
+	case shotRed:
+		gridSlotC.setSpriteSheet("gridRed");
+		break;
+	case shotGreen:
+		gridSlotC.setSpriteSheet("gridGreen");
+		break;
+	case shotBlue:
+		gridSlotC.setSpriteSheet("gridBlue");
+		break;
+	case shotNull:
+		gridSlotC.setSpriteSheet("gridEmpty");
+	default:
+		break;
+	};
+
+	// DESENHA OS GRID SLOTS
+	gridSlotA.desenhar(42, 559);
+	gridSlotB.desenhar(113, 559);
+	gridSlotC.desenhar(184, 559);
+
+	// DESENHA O POPUP MENU
+	if (popupNeedsDrawing)
+	{
+		popupBackground.desenhar(gJanela.getLargura() / 2, (gJanela.getAltura() / 2) - 50);
+	}
+
+	// DESENHA A JOGO INTERFACE
+	score.desenhar();
+}
+
+void Jogo::telaJogo_clearAll()
+{
+	enemyFishes.clearEverything();
+	enemySubs.clearEverything();
+	tirosEnemy.clearEverything();
+	tirosPlayer.clearEverything();
+	divers.clearEverything();
+	airBubbles.clearEverything();
 }
 
 void Jogo::telaJogo_clearAllThreats()

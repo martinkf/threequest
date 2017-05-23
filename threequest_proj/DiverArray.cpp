@@ -63,6 +63,14 @@ void DiverArray::removeDiverAtIndex(int index_)
 	numeroTotalUtilizado--;
 }
 
+void DiverArray::clearEverything()
+{
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		removeDiverAtIndex(i);
+	}
+}
+
 void DiverArray::spawnNewRandomDiver()
 {
 	Diver local = Diver();

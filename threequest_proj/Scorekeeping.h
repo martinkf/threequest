@@ -14,6 +14,7 @@ public:
 	void drainOxygen();
 	void reduceOxygenByAmount(int oxygenLoss_);
 	void pegouUmaAirBubble();
+	int getOxygenLeft();
 
 	void pegouUmDiver();
 	void matouUmDiver();
@@ -39,8 +40,21 @@ public:
 	void resumeDisplayingScore();
 	void stopDisplayingScore();
 	void setContentBarContext(BarType input_);
+
+	void startDisplayingResults();
+	void stopDisplayingResults();
+
+	int getNumberOfLives();
+	void removeALife();
+	void clearAllScores();
 	
+	void setDeathBonus(bool input_);
+
+	int calculaTotalScore();
+
 private:
+	int lives;
+
 	int maxOxygen;
 	int oxygenLeft;
 	Sprite oxygenArray[500];
@@ -50,6 +64,8 @@ private:
 	int qttyEnemyFish;
 	int qttyEnemySub;
 	int qttyThreeQuest;
+
+	int totalScore;
 
 	ShotType threeGrid[3];
 	int threeGridPointer;
@@ -62,5 +78,8 @@ private:
 
 	BarType contentBarIsDisplaying;
 	bool isDisplayingScore;
+	bool isDisplayingResults;
+
+	bool deathBonus;
 };
 

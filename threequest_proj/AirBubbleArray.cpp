@@ -92,3 +92,11 @@ void AirBubbleArray::removeAirBubbleAtIndex(int index_)
 		array[index_ + i] = array[index_ + i + 1];
 	}
 }
+
+void AirBubbleArray::clearEverything()
+{
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		removeAirBubbleAtIndex(i);
+	}
+}

@@ -20,6 +20,8 @@ public:
 	EnemyFish getEnemyFishAtIndex(int index_);
 	void removeEnemyFishAtIndex(int index_);
 	
+	void clearEverything();
+
 private:
 	int numeroTotalUtilizado;
 	EnemyFish array[100];

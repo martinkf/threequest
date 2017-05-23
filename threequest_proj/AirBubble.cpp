@@ -28,6 +28,8 @@ void AirBubble::inicializar()
 	
 	// dizendo que está vivo
 	isAlive = true;
+
+	initialized = true;
 }
 
 void AirBubble::atualizar()

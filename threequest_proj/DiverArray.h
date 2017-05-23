@@ -20,6 +20,8 @@ public:
 	Diver getDiverAtIndex(int index_);
 	void removeDiverAtIndex(int index_);
 	
+	void clearEverything();
+
 private:
 	int numeroTotalUtilizado;
 	Diver array[20];

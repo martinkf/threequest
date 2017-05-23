@@ -61,7 +61,10 @@ private:
 	void telaJogo_desenhar();
 	void telaJogo_verificar();
 	
-	bool telaJogo_shouldDrawPopup();
+	void telaJogo_mortePorSubmergencia();
+	void telaJogo_mortePorAsfixia();
+
+	void telaJogo_clearAll();
 	void telaJogo_clearAllThreats();
 
 	void telaJogo_collisionPlayerDiver();
@@ -100,5 +103,6 @@ private:
 	EnemySubArray enemySubs;
 	ExplosionArray explosions;
 	bool popupNeedsDrawing;
+	bool gameStarted;
 };
 

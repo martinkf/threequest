@@ -81,3 +81,11 @@ void EnemyFishArray::removeEnemyFishAtIndex(int index_)
 	}
 	numeroTotalUtilizado--;
 }
+
+void EnemyFishArray::clearEverything()
+{
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		removeEnemyFishAtIndex(i);
+	}
+}
