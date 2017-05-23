@@ -53,6 +53,19 @@ private:
 
 
 
+	// tela instructions
+
+	// métodos
+	void telaInstructions_inicializar();
+	void telaInstructions_executar();
+	void telaInstructions_desenhar();
+	
+	// atributos
+	Sprite instructionsPicture;
+
+
+
+
 	// tela jogo
 
 	// métodos da tela jogo

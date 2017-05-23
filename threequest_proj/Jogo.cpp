@@ -14,11 +14,12 @@ void Jogo::inicializar()
 	uniInicializar(800, 600, false);	
 	
 	// INICIALIZA O STATUS DA TELA
-	status = sTelaJogo;
+	status = sTelaSplash;
 
 	// INICIALIZA AS TELAS
 	telaSplash_inicializar();
 	telaJogo_inicializar();
+	telaInstructions_inicializar();
 	telaMenu_inicializar();
 }
 
@@ -37,6 +38,9 @@ void Jogo::executar()
 				break;
 			case sTelaMenu:
 				telaMenu_executar();
+				break;
+			case sTelaInstructions:
+				telaInstructions_executar();
 				break;
 			case sTelaJogo:
 				telaJogo_executar();
@@ -133,15 +137,6 @@ void Jogo::telaMenu_executar()
 	telaMenu_desenhar();	
 }
 
-void Jogo::telaMenu_desenhar()
-{
-	// DESENHA O MENU BACKGROUND
-	menuBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
-
-	// DESENHA O SELECTION FISH
-	selectionFish.desenhar(200, selectionFishY);
-}
-
 void Jogo::telaMenu_verificar()
 {
 	// AVANÇA ANIMAÇÃO DO SELECTION FISH
@@ -150,28 +145,28 @@ void Jogo::telaMenu_verificar()
 	// POSICIONA O SELECTION FISH DE ACORDO COM O SELECTION INT
 	switch (currentChoice)
 	{
-		case 0: // NEW GAME
-			selectionFishY = 278;
-			break;
-		case 1: // INSTRUCTIONS
-			selectionFishY = 346;
-			break;
-		case 2: // CREDITS
-			selectionFishY = 414;
-			break;
-		case 3: // EXIT
-			selectionFishY = 482;
-			break;
+	case 0: // NEW GAME
+		selectionFishY = 278;
+		break;
+	case 1: // INSTRUCTIONS
+		selectionFishY = 346;
+		break;
+	case 2: // CREDITS
+		selectionFishY = 414;
+		break;
+	case 3: // EXIT
+		selectionFishY = 482;
+		break;
 	}
 
 	// VERIFICA KEYBOARD PRESSES
 	if (gTeclado.pressionou[TECLA_W] || gTeclado.pressionou[TECLA_CIMA])
 	{
-		if (currentChoice > 0) 
+		if (currentChoice > 0)
 		{
 			currentChoice--;
 		}
-		else 
+		else
 		{
 			currentChoice = 3;
 		}
@@ -195,18 +190,54 @@ void Jogo::telaMenu_verificar()
 			status = sTelaJogo;
 			break;
 		case 1: // INSTRUCTIONS
-			// status = sTelaInstructions; 
-			// nyi
+			status = sTelaInstructions;
 			break;
 		case 2: // CREDITS
 			frameCounterSplash.freeze();
 			status = sTelaSplash;
 			break;
-		case 3: // EXIT
-			// nyi
+		case 3: // EXIT			
+			gEventos.emitirEventoDeSaida();
 			break;
 		}
 	}
+}
+
+void Jogo::telaInstructions_inicializar()
+{
+	// INICIALIZA A PICTURE
+	if (!gRecursos.carregouSpriteSheet("instructions"))
+	{
+		gRecursos.carregarSpriteSheet("instructions", "imagens/spr_instructions.png");
+	}
+	instructionsPicture.setSpriteSheet("instructions");
+}
+
+void Jogo::telaInstructions_executar()
+{
+	// LISTENS TO KEYBOARD INPUT
+	if (gTeclado.pressionou[TECLA_ESPACO] || gTeclado.pressionou[TECLA_ENTER])
+	{
+		status = sTelaMenu;
+	}
+
+	// DESENHA A TELA
+	telaInstructions_desenhar();
+}
+
+void Jogo::telaInstructions_desenhar()
+{
+	// DESENHA A PICTURE
+	instructionsPicture.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
+}
+
+void Jogo::telaMenu_desenhar()
+{
+	// DESENHA O MENU BACKGROUND
+	menuBackground.desenhar(gJanela.getLargura() / 2, gJanela.getAltura() / 2);
+
+	// DESENHA O SELECTION FISH
+	selectionFish.desenhar(200, selectionFishY);
 }
 
 void Jogo::telaJogo_inicializar()
@@ -635,7 +666,6 @@ void Jogo::telaJogo_mortePorAsfixia()
 	// congela o movimento do player por enquanto
 	player.freeze();
 }
-
 
 void Jogo::telaJogo_desenhar()
 {
