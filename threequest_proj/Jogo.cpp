@@ -386,7 +386,7 @@ void Jogo::telaJogo_inicializar()
 
 void Jogo::telaJogo_executar()
 {
-	// QUERO MESMO PARAR A MÚSICA?
+	// PARAR A MÚSICA
 	if (musicIsPlaying) 
 	{ 
 		musicIsPlaying = false;
@@ -632,7 +632,7 @@ void Jogo::telaJogo_verificar()
 		{
 			if (airBubbles.isSpawnerTurnedOn()) // se o spawner está ligado
 			{
-				//airBubbles.spawnNewRandomAirBubble();
+				airBubbles.spawnNewRandomAirBubble();
 			}
 		}
 	}
@@ -967,6 +967,7 @@ void Jogo::telaJogo_collisionPlayerBubble()
 			score.pegouUmaAirBubble();
 
 			// destrói a air bubble
+			airBubbles.getAirBubbleAtIndex(i).destruir();
 			airBubbles.removeAirBubbleAtIndex(i);
 		}
 	}

@@ -4,6 +4,10 @@
 
 AirBubble::AirBubble()
 {
+	x = 101;
+	y = 101;
+	isAlive = false;
+	initialized = false;
 }
 
 
@@ -13,6 +17,8 @@ AirBubble::~AirBubble()
 
 void AirBubble::inicializar()
 {
+	initialized = true;
+
 	// carregando sprite
 	if (!gRecursos.carregouSpriteSheet("airBubble"))
 	{
@@ -27,23 +33,24 @@ void AirBubble::inicializar()
 	x = 20 + (spawnRow * 40);
 	
 	// dizendo que está vivo
-	isAlive = true;
-
-	initialized = true;
+	isAlive = true;	
 }
 
 void AirBubble::atualizar()
 {
-	// avança animação
-	sprite.avancarAnimacao();
-
-	// faz ele andar
-	y -= 1;
-
-	// verifica out-of-bounds
-	if (y <= 120)
+	if (isAlive && initialized) 
 	{
-		destruir();
+		// avança animação
+		sprite.avancarAnimacao();
+	
+		// verifica out-of-bounds
+		if (y <= 120)
+		{
+			destruir();
+		}
+
+		// faz ele andar
+		y -= 1;
 	}
 }
 

@@ -69,7 +69,7 @@ void TiroArray::adicionaTiroNaLista(Tiro tiro_)
 
 void TiroArray::removeTiroAtIndex(int index_)
 {
-	for (int i = 0; i < ( 99 - index_); i++)
+	for (int i = 0; i < ( 99 - index_ ); i++)
 	{
 		array[index_ + i] = array[index_ + i + 1];
 	}

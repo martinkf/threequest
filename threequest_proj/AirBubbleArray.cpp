@@ -11,6 +11,12 @@ AirBubbleArray::~AirBubbleArray()
 void AirBubbleArray::inicializar()
 {
 	numeroTotalUtilizado = 0;
+
+	for (int i = 0; i < 100; i++)
+	{
+		AirBubble local = AirBubble();
+		array[i] = local;
+	}
 }
 
 void AirBubbleArray::atualizar()
@@ -31,6 +37,16 @@ void AirBubbleArray::atualizar()
 		if (!array[i].estaVivo())
 		{
 			removeAirBubbleAtIndex(i);
+		}
+	}
+
+	// atualiza seu numero de real size
+	numeroTotalUtilizado = 0;
+	for (int i = 0; i < 100; i++)
+	{
+		if (array[i].isInitialized())
+		{
+			numeroTotalUtilizado++;
 		}
 	}
 
@@ -57,7 +73,6 @@ void AirBubbleArray::spawnNewRandomAirBubble()
 	AirBubble local = AirBubble();
 	local.inicializar();
 	array[numeroTotalUtilizado] = local;
-	numeroTotalUtilizado++;
 }
 
 void AirBubbleArray::turnOffSpawner()
@@ -87,7 +102,7 @@ AirBubble AirBubbleArray::getAirBubbleAtIndex(int index_)
 
 void AirBubbleArray::removeAirBubbleAtIndex(int index_)
 {
-	for (int i = 0; i < (99 - index_); i++)
+	for (int i = 0; i < ( 99 - index_ ); i++)
 	{
 		array[index_ + i] = array[index_ + i + 1];
 	}
