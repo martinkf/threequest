@@ -724,6 +724,10 @@ void Jogo::telaJogo_mortePorSubmergencia()
 	score.setDeathBonus(true);
 	score.startDisplayingResults();
 
+	// troca o score overlay para o oxigênio
+	score.setContentBarContext(barOxygen);
+	scoreOverlay.setSpriteSheet("scoreOverlay");
+
 	// remove uma vida
 	score.removeALife();
 
