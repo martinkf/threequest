@@ -24,6 +24,9 @@ public:
 	ShotType getShotType();
 	int getId();
 
+	bool isInitialized();
+	void reset();
+
 private:
 	int id;
 	int x;
@@ -33,5 +36,7 @@ private:
 	Direction facingDirection;
 	bool isAlive;
 	ShotType shotType;
+
+	bool initialized;
 };
 

@@ -1,7 +1,5 @@
 #include "FrameCounter.h"
 
-
-
 FrameCounter::FrameCounter()
 {
 }

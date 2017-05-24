@@ -22,6 +22,6 @@ public:
 
 private:
 	int numeroTotalUtilizado;
-	Tiro array[100];
+	Tiro array[50];
 };
 

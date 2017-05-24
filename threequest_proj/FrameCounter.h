@@ -4,6 +4,7 @@ class FrameCounter
 public:
 	FrameCounter();
 	~FrameCounter();
+
 	void inicializar();
 	void tick();
 	

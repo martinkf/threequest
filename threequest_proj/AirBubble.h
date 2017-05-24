@@ -27,6 +27,6 @@ private:
 	Sprite sprite;
 	bool isAlive;
 
-	bool initialized = false;
+	bool initialized;
 };
 

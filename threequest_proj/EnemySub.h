@@ -29,6 +29,9 @@ public:
 	bool wantsToShoot();
 	void makeNotWantToShoot();
 
+	bool isInitialized();
+	void reset();
+
 private:
 	int id;
 	int x;
@@ -40,5 +43,6 @@ private:
 	ShotType shotType;
 	bool subWantsToShoot;
 	int shotCooldown;
+	bool initialized;
 };
 

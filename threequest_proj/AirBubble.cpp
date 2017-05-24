@@ -1,7 +1,5 @@
 #include "AirBubble.h"
 
-
-
 AirBubble::AirBubble()
 {
 	x = 101;
@@ -9,7 +7,6 @@ AirBubble::AirBubble()
 	isAlive = false;
 	initialized = false;
 }
-
 
 AirBubble::~AirBubble()
 {

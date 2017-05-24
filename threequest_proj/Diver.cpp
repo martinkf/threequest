@@ -2,6 +2,10 @@
 
 Diver::Diver()
 {
+	x = 101;
+	y = 101;
+	isAlive = false;
+	initialized = false;
 }
 
 Diver::~Diver()
@@ -10,6 +14,8 @@ Diver::~Diver()
 
 void Diver::inicializar()
 {
+	initialized = true;
+
 	// carregando sprite
 	if (!gRecursos.carregouSpriteSheet("diver"))
 	{
@@ -45,23 +51,26 @@ void Diver::inicializar()
 
 void Diver::atualizar()
 {	
-	// avança animação
-	sprite.avancarAnimacao();
+	if (isAlive && initialized)
+	{
+		// avança animação
+		sprite.avancarAnimacao();
+		
+		// verifica out-of-bounds
+		if (x > 830 || x < -30)
+		{
+			destruir();
+		}
 
-	// faz ele andar
-	if (facingDirection == facingRight)
-	{
-		x += speed;
-	}
-	else
-	{
-		x -= speed;
-	}
-
-	// verifica out-of-bounds
-	if (x > 830 || x < -30)
-	{
-		destruir();
+		// faz ele andar
+		if (facingDirection == facingRight)
+		{
+			x += speed;
+		}
+		else
+		{
+			x -= speed;
+		}
 	}
 }
 
@@ -93,4 +102,14 @@ int Diver::getX()
 int Diver::getY()
 {
 	return y;
+}
+
+bool Diver::isInitialized()
+{
+	return initialized;
+}
+
+void Diver::reset()
+{
+	initialized = false;
 }

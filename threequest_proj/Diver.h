@@ -20,6 +20,9 @@ public:
 	int getX();
 	int getY();
 
+	bool isInitialized();
+	void reset();
+
 private:
 	int x;
 	int y;
@@ -27,5 +30,7 @@ private:
 	Sprite sprite;
 	Direction facingDirection;
 	bool isAlive;
+
+	bool initialized;
 };
 

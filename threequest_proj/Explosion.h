@@ -13,11 +13,16 @@ public:
 
 	bool estaVivo();
 
+	bool isInitialized();
+	void reset();
+
 private:
 	Sprite sprite;
 	int x;
 	int y;
 	int lifeRemaining;
 	bool isAlive;
+
+	bool initialized;
 };
 

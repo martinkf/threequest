@@ -1,11 +1,13 @@
 #include "EnemySub.h"
 
-
-
 EnemySub::EnemySub()
 {
+	id = 101;
+	x = 101;
+	y = 101;
+	isAlive = false;
+	initialized = false;
 }
-
 
 EnemySub::~EnemySub()
 {
@@ -13,6 +15,8 @@ EnemySub::~EnemySub()
 
 void EnemySub::inicializar()
 {
+	initialized = true;
+
 	// DETERMINA A COR DESSE SUB E CARREGA SPRITE
 	int randm = rand() % 3 + 1;
 	switch (randm)
@@ -78,42 +82,45 @@ void EnemySub::inicializar()
 
 void EnemySub::atualizar()
 {
-	// avança animação
-	sprite.avancarAnimacao();
+	if (isAlive && initialized)
+	{
+		// avança animação
+		sprite.avancarAnimacao();
 
-	// faz ele andar
-	if (facingDirection == facingRight)
-	{
-		x += speed;
-	}
-	else
-	{
-		x -= speed;
-	}
-
-	// reduz o cooldown do tiro, caso tenha
-	if (shotCooldown > 0) 
-	{
-		shotCooldown--;
-	}
-
-	// 1 chance em 120, a cada frame, de atirar. chance média de 2 segundos por tiro
-	int randm = rand() % 120;
-	if (randm == 0)
-	{
-		if (shotType != shotBlue) // submarinos azuis não atiram :)
+		// verifica out-of-bounds
+		if (x > 830 || x < -30)
 		{
-			if (shotCooldown == 0) // somente atira se não está em cooldown
-			{
-				atirar();
-			}
+			destruir();
 		}
-	}
 
-	// verifica out-of-bounds
-	if (x > 830 || x < -30)
-	{
-		destruir();
+		// faz ele andar
+		if (facingDirection == facingRight)
+		{
+			x += speed;
+		}
+		else
+		{
+			x -= speed;
+		}
+
+		// reduz o cooldown do tiro, caso tenha
+		if (shotCooldown > 0)
+		{
+			shotCooldown--;
+		}
+
+		// 1 chance em 120, a cada frame, de atirar. chance média de 2 segundos por tiro
+		int randm = rand() % 120;
+		if (randm == 0)
+		{
+			if (shotType != shotBlue) // submarinos azuis não atiram :)
+			{
+				if (shotCooldown == 0) // somente atira se não está em cooldown
+				{
+					atirar();
+				}
+			}
+		}		
 	}
 }
 
@@ -185,4 +192,14 @@ bool EnemySub::wantsToShoot()
 void EnemySub::makeNotWantToShoot()
 {
 	subWantsToShoot = false;
+}
+
+bool EnemySub::isInitialized()
+{
+	return initialized;
+}
+
+void EnemySub::reset()
+{
+	initialized = false;
 }

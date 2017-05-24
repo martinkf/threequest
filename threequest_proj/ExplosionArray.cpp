@@ -11,31 +11,60 @@ ExplosionArray::~ExplosionArray()
 void ExplosionArray::inicializar()
 {
 	numeroTotalUtilizado = 0;
+
+	for (int i = 0; i < 20; i++)
+	{
+		Explosion local = Explosion();
+		array[i] = local;
+	}
 }
 
 void ExplosionArray::atualizar()
 {
-	for (int i = 0; i < numeroTotalUtilizado; i++)
+	// atualiza seu numero de real size
+	numeroTotalUtilizado = 0;
+	for (int i = 0; i < 20; i++)
 	{
-		Explosion test;
-		test = array[i];
-		if (test.estaVivo())
+		if (array[i].isInitialized())
 		{
-			test.atualizar();
-			array[i] = test;
+			numeroTotalUtilizado++;
 		}
-		else
+	}
+
+	// confere seus elementinhos mortos e os remove
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		if (!array[i].estaVivo())
 		{
 			removeExplosionAtIndex(i);
 		}
+	}
+
+	// atualiza seu numero de real size
+	numeroTotalUtilizado = 0;
+	for (int i = 0; i < 20; i++)
+	{
+		if (array[i].isInitialized())
+		{
+			numeroTotalUtilizado++;
+		}
+	}
+
+	// atualiza cada um dos seus elementinhos
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		array[i].atualizar();
 	}
 }
 
 void ExplosionArray::desenhar()
 {
-	for (int i = 0; i < numeroTotalUtilizado; i++)
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
 	{
-		array[i].desenhar();
+		if (array[i].estaVivo())
+		{
+			array[i].desenhar();
+		}
 	}
 }
 
@@ -50,16 +79,14 @@ Explosion ExplosionArray::getExplosionAtIndex(int index_)
 }
 
 void ExplosionArray::adicionaExplosionNaLista(Explosion explosion_)
-{
+{	
 	array[numeroTotalUtilizado] = explosion_;
-	numeroTotalUtilizado++;
 }
 
 void ExplosionArray::removeExplosionAtIndex(int index_)
 {
-	for (int i = index_; i < (numeroTotalUtilizado - 1); i++)
+	for (int i = 0; i < (19 - index_); i++)
 	{
-		array[i] = array[i + 1];
+		array[index_ + i] = array[index_ + i + 1];
 	}
-	numeroTotalUtilizado--;
 }

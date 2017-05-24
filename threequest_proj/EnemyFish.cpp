@@ -2,6 +2,11 @@
 
 EnemyFish::EnemyFish()
 {
+	id = 101;
+	x = 101;
+	y = 101;
+	isAlive = false;
+	initialized = false;
 }
 
 EnemyFish::~EnemyFish()
@@ -10,6 +15,8 @@ EnemyFish::~EnemyFish()
 
 void EnemyFish::inicializar()
 {
+	initialized = true;
+
 	// DETERMINA A COR DESSE PEIXE E CARREGA SPRITE
 	int randm = rand() % 3 + 1;
 	switch (randm)
@@ -71,23 +78,26 @@ void EnemyFish::inicializar()
 
 void EnemyFish::atualizar()
 {
-	// avança animação
-	sprite.avancarAnimacao();
+	if (isAlive && initialized)
+	{	
+		// avança animação
+		sprite.avancarAnimacao();
+		
+		// verifica out-of-bounds
+		if (x > 830 || x < -30)
+		{
+			destruir();
+		}
 
-	// faz ele andar
-	if (facingDirection == facingRight)
-	{
-		x += speed;
-	}
-	else
-	{
-		x -= speed;
-	}
-
-	// verifica out-of-bounds
-	if (x > 830 || x < -30)
-	{
-		destruir();
+		// faz ele andar
+		if (facingDirection == facingRight)
+		{
+			x += speed;
+		}
+		else
+		{
+			x -= speed;
+		}
 	}
 }
 
@@ -138,4 +148,14 @@ ShotType EnemyFish::getShotType()
 int EnemyFish::getId()
 {
 	return id;
+}
+
+bool EnemyFish::isInitialized()
+{
+	return initialized;
+}
+
+void EnemyFish::reset()
+{
+	initialized = false;
 }

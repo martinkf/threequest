@@ -11,31 +11,60 @@ DiverArray::~DiverArray()
 void DiverArray::inicializar()
 {
 	numeroTotalUtilizado = 0;
+
+	for (int i = 0; i < 10; i++)
+	{
+		Diver local = Diver();
+		array[i] = local;
+	}
 }
 
 void DiverArray::atualizar()
 {
-	for (int i = 0; i < numeroTotalUtilizado; i++)
+	// atualiza seu numero de real size
+	numeroTotalUtilizado = 0;
+	for (int i = 0; i < 10; i++)
 	{
-		Diver local;
-		local = array[i];
-		if (local.estaVivo())
+		if (array[i].isInitialized())
 		{
-			local.atualizar();
-			array[i] = local;
+			numeroTotalUtilizado++;
 		}
-		else
+	}
+
+	// confere seus elementinhos mortos e os remove
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		if (!array[i].estaVivo())
 		{
 			removeDiverAtIndex(i);
 		}
+	}
+
+	// atualiza seu numero de real size
+	numeroTotalUtilizado = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		if (array[i].isInitialized())
+		{
+			numeroTotalUtilizado++;
+		}
+	}
+
+	// atualiza cada um dos seus elementinhos
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
+	{
+		array[i].atualizar();
 	}
 }
 
 void DiverArray::desenhar()
 {
-	for (int i = 0; i < numeroTotalUtilizado; i++)
+	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
 	{
-		array[i].desenhar();
+		if (array[i].estaVivo())
+		{
+			array[i].desenhar();
+		}
 	}
 }
 
@@ -56,11 +85,10 @@ Diver DiverArray::getDiverAtIndex(int index_)
 
 void DiverArray::removeDiverAtIndex(int index_)
 {
-	for (int i = index_; i < (numeroTotalUtilizado - 1); i++)
+	for (int i = 0; i < (19 - index_); i++)
 	{
-		array[i] = array[i + 1];
+		array[index_ + i] = array[index_ + i + 1];
 	}
-	numeroTotalUtilizado--;
 }
 
 void DiverArray::clearEverything()
@@ -76,7 +104,6 @@ void DiverArray::spawnNewRandomDiver()
 	Diver local = Diver();
 	local.inicializar();
 	array[numeroTotalUtilizado] = local;
-	numeroTotalUtilizado++;
 }
 
 void DiverArray::turnOffSpawner()

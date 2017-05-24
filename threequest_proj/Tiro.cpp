@@ -2,6 +2,11 @@
 
 Tiro::Tiro()
 {
+	shotType = shotNull;
+	x = 101;
+	y = 101;
+	isAlive = false;
+	initialized = false;
 }
 
 Tiro::~Tiro()

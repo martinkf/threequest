@@ -32,6 +32,6 @@ private:
 	Direction shotDirection;
 	bool isAlive;
 	int shotSpeed;
-	bool initialized = false;
+	bool initialized;
 };
 

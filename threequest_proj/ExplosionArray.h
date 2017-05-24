@@ -19,6 +19,6 @@ public:
 
 private:
 	int numeroTotalUtilizado;
-	Explosion array[50];
+	Explosion array[20];
 };
 

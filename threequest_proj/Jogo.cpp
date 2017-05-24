@@ -593,9 +593,19 @@ void Jogo::telaJogo_verificar()
 		{
 			// cria o tiro
 			Tiro tiro = Tiro();
+			int tiroX = enemySubs.getEnemySubAtIndex(i).getX();
+			if (enemySubs.getEnemySubAtIndex(i).getDirection() == facingLeft)
+			{
+				tiroX += 5;
+			}
+			else // facing right
+			{
+				tiroX -= 5;
+			}
+
 			tiro.inicializar(
 				enemySubs.getEnemySubAtIndex(i).getShotType(),
-				enemySubs.getEnemySubAtIndex(i).getX(),
+				tiroX,
 				enemySubs.getEnemySubAtIndex(i).getY(),
 				enemySubs.getEnemySubAtIndex(i).getDirection()
 				);
