@@ -3,12 +3,12 @@
 #include "MyEnums.h"
 #include <ctime>
 
-class EnemySub: public SeaElement
+class Enemy: public SeaElement
 {
 public:
 	// construtores e desconstrutores
-	EnemySub();
-	~EnemySub();
+	Enemy();
+	~Enemy();
 
 	// métodos da lib
 	void inicializar();
@@ -18,23 +18,26 @@ public:
 	void tryToShoot();
 
 	// métodos
-	bool verificaSemelhanca(EnemySub input_);
+	bool verificaSemelhanca(Enemy input_);
 
 	void atirar();
 	void makeNotWantToShoot();
 
 	// métodos get
+	EnemyType getEnemyType();
 	int getId();
 	ShotType getColor();
 	Direction getDirection();	
 	bool getShootStatus();	
 
 private:
+	EnemyType enemyType;
+
 	int id;
 	int speed;
 	ShotType color;
 	Direction facingDirection;	
 	bool wantsToShoot;
-	int shotCooldown;
+	int shotCooldown;	
 };
 

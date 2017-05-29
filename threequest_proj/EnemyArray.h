@@ -1,30 +1,33 @@
 #pragma once
-#include "EnemyFish.h"
+#include "Enemy.h"
 
-class EnemyFishArray
+class EnemyArray
 {
 public:
-	EnemyFishArray();
-	~EnemyFishArray();
+	EnemyArray();
+	~EnemyArray();
 
 	void inicializar();
 	void atualizar();
 	void desenhar();
 
-	void spawnNewRandomEnemyFish();
+	void spawnNewRandomEnemy();
 	void turnOffSpawner();
 	void turnOnSpawner();
 
 	bool isSpawnerTurnedOn();
 	int getNumeroTotalUtilizado();
-	EnemyFish getEnemyFishAtIndex(int index_);
-	void removeEnemyFishAtIndex(int index_);
-	
+	Enemy getEnemyAtIndex(int index_);
+	void removeEnemyAtIndex(int index_);
+
+	void addEnemyAtIndex(Enemy _input, int _index);
+	//
+
 	void clearEverything();
+	//
 
 private:
 	int numeroTotalUtilizado;
-	EnemyFish array[50];
+	Enemy array[100];
 	bool isTurnedOn;
 };
-

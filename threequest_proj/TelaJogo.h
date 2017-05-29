@@ -6,8 +6,7 @@
 #include "AirBubbleArray.h"
 #include "TiroArray.h"
 #include "DiverArray.h"
-#include "EnemyFishArray.h"
-#include "EnemySubArray.h"
+#include "EnemyArray.h"
 #include "ExplosionArray.h"
 
 class TelaJogo
@@ -29,20 +28,14 @@ public:
 
 	void collisionPlayerDiver();
 	void collisionPlayerBubble();
-	void collisionPlayerFish();
-	void collisionPlayerSub();
+	void collisionPlayerEnemy();
 	void collisionPlayerEnemyTiro();
 	void collisionFriendlyTiroDiver();
-	void collisionFriendlyTiroFish();
-	void collisionFriendlyTiroSub();
+	void collisionFriendlyTiroEnemy();
 	void collisionEnemyTiroDiver();
-	void collisionEnemyTiroFish();
-	void collisionEnemyTiroSub();
-	void collisionFishDiver();
-	void collisionFishFish();
-	void collisionFishSub();
-	void collisionSubDiver();
-	void collisionSubSub();
+	void collisionEnemyTiroEnemy();
+	void collisionEnemyDiver();
+	void collisionEnemyEnemy();
 		
 	void comingIn();
 	bool wantsToGoBack();
@@ -63,8 +56,7 @@ private:
 	TiroArray tirosPlayer;
 	TiroArray tirosEnemy;
 	DiverArray divers;
-	EnemyFishArray enemyFishes;
-	EnemySubArray enemySubs;
+	EnemyArray enemies;
 	ExplosionArray explosions;
 	bool popupNeedsDrawing;
 	bool gameStarted;

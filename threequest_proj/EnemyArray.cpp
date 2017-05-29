@@ -1,29 +1,29 @@
-#include "EnemyFishArray.h"
+#include "EnemyArray.h"
 
-EnemyFishArray::EnemyFishArray()
+EnemyArray::EnemyArray()
 {
 }
 
-EnemyFishArray::~EnemyFishArray()
+EnemyArray::~EnemyArray()
 {
 }
 
-void EnemyFishArray::inicializar()
+void EnemyArray::inicializar()
 {
 	numeroTotalUtilizado = 0;
 
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 100; i++)
 	{
-		EnemyFish local = EnemyFish();
+		Enemy local = Enemy();
 		array[i] = local;
 	}
 }
 
-void EnemyFishArray::atualizar()
+void EnemyArray::atualizar()
 {
 	// atualiza seu numero de real size
 	numeroTotalUtilizado = 0;
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		if (array[i].isInitialized())
 		{
@@ -36,13 +36,13 @@ void EnemyFishArray::atualizar()
 	{
 		if (!array[i].estaVivo())
 		{
-			removeEnemyFishAtIndex(i);
+			removeEnemyAtIndex(i);
 		}
 	}
 
 	// atualiza seu numero de real size
 	numeroTotalUtilizado = 0;
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		if (array[i].isInitialized())
 		{
@@ -57,7 +57,7 @@ void EnemyFishArray::atualizar()
 	}
 }
 
-void EnemyFishArray::desenhar()
+void EnemyArray::desenhar()
 {
 	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
 	{
@@ -68,39 +68,39 @@ void EnemyFishArray::desenhar()
 	}
 }
 
-void EnemyFishArray::spawnNewRandomEnemyFish()
+void EnemyArray::spawnNewRandomEnemy()
 {
-	EnemyFish local = EnemyFish();
+	Enemy local = Enemy();
 	local.inicializar();
 	array[numeroTotalUtilizado] = local;
 }
 
-void EnemyFishArray::turnOffSpawner()
+void EnemyArray::turnOffSpawner()
 {
 	isTurnedOn = false;
 }
 
-void EnemyFishArray::turnOnSpawner()
+void EnemyArray::turnOnSpawner()
 {
 	isTurnedOn = true;
 }
 
-bool EnemyFishArray::isSpawnerTurnedOn()
+bool EnemyArray::isSpawnerTurnedOn()
 {
 	return isTurnedOn;
 }
 
-int EnemyFishArray::getNumeroTotalUtilizado()
+int EnemyArray::getNumeroTotalUtilizado()
 {
 	return numeroTotalUtilizado;
 }
 
-EnemyFish EnemyFishArray::getEnemyFishAtIndex(int index_)
+Enemy EnemyArray::getEnemyAtIndex(int index_)
 {
 	return array[index_];
 }
 
-void EnemyFishArray::removeEnemyFishAtIndex(int index_)
+void EnemyArray::removeEnemyAtIndex(int index_)
 {
 	for (int i = 0; i < (49 - index_); i++)
 	{
@@ -109,10 +109,15 @@ void EnemyFishArray::removeEnemyFishAtIndex(int index_)
 	numeroTotalUtilizado--;
 }
 
-void EnemyFishArray::clearEverything()
+void EnemyArray::addEnemyAtIndex(Enemy _input, int _index)
+{
+	array[_index] = _input;
+}
+
+void EnemyArray::clearEverything()
 {
 	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
 	{
-		removeEnemyFishAtIndex(i);
+		removeEnemyAtIndex(i);
 	}
 }
