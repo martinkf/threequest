@@ -106,6 +106,7 @@ void EnemySubArray::removeEnemySubAtIndex(int index_)
 	{
 		array[index_ + i] = array[index_ + i + 1];
 	}
+	numeroTotalUtilizado--;
 }
 
 void EnemySubArray::addEnemySubAtIndex(EnemySub _input, int _index)

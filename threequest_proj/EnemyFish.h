@@ -1,42 +1,33 @@
 #pragma once
-#include "libUnicornio.h"
+#include "SeaElement.h"
 #include "MyEnums.h"
 #include <ctime>
 
-class EnemyFish
+class EnemyFish: public SeaElement
 {
 public:
+	// construtores e desconstrutores
 	EnemyFish();
 	~EnemyFish();
 
+	// métodos da lib
 	void inicializar();
 	void atualizar();
-	void desenhar();
+	void verificaOOB();
+	void moveXY();
 
-	void destruir();
-	bool estaVivo();
-
+	// métodos
 	bool verificaSemelhanca(EnemyFish input_);
 
-	Sprite getSprite();
-	int getX();
-	int getY();
-	ShotType getShotType();
+	// métodos get
 	int getId();
-
-	bool isInitialized();
-	void reset();
+	ShotType getColor();
 
 private:
+	// atributos
 	int id;
-	int x;
-	int y;
-	int speed;
-	Sprite sprite;
+	ShotType color;	
 	Direction facingDirection;
-	bool isAlive;
-	ShotType shotType;
-
-	bool initialized;
+	int speed;	
 };
 

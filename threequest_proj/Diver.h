@@ -1,36 +1,24 @@
 #pragma once
-#include "libUnicornio.h"
+#include "SeaElement.h"
 #include "MyEnums.h"
 #include <ctime>
 
-class Diver
+class Diver: public SeaElement
 {
 public:
+	// construtores e desconstrutores
 	Diver();
 	~Diver();
 
+	// métodos da lib
 	void inicializar();
 	void atualizar();
-	void desenhar();
-
-	void destruir();
-	bool estaVivo();
-
-	Sprite getSprite();
-	int getX();
-	int getY();
-
-	bool isInitialized();
-	void reset();
+	void verificaOOB();
+	void moveXY();
 
 private:
-	int x;
-	int y;
+	// atributos
 	int speed;
-	Sprite sprite;
 	Direction facingDirection;
-	bool isAlive;
-
-	bool initialized;
 };
 

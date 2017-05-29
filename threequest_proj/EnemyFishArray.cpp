@@ -106,6 +106,7 @@ void EnemyFishArray::removeEnemyFishAtIndex(int index_)
 	{
 		array[index_ + i] = array[index_ + i + 1];
 	}
+	numeroTotalUtilizado--;
 }
 
 void EnemyFishArray::clearEverything()

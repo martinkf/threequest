@@ -2,11 +2,6 @@
 
 Tiro::Tiro()
 {
-	shotType = shotNull;
-	x = 101;
-	y = 101;
-	isAlive = false;
-	initialized = false;
 }
 
 Tiro::~Tiro()
@@ -15,12 +10,32 @@ Tiro::~Tiro()
 
 void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 {
+	// atributo: initialized
 	initialized = true;
 
-	int xOffset = 0;
-	int yOffset = 0;
+	// atributo: isAlive
+	isAlive = true;
+
+	// atributo: shotType	
 	shotType = shotType_;
 
+	// atributo: shotDirection
+	shotDirection = direction_;
+
+	// atributo: x
+	if (shotDirection == facingRight)
+	{
+		x = x_ + 44;
+	}
+	else 
+	{
+		x = x_ - 44;
+	}
+
+	// atributo: y
+	y = y_;	
+
+	// atributo: sprite, shotSpeed
 	switch (shotType)
 	{
 		case shotRegular:
@@ -28,11 +43,8 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 			{
 				gRecursos.carregarSpriteSheet("shotRegular", "imagens/spr_shotRegular.png");
 			}
-			sprite.setSpriteSheet("shotRegular");
-						
-			shotSpeed = 5;
-			xOffset = 44;
-			yOffset = 0;
+			sprite.setSpriteSheet("shotRegular");						
+			shotSpeed = 5;			
 			break;		
 		case shotRed:
 			if (!gRecursos.carregouSpriteSheet("shotRed"))
@@ -40,10 +52,7 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 				gRecursos.carregarSpriteSheet("shotRed", "imagens/spr_shotRed.png");
 			}
 			sprite.setSpriteSheet("shotRed");
-
 			shotSpeed = 6;
-			xOffset = 44;
-			yOffset = 0;
 			break;
 		case shotGreen:
 			if (!gRecursos.carregouSpriteSheet("shotGreen"))
@@ -51,10 +60,7 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 				gRecursos.carregarSpriteSheet("shotGreen", "imagens/spr_shotGreen.png");
 			}
 			sprite.setSpriteSheet("shotGreen");
-
 			shotSpeed = 4;
-			xOffset = 44;
-			yOffset = 0;
 			break;
 		case shotBlue:
 			if (!gRecursos.carregouSpriteSheet("shotBlue"))
@@ -62,33 +68,33 @@ void Tiro::inicializar(ShotType shotType_, int x_, int y_, Direction direction_)
 				gRecursos.carregarSpriteSheet("shotBlue", "imagens/spr_shotBlue.png");
 			}
 			sprite.setSpriteSheet("shotBlue");
-
 			shotSpeed = 3;
-			xOffset = 44;
-			yOffset = 0;
 			break;
-	}
-	shotDirection = direction_;
-	y = y_ + yOffset;
-
-	switch (shotDirection)
-	{
-		case facingLeft:
-			x = x_ - xOffset;
-			break;
-		case facingRight:
-			x = x_ + xOffset;
-			break;
-	}
-
-	isAlive = true;
-
+	}	
 }
 
 void Tiro::atualizar()
 {
-	if (isAlive) {
-		if (shotType != shotBlue) // tiros azuis não se movem
+	verificaOOB();
+	moveXY();
+}
+
+void Tiro::verificaOOB()
+{
+	if (isAlive && initialized)
+	{		
+		if (x < -sprite.getLargura() / 2 || x > gJanela.getLargura() + sprite.getLargura() / 2)
+		{
+			isAlive = false;
+		}
+	}
+}
+
+void Tiro::moveXY()
+{
+	if (isAlive && initialized)
+	{
+		if (shotType != shotBlue) // pois tiros azuis não se movem
 		{
 			if (shotDirection == facingLeft)
 			{
@@ -99,58 +105,10 @@ void Tiro::atualizar()
 				x += shotSpeed;
 			}
 		}
-	
-		if (x < -sprite.getLargura() / 2 || x > gJanela.getLargura() + sprite.getLargura() / 2)
-		{
-			destruir();
-		}
 	}
-}
-
-void Tiro::desenhar()
-{
-	if (isAlive) 
-	{
-		sprite.desenhar(x, y);
-	}
-}
-
-void Tiro::destruir()
-{
-	isAlive = false;
-}
-
-bool Tiro::estaVivo()
-{
-	return isAlive;
-}
-
-Sprite Tiro::getSprite()
-{
-	return sprite;
-}
-
-int Tiro::getX()
-{
-	return x;
-}
-
-int Tiro::getY()
-{
-	return y;
 }
 
 ShotType Tiro::getShotType()
 {
 	return shotType;
-}
-
-bool Tiro::isInitialized()
-{
-	return initialized;
-}
-
-void Tiro::reset()
-{
-	initialized = false;
 }

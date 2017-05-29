@@ -21,8 +21,10 @@ public:
 	void removeEnemySubAtIndex(int index_);
 
 	void addEnemySubAtIndex(EnemySub _input, int _index);
-	
+	//
+
 	void clearEverything();
+	//
 
 private:
 	int numeroTotalUtilizado;

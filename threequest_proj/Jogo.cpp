@@ -427,7 +427,7 @@ void Jogo::telaJogo_verificar()
 	}
 
 	// SE O PLAYER ESTÁ NA SUPERFÍCIE, DESLIGA OS SPAWNERS
-	if (player.isPlayerOnSurface())
+	if (player.getSurfaceStatus())
 	{
 		// desliga os spawners
 		divers.turnOffSpawner();
@@ -453,7 +453,7 @@ void Jogo::telaJogo_verificar()
 	}	
 
 	// RACIONALIZA SE DEVE COMER OXYGEN
-	if (!player.isPlayerOnSurface() && !(score.getFillStatus() == enumFrozen))
+	if (!player.getSurfaceStatus() && !(score.getFillStatus() == enumFrozen))
 	{
 		score.drainOxygen();
 	}
@@ -559,7 +559,7 @@ void Jogo::telaJogo_verificar()
 	}
 
 	// SE O PLAYER ATIROU
-	if (player.wantsToShoot())
+	if (player.getShootStatus())
 	{
 		// cria o tiro
 		Tiro tiro = Tiro();
@@ -589,7 +589,7 @@ void Jogo::telaJogo_verificar()
 	// SE ALGUM ENEMY SUB ATIROU
 	for (int i = (enemySubs.getNumeroTotalUtilizado() - 1); i >= 0; i--)
 	{
-		if (enemySubs.getEnemySubAtIndex(i).wantsToShoot())
+		if (enemySubs.getEnemySubAtIndex(i).getShootStatus())
 		{
 			// cria o tiro
 			Tiro tiro = Tiro();
@@ -604,7 +604,7 @@ void Jogo::telaJogo_verificar()
 			}
 
 			tiro.inicializar(
-				enemySubs.getEnemySubAtIndex(i).getShotType(),
+				enemySubs.getEnemySubAtIndex(i).getColor(),
 				tiroX,
 				enemySubs.getEnemySubAtIndex(i).getY(),
 				enemySubs.getEnemySubAtIndex(i).getDirection()
@@ -798,14 +798,14 @@ void Jogo::telaJogo_desenhar()
 	enemySubs.atualizar();
 	enemySubs.desenhar();
 
-	// DESENHA A EXPLOSIONS ARRAY
-	explosions.atualizar();
-	explosions.desenhar();
-
 	// DESENHA O PLAYER
 	player.atualizar();
 	player.desenhar();
 
+	// DESENHA A EXPLOSIONS ARRAY
+	explosions.atualizar();
+	explosions.desenhar();
+	
 	// DESENHA A WATER SURFACE
 	gameWaterSurface.desenhar(gJanela.getLargura() / 2, 124);
 
@@ -895,10 +895,8 @@ void Jogo::telaJogo_clearAllThreats()
 		// adiciona o enemy fish ao score
 		score.matouUmEnemyFishSemGrid();
 
-		// cria uma explosão
-		Explosion test;
-		test.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
-		explosions.adicionaExplosionNaLista(test);
+		// cria uma explosão		
+		explosions.adicionaNovaExplosion(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
 
 		// destrói o enemy fish
 		enemyFishes.removeEnemyFishAtIndex(i);
@@ -910,10 +908,8 @@ void Jogo::telaJogo_clearAllThreats()
 		// adiciona o enemy sub ao score
 		score.matouUmEnemySubSemGrid();
 
-		// cria uma explosão
-		Explosion test2;
-		test2.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
-		explosions.adicionaExplosionNaLista(test2);
+		// cria uma explosão		
+		explosions.adicionaNovaExplosion(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
 
 		// destrói o enemy sub
 		enemySubs.removeEnemySubAtIndex(i);
@@ -1014,10 +1010,8 @@ void Jogo::telaJogo_collisionPlayerFish()
 			som.setAudio("sound_explosion");
 			som.tocar();
 
-			// cria uma explosão
-			Explosion test;
-			test.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
-			explosions.adicionaExplosionNaLista(test);
+			// cria uma explosão			
+			explosions.adicionaNovaExplosion(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
 
 			// destrói o enemy fish
 			enemyFishes.removeEnemyFishAtIndex(i);
@@ -1052,10 +1046,8 @@ void Jogo::telaJogo_collisionPlayerSub()
 			som.setAudio("sound_explosion");
 			som.tocar();
 
-			// cria uma explosão
-			Explosion test;
-			test.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
-			explosions.adicionaExplosionNaLista(test);
+			// cria uma explosão			
+			explosions.adicionaNovaExplosion(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
 
 			// destrói o enemy sub
 			enemySubs.removeEnemySubAtIndex(i);
@@ -1089,6 +1081,9 @@ void Jogo::telaJogo_collisionPlayerEnemyTiro()
 			// dá play no som
 			som.setAudio("sound_explosion");
 			som.tocar();
+
+			// cria uma explosão
+			explosions.adicionaNovaExplosion(((player.getX() + tirosEnemy.getTiroAtIndex(i).getX()) / 2), tirosEnemy.getTiroAtIndex(i).getY());
 
 			// destrói o enemy tiro
 			tirosEnemy.getTiroAtIndex(i).destruir();
@@ -1130,10 +1125,8 @@ void Jogo::telaJogo_collisionFriendlyTiroDiver()
 				som.setAudio("sound_explosion");
 				som.tocar();
 
-				// cria uma explosão
-				Explosion test;
-				test.inicializar(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
-				explosions.adicionaExplosionNaLista(test);
+				// cria uma explosão				
+				explosions.adicionaNovaExplosion(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
 
 				// destrói o diver
 				divers.removeDiverAtIndex(i);
@@ -1169,7 +1162,7 @@ void Jogo::telaJogo_collisionFriendlyTiroFish()
 				}
 				else
 				{
-					score.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getShotType());
+					score.matouUmEnemyFish(enemyFishes.getEnemyFishAtIndex(i).getColor());
 				}
 
 				// destrói o tiro
@@ -1183,10 +1176,8 @@ void Jogo::telaJogo_collisionFriendlyTiroFish()
 				som.setAudio("sound_explosion");
 				som.tocar();
 
-				// cria uma explosão
-				Explosion test;
-				test.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
-				explosions.adicionaExplosionNaLista(test);
+				// cria uma explosão				
+				explosions.adicionaNovaExplosion(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
 
 				// destrói o enemy fish
 				enemyFishes.removeEnemyFishAtIndex(i);
@@ -1222,7 +1213,7 @@ void Jogo::telaJogo_collisionFriendlyTiroSub()
 				}
 				else
 				{
-					score.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getShotType());
+					score.matouUmEnemySub(enemySubs.getEnemySubAtIndex(i).getColor());
 				}
 
 				// destrói o tiro
@@ -1236,10 +1227,8 @@ void Jogo::telaJogo_collisionFriendlyTiroSub()
 				som.setAudio("sound_explosion");
 				som.tocar();
 
-				// cria uma explosão
-				Explosion test;
-				test.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
-				explosions.adicionaExplosionNaLista(test);
+				// cria uma explosão				
+				explosions.adicionaNovaExplosion(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
 
 				// destrói o enemy sub
 				enemySubs.removeEnemySubAtIndex(i);
@@ -1278,10 +1267,8 @@ void Jogo::telaJogo_collisionEnemyTiroDiver()
 				som.setAudio("sound_explosion");
 				som.tocar();
 
-				// cria uma explosão
-				Explosion test;
-				test.inicializar(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
-				explosions.adicionaExplosionNaLista(test);
+				// cria uma explosão				
+				explosions.adicionaNovaExplosion(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
 
 				// destrói o diver
 				divers.removeDiverAtIndex(i);
@@ -1320,10 +1307,8 @@ void Jogo::telaJogo_collisionEnemyTiroFish()
 				som.setAudio("sound_explosion");
 				som.tocar();
 
-				// cria uma explosão
-				Explosion test;
-				test.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
-				explosions.adicionaExplosionNaLista(test);
+				// cria uma explosão				
+				explosions.adicionaNovaExplosion(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
 
 				// destrói o enemy fish
 				enemyFishes.removeEnemyFishAtIndex(i);
@@ -1362,10 +1347,8 @@ void Jogo::telaJogo_collisionEnemyTiroSub()
 				som.setAudio("sound_explosion");
 				som.tocar();
 
-				// cria uma explosão
-				Explosion test;
-				test.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
-				explosions.adicionaExplosionNaLista(test);
+				// cria uma explosão				
+				explosions.adicionaNovaExplosion(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
 
 				// destrói o enemy fish
 				enemySubs.removeEnemySubAtIndex(i);
@@ -1397,10 +1380,8 @@ void Jogo::telaJogo_collisionFishDiver()
 				som.setAudio("sound_explosion");
 				som.tocar();
 
-				// cria uma explosão
-				Explosion test;
-				test.inicializar(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
-				explosions.adicionaExplosionNaLista(test);
+				// cria uma explosão				
+				explosions.adicionaNovaExplosion(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
 
 				// destrói o diver
 				divers.removeDiverAtIndex(i);
@@ -1430,10 +1411,8 @@ void Jogo::telaJogo_collisionFishFish()
 				// verificação necessária por motivos óbvios
 				if (!(enemyFishes.getEnemyFishAtIndex(i).verificaSemelhanca(enemyFishes.getEnemyFishAtIndex(j))))
 				{
-					// cria uma explosão
-					Explosion test;
-					test.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
-					explosions.adicionaExplosionNaLista(test);
+					// cria uma explosão					
+					explosions.adicionaNovaExplosion(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
 
 					// destrói o enemy fish i
 					enemyFishes.removeEnemyFishAtIndex(i);
@@ -1442,10 +1421,8 @@ void Jogo::telaJogo_collisionFishFish()
 					som.setAudio("sound_explosion");
 					som.tocar();
 
-					// cria uma explosão
-					Explosion test2;
-					test2.inicializar(enemyFishes.getEnemyFishAtIndex(j).getX(), enemyFishes.getEnemyFishAtIndex(j).getY());
-					explosions.adicionaExplosionNaLista(test2);
+					// cria outra explosão					
+					explosions.adicionaNovaExplosion(enemyFishes.getEnemyFishAtIndex(j).getX(), enemyFishes.getEnemyFishAtIndex(j).getY());
 
 					// destrói o enemy fish j
 					enemyFishes.removeEnemyFishAtIndex(j);
@@ -1474,10 +1451,8 @@ void Jogo::telaJogo_collisionFishSub()
 			{
 				// COLIDIU UM ENEMY FISH COM UM ENEMY SUB!
 
-				// cria uma explosão
-				Explosion test;
-				test.inicializar(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
-				explosions.adicionaExplosionNaLista(test);
+				// cria uma explosão				
+				explosions.adicionaNovaExplosion(enemyFishes.getEnemyFishAtIndex(i).getX(), enemyFishes.getEnemyFishAtIndex(i).getY());
 
 				// destrói o enemy fish
 				enemyFishes.removeEnemyFishAtIndex(i);
@@ -1486,10 +1461,8 @@ void Jogo::telaJogo_collisionFishSub()
 				som.setAudio("sound_explosion");
 				som.tocar();
 
-				// cria uma explosão
-				Explosion test2;
-				test2.inicializar(enemySubs.getEnemySubAtIndex(j).getX(), enemySubs.getEnemySubAtIndex(j).getY());
-				explosions.adicionaExplosionNaLista(test2);
+				// cria outra explosão				
+				explosions.adicionaNovaExplosion(enemySubs.getEnemySubAtIndex(j).getX(), enemySubs.getEnemySubAtIndex(j).getY());
 
 				// destrói o enemy sub
 				enemySubs.removeEnemySubAtIndex(j);
@@ -1521,10 +1494,8 @@ void Jogo::telaJogo_collisionSubDiver()
 				som.setAudio("sound_explosion");
 				som.tocar();
 
-				// cria uma explosão
-				Explosion test;
-				test.inicializar(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
-				explosions.adicionaExplosionNaLista(test);
+				// cria uma explosão				
+				explosions.adicionaNovaExplosion(divers.getDiverAtIndex(i).getX(), divers.getDiverAtIndex(i).getY());
 
 				// destrói o diver
 				divers.removeDiverAtIndex(i);
@@ -1554,10 +1525,8 @@ void Jogo::telaJogo_collisionSubSub()
 				// verificação necessária por motivos óbvios
 				if (!(enemySubs.getEnemySubAtIndex(i).verificaSemelhanca(enemySubs.getEnemySubAtIndex(j))))
 				{
-					// cria uma explosão
-					Explosion test;
-					test.inicializar(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
-					explosions.adicionaExplosionNaLista(test);
+					// cria uma explosão					
+					explosions.adicionaNovaExplosion(enemySubs.getEnemySubAtIndex(i).getX(), enemySubs.getEnemySubAtIndex(i).getY());
 
 					// destrói o enemy sub I
 					enemySubs.removeEnemySubAtIndex(i);
@@ -1566,10 +1535,8 @@ void Jogo::telaJogo_collisionSubSub()
 					som.setAudio("sound_explosion");
 					som.tocar();
 
-					// cria uma explosão
-					Explosion test2;
-					test2.inicializar(enemySubs.getEnemySubAtIndex(j).getX(), enemySubs.getEnemySubAtIndex(j).getY());
-					explosions.adicionaExplosionNaLista(test2);
+					// cria outra explosão					
+					explosions.adicionaNovaExplosion(enemySubs.getEnemySubAtIndex(j).getX(), enemySubs.getEnemySubAtIndex(j).getY());
 
 					// destrói o enemy sub J
 					enemySubs.removeEnemySubAtIndex(j);

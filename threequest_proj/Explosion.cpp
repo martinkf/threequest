@@ -1,11 +1,7 @@
 #include "Explosion.h"
 
 Explosion::Explosion()
-{
-	x = 101;
-	y = 101;
-	isAlive = false;
-	initialized = false;
+{	
 }
 
 Explosion::~Explosion()
@@ -14,55 +10,40 @@ Explosion::~Explosion()
 
 void Explosion::inicializar(int x_, int y_)
 {
+	// atributo: initialized
 	initialized = true;
 
+	// atributo: isAlive
+	isAlive = true;
+
+	// atributo: x
+	x = x_;
+
+	// atributo: y
+	y = y_;
+
+	// atributo: sprite
 	if (!gRecursos.carregouSpriteSheet("explosion"))
 	{
 		gRecursos.carregarSpriteSheet("explosion", "imagens/spr_explosion.png", 1, 6);
 	}
 	sprite.setSpriteSheet("explosion");
-
-	x = x_;
-	y = y_;
-
-	lifeRemaining = 5;
-	isAlive = true;
+	sprite.setVelocidadeAnimacao(16);
 }
 
 void Explosion::atualizar()
 {
+	verificaAnimation();
+	advanceAnimation();
+}
+
+void Explosion::verificaAnimation()
+{
 	if (isAlive && initialized)
 	{
-		// avança animação
-		sprite.avancarAnimacao();
-
-		// reduz a vida útil restante
-		lifeRemaining--;
-
-		// verifica e assassina
-		if (lifeRemaining < 0)
+		if (sprite.getFrame() == 5)
 		{
 			isAlive = false;
 		}
 	}
-}
-
-void Explosion::desenhar()
-{
-	sprite.desenhar(x, y);
-}
-
-bool Explosion::estaVivo()
-{
-	return isAlive;
-}
-
-bool Explosion::isInitialized()
-{
-	return initialized;
-}
-
-void Explosion::reset()
-{
-	initialized = false;
 }

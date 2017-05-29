@@ -1,12 +1,7 @@
 #include "EnemySub.h"
 
 EnemySub::EnemySub()
-{
-	id = 101;
-	x = 101;
-	y = 101;
-	isAlive = false;
-	initialized = false;
+{	
 }
 
 EnemySub::~EnemySub()
@@ -15,39 +10,43 @@ EnemySub::~EnemySub()
 
 void EnemySub::inicializar()
 {
+	// atributo: initialized
 	initialized = true;
 
-	// DETERMINA A COR DESSE SUB E CARREGA SPRITE
+	// atributo: isAlive
+	isAlive = true;
+
+	// atributo: sprite, color
 	int randm = rand() % 3 + 1;
 	switch (randm)
 	{
-	case 1:
-		shotType = shotRed;
+	case 1:		
 		if (!gRecursos.carregouSpriteSheet("subRed"))
 		{
 			gRecursos.carregarSpriteSheet("subRed", "imagens/spr_subRed.png", 1, 4);
 		}
 		sprite.setSpriteSheet("subRed");
+		color = shotRed;
 		break;
-	case 2:
-		shotType = shotGreen;
+	case 2:		
 		if (!gRecursos.carregouSpriteSheet("subGreen"))
 		{
 			gRecursos.carregarSpriteSheet("subGreen", "imagens/spr_subGreen.png", 1, 4);
 		}
 		sprite.setSpriteSheet("subGreen");
+		color = shotGreen;
 		break;
-	case 3:
-		shotType = shotBlue;
+	case 3:		
 		if (!gRecursos.carregouSpriteSheet("subBlue"))
 		{
 			gRecursos.carregarSpriteSheet("subBlue", "imagens/spr_subBlue.png", 1, 4);
 		}
 		sprite.setSpriteSheet("subBlue");
+		color = shotBlue;
 		break;
 	}
 
-	// definindo spawn na esquerda ou direita
+	// atributo: x, facingDirection
 	int leftOrRight = rand() % 2;
 	if (leftOrRight == 0)
 	{
@@ -62,38 +61,46 @@ void EnemySub::inicializar()
 
 	}
 
-	// definindo y do spawn
+	// atributo: y
 	int spawnRow = rand() % 9;
 	y = 165 + (spawnRow * 40);
 
-	// definindo speed
+	// atributo: id
+	id = rand();
+
+	// atributo: speed
 	speed = (rand() % 2) + 1;
 
-	// dizendo que está vivo
-	isAlive = true;
+	// atributo: wantsToShoot
+	wantsToShoot = false;
 
-	// não nasce já querendo atirar pls
-	subWantsToShoot = false;
+	// atributo: shotCooldown
 	shotCooldown = 0;
-
-	// obtém uma random id
-	id = rand();	
 }
 
 void EnemySub::atualizar()
 {
+	verificaOOB();
+	advanceAnimation();
+	moveXY();
+	tryToShoot();
+}
+
+void EnemySub::verificaOOB()
+{
 	if (isAlive && initialized)
 	{
-		// avança animação
-		sprite.avancarAnimacao();
-
-		// verifica out-of-bounds
 		if (x > 830 || x < -30)
 		{
-			destruir();
+			isAlive = false;
 		}
+	}
+}
 
-		// faz ele andar
+void EnemySub::moveXY()
+{
+	if (isAlive && initialized)
+	{
 		if (facingDirection == facingRight)
 		{
 			x += speed;
@@ -102,7 +109,13 @@ void EnemySub::atualizar()
 		{
 			x -= speed;
 		}
+	}
+}
 
+void EnemySub::tryToShoot()
+{
+	if (isAlive && initialized)
+	{
 		// reduz o cooldown do tiro, caso tenha
 		if (shotCooldown > 0)
 		{
@@ -113,50 +126,20 @@ void EnemySub::atualizar()
 		int randm = rand() % 120;
 		if (randm == 0)
 		{
-			if (shotType != shotBlue) // submarinos azuis não atiram :)
+			if (color != shotBlue) // submarinos azuis não atiram :)
 			{
 				if (shotCooldown == 0) // somente atira se não está em cooldown
 				{
 					atirar();
 				}
 			}
-		}		
+		}
 	}
 }
 
-void EnemySub::desenhar()
+ShotType EnemySub::getColor()
 {
-	sprite.desenhar(x, y);
-}
-
-void EnemySub::destruir()
-{
-	isAlive = false;
-}
-
-bool EnemySub::estaVivo()
-{
-	return isAlive;
-}
-
-Sprite EnemySub::getSprite()
-{
-	return sprite;
-}
-
-int EnemySub::getX()
-{
-	return x;
-}
-
-int EnemySub::getY()
-{
-	return y;
-}
-
-ShotType EnemySub::getShotType()
-{
-	return shotType;
+	return color;
 }
 
 Direction EnemySub::getDirection()
@@ -180,26 +163,16 @@ bool EnemySub::verificaSemelhanca(EnemySub input_)
 
 void EnemySub::atirar()
 {
-	subWantsToShoot = true;
+	wantsToShoot = true;
 	shotCooldown = 120;
 }
 
-bool EnemySub::wantsToShoot()
+bool EnemySub::getShootStatus()
 {
-	return subWantsToShoot;
+	return wantsToShoot;
 }
 
 void EnemySub::makeNotWantToShoot()
 {
-	subWantsToShoot = false;
-}
-
-bool EnemySub::isInitialized()
-{
-	return initialized;
-}
-
-void EnemySub::reset()
-{
-	initialized = false;
+	wantsToShoot = false;
 }

@@ -1,37 +1,27 @@
 #pragma once
-#include "libUnicornio.h"
+#include "SeaElement.h"
 #include "MyEnums.h"
 
-class Tiro
+class Tiro: public SeaElement
 {
 public:
+	// construtores e desconstrutores
 	Tiro();
 	~Tiro();
 
+	// métodos da lib
 	void inicializar(ShotType shotType_, int x_, int y_, Direction direction_);
-	void atualizar();
-	void desenhar();
+	void atualizar();	
+	void verificaOOB();
+	void moveXY();
 
-	void destruir();
-
-	bool estaVivo();
-
-	Sprite getSprite();
-	int getX();
-	int getY();
+	// métodos get
 	ShotType getShotType();
 
-	bool isInitialized();
-	void reset();
-
 private:
+	// atributos
 	ShotType shotType;
-	Sprite sprite;
-	int x;
-	int y;
 	Direction shotDirection;
-	bool isAlive;
 	int shotSpeed;
-	bool initialized;
 };
 

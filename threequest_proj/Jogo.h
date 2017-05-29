@@ -107,11 +107,11 @@ private:
 	Scorekeeping score;
 	Sprite gridSlotA;
 	Sprite gridSlotB;
-	Sprite gridSlotC;
+	Sprite gridSlotC;	
 	Player player;
-	AirBubbleArray airBubbles;
-	TiroArray tirosEnemy;
+	AirBubbleArray airBubbles;	
 	TiroArray tirosPlayer;
+	TiroArray tirosEnemy;
 	DiverArray divers;
 	EnemyFishArray enemyFishes;
 	EnemySubArray enemySubs;

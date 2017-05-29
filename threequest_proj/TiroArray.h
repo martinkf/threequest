@@ -11,12 +11,18 @@ public:
 	void atualizar();
 	void desenhar();
 
+	//
+	//
+	//
+
+	//
 	int getNumeroTotalUtilizado();
 	Tiro getTiroAtIndex(int index_);
-
-	void adicionaTiroNaLista(Tiro tiro_);
 	void removeTiroAtIndex(int index_);
 
+	//
+	void adicionaTiroNaLista(Tiro tiro_);
+	
 	void clearEverything();
 	void clearEverythingButBlueFreezers();
 

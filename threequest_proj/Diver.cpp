@@ -2,10 +2,6 @@
 
 Diver::Diver()
 {
-	x = 101;
-	y = 101;
-	isAlive = false;
-	initialized = false;
 }
 
 Diver::~Diver()
@@ -14,16 +10,20 @@ Diver::~Diver()
 
 void Diver::inicializar()
 {
+	// atributo: initialized
 	initialized = true;
 
-	// carregando sprite
+	// atributo: isAlive
+	isAlive = true;
+
+	// atributo: sprite
 	if (!gRecursos.carregouSpriteSheet("diver"))
 	{
 		gRecursos.carregarSpriteSheet("diver", "imagens/spr_diver.png", 1, 4);
 	}
 	sprite.setSpriteSheet("diver");
 
-	// definindo spawn na esquerda ou direita
+	// atributo: x, facingDirection	
 	int leftOrRight = rand() % 2;
 	if (leftOrRight == 0)
 	{
@@ -38,31 +38,36 @@ void Diver::inicializar()
 		
 	}
 
-	// definindo y do spawn
+	// atributo: y
 	int spawnRow = rand() % 9;
 	y = 165 + (spawnRow * 40);
 
-	// definindo speed
-	speed = (rand() % 2) + 1;
-
-	// dizendo que está vivo
-	isAlive = true;
+	// atributo: speed
+	speed = (rand() % 2) + 1;	
 }
 
 void Diver::atualizar()
 {	
+	verificaOOB();
+	advanceAnimation();
+	moveXY();
+}
+
+void Diver::verificaOOB()
+{	
 	if (isAlive && initialized)
 	{
-		// avança animação
-		sprite.avancarAnimacao();
-		
-		// verifica out-of-bounds
 		if (x > 830 || x < -30)
 		{
-			destruir();
+			isAlive = false;
 		}
+	}
+}
 
-		// faz ele andar
+void Diver::moveXY()
+{
+	if (isAlive && initialized)
+	{
 		if (facingDirection == facingRight)
 		{
 			x += speed;
@@ -72,44 +77,4 @@ void Diver::atualizar()
 			x -= speed;
 		}
 	}
-}
-
-void Diver::desenhar()
-{
-	sprite.desenhar(x, y);
-}
-
-void Diver::destruir()
-{	
-	isAlive = false;
-}
-
-bool Diver::estaVivo()
-{
-	return isAlive;
-}
-
-Sprite Diver::getSprite()
-{
-	return sprite;
-}
-
-int Diver::getX()
-{
-	return x;
-}
-
-int Diver::getY()
-{
-	return y;
-}
-
-bool Diver::isInitialized()
-{
-	return initialized;
-}
-
-void Diver::reset()
-{
-	initialized = false;
 }

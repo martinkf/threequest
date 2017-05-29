@@ -1,28 +1,16 @@
 #pragma once
-#include "libUnicornio.h"
+#include "SeaElement.h"
 
-class Explosion
+class Explosion: public SeaElement
 {
 public:
+	// construtores e desconstrutores
 	Explosion();
 	~Explosion();
 
+	// métodos da lib
 	void inicializar(int x_, int y_);
 	void atualizar();
-	void desenhar();
-
-	bool estaVivo();
-
-	bool isInitialized();
-	void reset();
-
-private:
-	Sprite sprite;
-	int x;
-	int y;
-	int lifeRemaining;
-	bool isAlive;
-
-	bool initialized;
+	void verificaAnimation();
 };
 

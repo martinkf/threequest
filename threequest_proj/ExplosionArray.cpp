@@ -78,9 +78,12 @@ Explosion ExplosionArray::getExplosionAtIndex(int index_)
 	return array[index_];
 }
 
-void ExplosionArray::adicionaExplosionNaLista(Explosion explosion_)
-{	
-	array[numeroTotalUtilizado] = explosion_;
+void ExplosionArray::adicionaNovaExplosion(int x_, int y_)
+{
+	Explosion local;
+	local.inicializar(x_, y_);
+	array[numeroTotalUtilizado] = local;
+	numeroTotalUtilizado++;
 }
 
 void ExplosionArray::removeExplosionAtIndex(int index_)

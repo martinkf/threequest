@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "Jogo.h"
 
 Player::Player()
 {
@@ -11,27 +10,48 @@ Player::~Player()
 
 void Player::inicializar()
 {
+	// atributo: initialized
+	initialized = true;
+
+	// atributo: isAlive
+	isAlive = true;
+
+	// atributo: sprite
 	if (!gRecursos.carregouSpriteSheet("player"))
 	{
 		gRecursos.carregarSpriteSheet("player", "imagens/spr_player.png", 1, 4);
 	}
 	sprite.setSpriteSheet("player");
-
-	x = gJanela.getLargura() / 2;
-	y = 120;
-	isOnSurface = true;
-	facingDirection = facingRight;
 	sprite.setInverterX(true);
-	speed = 3;
-	shotType = shotRegular;
-	playerWantsToShoot = false;
+	sprite.setVelocidadeAnimacao(5);
+
+	// atributo: x
+	x = gJanela.getLargura() / 2;
+
+	// atributo: y
+	y = 120;
+	
+	// atributo: facingDirection	
+	facingDirection = facingRight;
+
+	// atributo: isFrozen
 	isFrozen = false;
+
+	// atributo: isOnSurface
+	isOnSurface = true;
+
+	// atributo: shotType	
+	shotType = shotRegular;
+
+	// atributo: wantsToShoot
+	wantsToShoot = false;
+	
 }
 
 void Player::atualizar()
 {
 	// avança a animação do sprite do player
-	sprite.avancarAnimacao();
+	advanceAnimation();
 
 	// verificações referentes a submergência
 	if (y == 120)
@@ -47,9 +67,8 @@ void Player::atualizar()
 	{
 		// verificações referentes a movimentação
 		if ((gTeclado.segurando[TECLA_W] || gTeclado.segurando[TECLA_CIMA]) && y > 120)
-		{
-			int valorASubir = speed;
-			int novoY = y - valorASubir;
+		{			
+			int novoY = y - 3;
 			if (novoY < 120)
 			{
 				novoY = 120;
@@ -58,13 +77,13 @@ void Player::atualizar()
 		}
 		if ((gTeclado.segurando[TECLA_D] || gTeclado.segurando[TECLA_DIR]) && x < (gJanela.getLargura() - sprite.getLargura() / 2) - 12)
 		{
-			x += speed;
+			x += 3;
 			facingDirection = facingRight;
+			sprite.setInverterX(true);
 		}
 		if ((gTeclado.segurando[TECLA_S] || gTeclado.segurando[TECLA_BAIXO]) && y < 500)
-		{	
-			int valorADescer = speed;
-			int novoY = y + valorADescer;
+		{				
+			int novoY = y + 3;
 			if (novoY > 500)
 			{
 				novoY = 500;
@@ -73,17 +92,8 @@ void Player::atualizar()
 		}
 		if ((gTeclado.segurando[TECLA_A] || gTeclado.segurando[TECLA_ESQ]) && x > (sprite.getLargura() / 2) + 12)
 		{
-			x -= speed;
-			facingDirection = facingLeft;		
-		}	
-
-		// verificações referentes a direção (esq/dir)
-		if (facingDirection == facingRight) 
-		{
-			sprite.setInverterX(true);
-		}
-		else 
-		{
+			x -= 3;
+			facingDirection = facingLeft;
 			sprite.setInverterX(false);
 		}
 
@@ -95,62 +105,6 @@ void Player::atualizar()
 	}
 }
 
-void Player::desenhar()
-{
-	// desenha o player
-	sprite.desenhar(x, y);
-}
-
-void Player::atirar()
-{
-	playerWantsToShoot = true;	
-}
-
-ShotType Player::getShotType()
-{
-	return shotType;
-}
-
-int Player::getX()
-{
-	return x;
-}
-
-int Player::getY()
-{
-	return y;
-}
-
-Direction Player::getDirection()
-{
-	return facingDirection;
-}
-
-Sprite Player::getSprite()
-{
-	return sprite;
-}
-
-bool Player::isPlayerOnSurface()
-{
-	return isOnSurface;
-}
-
-void Player::changeShotType(ShotType _input)
-{
-	shotType = _input;
-}
-
-bool Player::wantsToShoot()
-{
-	return playerWantsToShoot;
-}
-
-void Player::makeNotWantToShoot()
-{
-	playerWantsToShoot = false;
-}
-
 void Player::freeze()
 {
 	isFrozen = true;
@@ -159,4 +113,39 @@ void Player::freeze()
 void Player::unfreeze()
 {
 	isFrozen = false;
+}
+
+void Player::changeShotType(ShotType _input)
+{
+	shotType = _input;
+}
+
+void Player::atirar()
+{
+	wantsToShoot = true;	
+}
+
+void Player::makeNotWantToShoot()
+{
+	wantsToShoot = false;
+}
+
+ShotType Player::getShotType()
+{
+	return shotType;
+}
+
+Direction Player::getDirection()
+{
+	return facingDirection;
+}
+
+bool Player::getSurfaceStatus()
+{
+	return isOnSurface;
+}
+
+bool Player::getShootStatus()
+{
+	return wantsToShoot;
 }

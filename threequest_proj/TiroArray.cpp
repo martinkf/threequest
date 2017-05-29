@@ -79,13 +79,14 @@ void TiroArray::removeTiroAtIndex(int index_)
 	{
 		array[index_ + i] = array[index_ + i + 1];
 	}
+	numeroTotalUtilizado--;
 }
 
 void TiroArray::clearEverything()
 {
 	for (int i = (numeroTotalUtilizado - 1); i >= 0; i--)
 	{
-		array[i].reset();
+		removeTiroAtIndex(i);
 	}
 }
 
