@@ -38,6 +38,8 @@
 *.vcxproj.filters
 *.ilk
 *.pdb
+*.sdf
+*.VC.opendb
 .vs/
 [Dd]ebug/
 fonte_padrao.ttf
